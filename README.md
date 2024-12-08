@@ -5,6 +5,9 @@ Required:
 - Node.js v22.5.1
 - Bun: https://bun.sh/docs/installation
 
+
+First copy `.env-sample` to `.env` update any values in the `.env` file if required.
+
 To install dependencies:
 
 ```bash
