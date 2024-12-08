@@ -2,14 +2,14 @@ import express from "express";
 import { createServer } from "node:http";
 import * as socketio from "socket.io";
 
-  const app = express();
-  const httpServer = createServer(app);
-  const io = new socketio.Server(httpServer, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-    },
-  });
+const app = express();
+const httpServer = createServer(app);
+const io = new socketio.Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
 io.on("connection", (socket) => {
   console.log(`New client connected ${socket.id}`);

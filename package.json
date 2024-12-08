@@ -9,10 +9,7 @@
     "lintformat": "bunx biome lint --write && bunx biome format --write",
     "prepare": "husky"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "workspaces": ["packages/*", "apps/*"],
   "module": "index.ts",
   "type": "module",
   "peerDependencies": {
