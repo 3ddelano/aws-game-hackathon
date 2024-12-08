@@ -1,0 +1,21 @@
+{
+  "name": "aws-game-hackathon",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest",
+    "husky": "^9.1.7"
+  },
+  "scripts": {
+    "lintformat": "bunx biome lint --write && bunx biome format --write",
+    "prepare": "husky"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
