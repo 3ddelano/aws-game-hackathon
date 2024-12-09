@@ -1,4 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #4a4a4a;
+  --secondary: #f9a825;
+  --tertiary: #7795aa;
+  --tertiary-lighter: #87a9c1;
+  --border: #8b8b8b;
+
+  --background: #2c2c2c;
+  --text: #ffffff;
+}
+
 body {
-  margin: 0;
+  font-family: Roboto, sans-serif;
+
+  background-color: var(--background);
+  color: var(--text);
+}
+
+#game-ui {
+  border: red 4px solid var(--border);
+  background-color: var(--primary);
+}
+
+/*
+  -----
+  Game Scenes
+  -----
+ */
+.game__scene {
+  width: 100%;
+  padding: 1rem;
+  flex-direction: column;
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.game__title {
+  color: var(--secondary);
+  text-shadow: 2px 2px 0px var(--primary);
+}
+
+.game__username__form {
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text-input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: var(--primary);
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+
+  user-select: none;
+
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.secondary {
+  padding: 5px 10px;
+  background-color: var(--tertiary);
+}
+
+button:hover {
+  background-color: #fbc02d;
+}
+
+button.secondary:hover {
+  background-color: var(--tertiary-lighter);
+}
+
+ul {
+  list-style-type: none;
   padding: 0;
+}
+
+li {
+  background-color: var(--primary);
+  border: 2px solid var(--border);
+  margin-bottom: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

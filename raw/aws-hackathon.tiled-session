@@ -1,0 +1,28 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+    },
+    "last.exportedFilePath": "/Users/3ddelano/projects/2024/aws-game-hackathon/packages/common/src/assets/maps",
+    "last.imagePath": "/Users/3ddelano/projects/2024/aws-game-hackathon/packages/common/src/tilesets",
+    "map.height": 100,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 100,
+    "openFiles": [
+    ],
+    "project": "aws-hackathon.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}

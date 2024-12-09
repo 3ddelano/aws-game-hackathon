@@ -1,16 +1,67 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AWS Game Builder Hackathon</title>
-  </head>
-  <body>
-    <script src="http://localhost:3005/socket.io/socket.io.js"></script>
 
-    <div id="app"></div>
-    <canvas id="app-canvas"></canvas>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Game Builder Hackathon</title>
+</head>
+
+<body>
+  <script src="http://localhost:3005/socket.io/socket.io.js"></script>
+
+  <!-- Wrapper -->
+  <div class="flex items-center justify-center min-h-screen">
+    <!-- Container -->
+    <div class="relative min-w-[600px] min-h-[300px] aspect-[8/6] w-[96vw] max-h-[95vh]">
+      <!-- Holds the game ui -->
+      <div id="game-ui" class="absolute w-full h-full z-10">
+        <div id="game-scenes" class="w-full h-full flex flex-1">
+          <div id="game-scene-initial" class="game__scene items-center justify-center gap-4 show">
+            <p id="initial-message">Connecting to server...</p>
+          </div>
+          <div id="game-scene-connected" class="game__scene gap-4">
+            <h2 class="game__title text-center text-3xl mb-2">MyGame</h2>
+            <div class="flex gap-8">
+              <!-- Left column -->
+              <div class="flex-1 p-1">
+                <p class="text-lg mb-2 text-center">Public Rooms</p>
+                <ul id="public-rooms-container" class="max-h-[300px] overflow-y-auto pr-2">
+                  <!-- <li>1 / 8 players <button class="secondary">Join</button></li> -->
+                </ul>
+              </div>
+              <!-- Right column -->
+              <div class="flex flex-col flex-1 justify-center">
+                <!-- Checkbox for isPublic -->
+                <div class="flex gap-2 items-center mb-2">
+                  <p>Public room</p>
+                  <input type="checkbox" id="create-room-is-public" class="checkbox" checked />
+                </div>
+                <button id="create-room-btn" class="primary-btn w-full">Create Room</button>
+                <p class="my-4 text-center">OR</p>
+
+                <div class="space-y-2">
+                  <input type="text" id="join-room-id" class="text-input w-full" placeholder="Enter room code" />
+                  <button id="join-room-btn" class="primary-btn w-full">Join Room</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="game-scene-room" class="game__scene gap-4">
+            <h2 class="game__title text-center text-3xl mb-2">In Room</h2>
+            <p id="room-data">Room data</p>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- Game canvas -->
+      <canvas id="app-canvas" class="absolute w-full h-full"></canvas>
+    </div>
+  </div>
+  <script type="module" src="/src/client.ts"></script>
+</body>
+
 </html>
