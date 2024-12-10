@@ -1,4 +1,9 @@
-import type { GameSceneName, RoomData } from "@repo/common/index";
+import type {
+  GameSceneName,
+  JoinRoomCallback,
+  PublicRoomData,
+  RoomData,
+} from "@repo/common/index";
 
 interface UiScene {
   name: GameSceneName;
@@ -66,38 +71,50 @@ export class ConnectedUiScene implements UiScene {
     "public-rooms-container",
   ) as HTMLUListElement;
 
-  private publicRooms: RoomData[] = [];
+  private publicRooms: PublicRoomData[] = [];
 
   constructor() {
-    globalThis.socket.on("roomCreated", (room) => {
-      console.log("Room created!");
-      globalThis.sceneManager.showScene("room", room);
-    });
-    globalThis.socket.on("roomJoined", (room) => {
-      console.log("Room joined!");
-      globalThis.sceneManager.showScene("room", room);
-    });
-
     this.createRoomBtn.addEventListener("click", () => {
       console.log("Creating room");
       const isPublic = this.createRoomIsPublic.checked;
-      globalThis.socket.emit("createRoom", isPublic);
+      globalThis.socket.emit("createRoom", isPublic, (createdRoom) => {
+        globalThis.sceneManager.showScene("room", createdRoom);
+      });
     });
 
     this.joinRoomBtn.addEventListener("click", () => {
       const roomId = this.joinRoomId.value.trim();
       console.log("Joining room with code: ", roomId);
-      globalThis.socket.emit("joinRoom", roomId);
+      globalThis.socket.emit("joinRoom", roomId, this.joinRoomCallback);
+    });
+
+    globalThis.socket.on("publicRoomCreated", (room) => {
+      this.publicRooms.push(room);
+      this.renderPublicRooms();
+    });
+
+    globalThis.socket.on("publicRoomUpdated", (room) => {
+      this.publicRooms = this.publicRooms.map((r) => {
+        if (r.id === room.id) {
+          return room;
+        }
+        return r;
+      });
+      this.renderPublicRooms();
+    });
+
+    globalThis.socket.on("publicRoomDeleted", (roomId) => {
+      this.publicRooms = this.publicRooms.filter((r) => r.id !== roomId);
+      this.renderPublicRooms();
     });
   }
 
   onShow?() {
     console.log("Loading public rooms");
-    globalThis.socket.on("publicRooms", (rooms) => {
+    globalThis.socket.emit("getPublicRooms", (rooms) => {
       this.publicRooms = rooms;
       this.renderPublicRooms();
     });
-    globalThis.socket.emit("getPublicRooms");
   }
 
   private renderPublicRooms() {
@@ -106,31 +123,71 @@ export class ConnectedUiScene implements UiScene {
     if (this.publicRooms.length === 0) {
       this.publicRoomsContainer.innerHTML = "No public rooms";
     }
+
     for (const room of this.publicRooms) {
       const li = document.createElement("li");
       const btn = document.createElement("button");
       btn.classList.add("secondary");
       btn.innerHTML = "Join";
       btn.onclick = () => {
-        globalThis.socket.emit("joinRoom", room.id);
+        globalThis.socket.emit("joinRoom", room.id, this.joinRoomCallback);
       };
-      li.innerHTML = `${room.players.length} / ${room.maxPlayerCount} players`;
+      li.innerHTML = `${room.playerCount} / ${room.maxPlayerCount} players`;
       li.appendChild(btn);
       this.publicRoomsContainer.appendChild(li);
     }
+  }
+
+  private joinRoomCallback(resp: Parameters<JoinRoomCallback>[0]) {
+    if ("error" in resp) {
+      alert(resp.error);
+      return;
+    }
+    globalThis.sceneManager.showScene("room", resp);
   }
 }
 
 export class RoomScene implements UiScene {
   public name: GameSceneName = "room";
 
+  private room!: RoomData;
+
   private roomDataElm = document.getElementById(
     "room-data",
   ) as HTMLParagraphElement;
 
+  constructor() {
+    globalThis.socket.on("roomPlayerJoined", (playerData) => {
+      this.room.players.push(playerData);
+      this.renderRoomInfo();
+    });
+    globalThis.socket.on("roomPlayerUpdated", (playerData) => {
+      this.room.players = this.room.players.map((p) => {
+        if (p.id === playerData.id) {
+          return playerData;
+        }
+        return p;
+      });
+      this.renderRoomInfo();
+    });
+    globalThis.socket.on("roomPlayerLeft", (playerId) => {
+      this.room.players = this.room.players.filter((p) => p.id !== playerId);
+      this.renderRoomInfo();
+    });
+    globalThis.socket.on("roomOwnerChanged", (newOwnerId) => {
+      this.room.ownerId = newOwnerId;
+      this.renderRoomInfo();
+    });
+  }
+
   onShow(room: RoomData): void {
+    this.room = room;
     console.log("joined room!", room);
 
-    this.roomDataElm.innerHTML = JSON.stringify(room, null, 2);
+    this.renderRoomInfo();
+  }
+
+  private renderRoomInfo() {
+    this.roomDataElm.innerHTML = JSON.stringify(this.room, null, 2);
   }
 }

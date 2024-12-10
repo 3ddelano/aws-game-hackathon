@@ -22,7 +22,7 @@
       "recommended": true,
       "correctness": {
         "noUnusedImports": {
-          "level": "error",
+          "level": "warn",
           "fix": "none"
         }
       },
