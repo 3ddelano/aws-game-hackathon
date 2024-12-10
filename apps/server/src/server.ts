@@ -109,7 +109,7 @@ async function main() {
 
     socket.on("startGame", () => {
       roomManager.startGame(socket.id);
-    })
+    });
 
     socket.on("disconnect", (reason) => {
       logger.info(`Client disconnected: id=${socket.id}, reason=${reason}`);

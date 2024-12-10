@@ -160,7 +160,7 @@ export class RoomManager {
 
     const channelName: SocketChannelsType = `room_${room.id}`;
     globalThis.io.in(channelName).emit("roomGameStarted");
-    
+
     for (const player of room.players) {
       globalThis.io.sockets.sockets.get(player.id)?.leave(channelName);
     }
