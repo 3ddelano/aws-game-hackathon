@@ -53,6 +53,7 @@ export interface ClientToServerEvents {
   moveToTeamA: () => void;
   moveToTeamB: () => void;
   changeUsername: (name: string) => void;
+  startGame: () => void;
 }
 
 export interface ServerToClientEvents {
@@ -66,4 +67,5 @@ export interface ServerToClientEvents {
   roomPlayerUpdated(playerData: PlayerData): void;
   roomPlayerLeft(playerId: string): void;
   roomOwnerChanged(newOwnerId: string): void;
+  roomGameStarted(): void;
 }

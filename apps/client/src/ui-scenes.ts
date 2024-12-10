@@ -15,6 +15,10 @@ interface UiScene {
 export class SceneManager {
   private scenes: UiScene[] = [];
 
+  private gameUiContainer = document.getElementById(
+    "game-ui",
+  ) as HTMLDivElement;
+
   registerScene(scene: UiScene) {
     this.scenes.push(scene);
   }
@@ -25,6 +29,14 @@ export class SceneManager {
       const elm = this.getSceneElm(scene.name);
       elm.classList.remove("show");
     }
+
+    if (sceneName === "game") {
+      this.gameUiContainer.style.display = "none";
+      return;
+    }
+
+    this.gameUiContainer.style.display = "absolute";
+
     // biome-ignore lint/style/noNonNullAssertion: <explanation>
     const scene = this.scenes.find((s) => s.name === sceneName)!;
     const elm = this.getSceneElm(scene.name);
@@ -221,6 +233,10 @@ export class RoomScene implements UiScene {
       this.renderRoomInfo();
     });
 
+    globalThis.socket.on("roomGameStarted", () => {
+      globalThis.sceneManager.showScene("game");
+    });
+
     this.moveToTeamABtn.onclick = () => {
       globalThis.socket.emit("moveToTeamA");
     };
@@ -239,6 +255,10 @@ export class RoomScene implements UiScene {
 
       globalThis.socket.emit("changeUsername", username);
       this.usernameText.value = "";
+    };
+
+    this.startGameBtn.onclick = () => {
+      globalThis.socket.emit("startGame");
     };
   }
 
@@ -265,10 +285,16 @@ export class RoomScene implements UiScene {
     const currentTeam = this.room.players.find(
       (p) => p.id === globalThis.socket.id,
     )?.team;
+    const isOwner = this.room.ownerId === globalThis.socket.id;
+
     if (currentTeam === "A") {
       this.moveToTeamBBtn.style.display = "block";
     } else {
       this.moveToTeamABtn.style.display = "block";
+    }
+
+    if (isOwner) {
+      this.startGameBtn.style.display = "block";
     }
 
     for (const player of this.room.players) {

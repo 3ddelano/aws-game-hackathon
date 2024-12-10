@@ -147,10 +147,23 @@ export class RoomManager {
 
     player.name = name;
 
-    // room.players
-
     const channelName: SocketChannelsType = `room_${room.id}`;
     globalThis.io.in(channelName).emit("roomPlayerUpdated", player);
+  }
+
+  public startGame(userId: string) {
+    const room = this.rooms.find((r) => r.players.find((p) => p.id === userId));
+    if (!room) return;
+
+    const player = room.players.find((p) => p.id === userId);
+    if (!player || player.id !== room.ownerId) return;
+
+    const channelName: SocketChannelsType = `room_${room.id}`;
+    globalThis.io.in(channelName).emit("roomGameStarted");
+    
+    for (const player of room.players) {
+      globalThis.io.sockets.sockets.get(player.id)?.leave(channelName);
+    }
   }
 
   public handlePlayerDisconnected(userId: string) {

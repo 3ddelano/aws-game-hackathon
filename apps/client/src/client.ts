@@ -16,17 +16,39 @@ async function main() {
   });
 
   const canvas = document.getElementById("app-canvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d");
-
+  const gameContainer = document.getElementById(
+    "game-container",
+  ) as HTMLDivElement;
   globalThis.sceneManager = new SceneManager();
   const initialUiScene = new InitialUiScene();
   const connectedUiScene = new ConnectedUiScene();
   const roomScene = new RoomScene();
 
+  // Setting up HDPI canvas
+  const ratio = window.devicePixelRatio ?? 1;
+  const canvasSize = gameContainer.getBoundingClientRect();
+
+  const ctx = canvas.getContext("2d");
   if (!ctx) {
     initialUiScene.setMessage("Your browser does not support HTML5 canvas.");
     return;
   }
+
+  // Initialize canvas
+  const resizeCanvas = () => {
+    const canvasSize = gameContainer.getBoundingClientRect();
+    canvas.width = canvasSize.width * ratio;
+    canvas.height = canvasSize.height * ratio;
+    canvas.style.width = `${canvasSize.width}px`;
+    canvas.style.height = `${canvasSize.height}px`;
+    ctx.scale(ratio, ratio);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvasSize.width, canvasSize.height);
+  };
+  window.onresize = () => {
+    resizeCanvas();
+  };
+  resizeCanvas();
 
   // Scenes
   globalThis.sceneManager.registerScene(initialUiScene);
