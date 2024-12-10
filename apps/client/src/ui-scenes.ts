@@ -1,8 +1,9 @@
-import type {
-  GameSceneName,
-  JoinRoomCallback,
-  PublicRoomData,
-  RoomData,
+import {
+  type GameSceneName,
+  type JoinRoomCallback,
+  type PublicRoomData,
+  ROOM_MAX_PLAYER_COUNT,
+  type RoomData,
 } from "@repo/common/index";
 
 interface UiScene {
@@ -132,7 +133,7 @@ export class ConnectedUiScene implements UiScene {
       btn.onclick = () => {
         globalThis.socket.emit("joinRoom", room.id, this.joinRoomCallback);
       };
-      li.innerHTML = `${room.playerCount} / ${room.maxPlayerCount} players`;
+      li.innerHTML = `${room.playerCount} / ${room.maxPlayerCount}`;
       li.appendChild(btn);
       this.publicRoomsContainer.appendChild(li);
     }
@@ -152,15 +153,54 @@ export class RoomScene implements UiScene {
 
   private room!: RoomData;
 
-  private roomDataElm = document.getElementById(
-    "room-data",
-  ) as HTMLParagraphElement;
+  private publicRoomText = document.getElementById(
+    "room-is-public",
+  ) as HTMLSpanElement;
+  private playerCountText = document.getElementById(
+    "room-player-count",
+  ) as HTMLSpanElement;
+  private roomJoinCodeText = document.getElementById(
+    "room-join-code",
+  ) as HTMLSpanElement;
+  private usernameText = document.getElementById(
+    "room-change-username",
+  ) as HTMLInputElement;
+  private changeUsernameBtn = document.getElementById(
+    "room-change-username-btn",
+  ) as HTMLButtonElement;
+  private teamAContainer = document.getElementById(
+    "room-team-a-container",
+  ) as HTMLUListElement;
+  private teamBContainer = document.getElementById(
+    "room-team-b-container",
+  ) as HTMLUListElement;
+  private moveToTeamABtn = document.getElementById(
+    "room-move-to-team-a-btn",
+  ) as HTMLButtonElement;
+  private moveToTeamBBtn = document.getElementById(
+    "room-move-to-team-b-btn",
+  ) as HTMLButtonElement;
+  private startGameBtn = document.getElementById(
+    "room-start-game-btn",
+  ) as HTMLButtonElement;
 
   constructor() {
+    // TODO: FOR DEBUG
+    // setTimeout(() => {
+    //   globalThis.sceneManager.showScene("room", {
+    //     id: "UF00rJx",
+    //     isPublic: false,
+    //     maxPlayerCount: ROOM_MAX_PLAYER_COUNT,
+    //     ownerId: globalThis.socket.id,
+    //     players: [{ id: globalThis.socket.id, name: "Player 1", team: "A" }],
+    //   });
+    // }, 400);
+
     globalThis.socket.on("roomPlayerJoined", (playerData) => {
       this.room.players.push(playerData);
       this.renderRoomInfo();
     });
+
     globalThis.socket.on("roomPlayerUpdated", (playerData) => {
       this.room.players = this.room.players.map((p) => {
         if (p.id === playerData.id) {
@@ -170,24 +210,78 @@ export class RoomScene implements UiScene {
       });
       this.renderRoomInfo();
     });
+
     globalThis.socket.on("roomPlayerLeft", (playerId) => {
       this.room.players = this.room.players.filter((p) => p.id !== playerId);
       this.renderRoomInfo();
     });
+
     globalThis.socket.on("roomOwnerChanged", (newOwnerId) => {
       this.room.ownerId = newOwnerId;
       this.renderRoomInfo();
     });
+
+    this.moveToTeamABtn.onclick = () => {
+      globalThis.socket.emit("moveToTeamA");
+    };
+
+    this.moveToTeamBBtn.onclick = () => {
+      globalThis.socket.emit("moveToTeamB");
+    };
+
+    this.changeUsernameBtn.onclick = () => {
+      const username = this.usernameText.value.trim();
+
+      if (username.length === 0) {
+        alert("Please enter a username");
+        return;
+      }
+
+      globalThis.socket.emit("changeUsername", username);
+      this.usernameText.value = "";
+    };
   }
 
   onShow(room: RoomData): void {
     this.room = room;
-    console.log("joined room!", room);
+    console.log(`Joined room: id=${room.id}`);
 
     this.renderRoomInfo();
   }
 
   private renderRoomInfo() {
-    this.roomDataElm.innerHTML = JSON.stringify(this.room, null, 2);
+    this.publicRoomText.innerHTML = this.room.isPublic ? "Public" : "Private";
+    this.playerCountText.innerHTML = `${this.room.players.length} / ${this.room.maxPlayerCount} players`;
+
+    this.roomJoinCodeText.innerHTML = this.room.id;
+
+    this.teamAContainer.innerHTML = "";
+    this.teamBContainer.innerHTML = "";
+
+    this.moveToTeamABtn.style.display = "none";
+    this.moveToTeamBBtn.style.display = "none";
+    this.startGameBtn.style.display = "none";
+
+    const currentTeam = this.room.players.find(
+      (p) => p.id === globalThis.socket.id,
+    )?.team;
+    if (currentTeam === "A") {
+      this.moveToTeamBBtn.style.display = "block";
+    } else {
+      this.moveToTeamABtn.style.display = "block";
+    }
+
+    for (const player of this.room.players) {
+      const li = document.createElement("li");
+
+      const isCurrentPlayer = player.id === globalThis.socket.id;
+
+      li.innerHTML = `${player.name}${isCurrentPlayer ? " (You)" : ""}`;
+      if (player.team === "A") {
+        this.teamAContainer.appendChild(li);
+      } else {
+        this.teamBContainer.appendChild(li);
+      }
+    }
   }
 }

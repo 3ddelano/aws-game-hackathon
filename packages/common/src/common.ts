@@ -1,4 +1,5 @@
 export const GAME_NAME = "AWS Game Builder Hackathon";
+export const ROOM_MAX_PLAYER_COUNT = 8;
 
 export type GameSceneName = "initial" | "connected" | "room" | "game";
 
@@ -49,6 +50,9 @@ export interface ClientToServerEvents {
 
   createRoom: (isPublic: boolean, callback: CreateRoomCallback) => void;
   joinRoom: (roomId: string, callback: JoinRoomCallback) => void;
+  moveToTeamA: () => void;
+  moveToTeamB: () => void;
+  changeUsername: (name: string) => void;
 }
 
 export interface ServerToClientEvents {

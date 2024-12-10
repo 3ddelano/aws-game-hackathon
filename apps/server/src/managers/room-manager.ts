@@ -3,15 +3,20 @@ import {
   type GetPublicRoomCallback,
   type JoinRoomCallback,
   type PlayerData,
-  type PublicRoomCallback,
-  type PublicRoomData,
+  ROOM_MAX_PLAYER_COUNT,
   type RoomData,
   SOCKET_CHANNEL_PUBLIC,
   type SocketChannelsType,
+  type TeamName,
   mapRoomDataToPublicRoomData,
 } from "@repo/common/common";
 import { logger } from "@repo/common/logger";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
+
+const nanoid = customAlphabet(
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+  8,
+);
 
 export class RoomManager {
   private rooms: RoomData[] = [];
@@ -26,9 +31,9 @@ export class RoomManager {
     callback: CreateRoomCallback;
   }) {
     const roomData: RoomData = {
-      id: nanoid(6),
+      id: nanoid(),
       isPublic: isPublic,
-      maxPlayerCount: 8,
+      maxPlayerCount: ROOM_MAX_PLAYER_COUNT,
       ownerId: userId,
       players: [
         {
@@ -90,18 +95,26 @@ export class RoomManager {
     room.players.push(playerData);
 
     const channelName: SocketChannelsType = `room_${room.id}`;
-    globalThis.io.sockets.sockets.get(userId)?.join(channelName);
-    globalThis.io.sockets.sockets.get(userId)?.leave(SOCKET_CHANNEL_PUBLIC);
+
+    const userSocket = globalThis.io.sockets.sockets.get(userId);
+
+    userSocket?.leave(SOCKET_CHANNEL_PUBLIC);
 
     callback(room);
 
-    // Emit player joined to the room
     globalThis.io.in(channelName).emit("roomPlayerJoined", playerData);
+    userSocket?.join(channelName);
 
     if (room.isPublic) {
-      globalThis.io
-        .in(SOCKET_CHANNEL_PUBLIC)
-        .emit("publicRoomUpdated", mapRoomDataToPublicRoomData(room));
+      if (room.players.length === room.maxPlayerCount) {
+        globalThis.io
+          .in(SOCKET_CHANNEL_PUBLIC)
+          .emit("publicRoomDeleted", room.id);
+      } else {
+        globalThis.io
+          .in(SOCKET_CHANNEL_PUBLIC)
+          .emit("publicRoomUpdated", mapRoomDataToPublicRoomData(room));
+      }
     }
   }
 
@@ -117,10 +130,34 @@ export class RoomManager {
     callback(publicRooms.map(mapRoomDataToPublicRoomData));
   }
 
+  public moveToTeamA(userId: string) {
+    this.moveToTeam(userId, "A");
+  }
+
+  public moveToTeamB(userId: string) {
+    this.moveToTeam(userId, "B");
+  }
+
+  public changeUsername(userId: string, name: string) {
+    const room = this.rooms.find((r) => r.players.find((p) => p.id === userId));
+    if (!room) return;
+
+    const player = room.players.find((p) => p.id === userId);
+    if (!player) return;
+
+    player.name = name;
+
+    // room.players
+
+    const channelName: SocketChannelsType = `room_${room.id}`;
+    globalThis.io.in(channelName).emit("roomPlayerUpdated", player);
+  }
+
   public handlePlayerDisconnected(userId: string) {
     const room = this.rooms.find((r) => r.players.find((p) => p.id === userId));
     if (!room) return;
 
+    const playerCountPrev = room.players.length;
     room.players = room.players.filter((p) => p.id !== userId);
 
     const channelName: SocketChannelsType = `room_${room.id}`;
@@ -149,9 +186,38 @@ export class RoomManager {
     }
 
     if (room.isPublic) {
-      globalThis.io
-        .in(SOCKET_CHANNEL_PUBLIC)
-        .emit("publicRoomUpdated", mapRoomDataToPublicRoomData(room));
+      if (
+        playerCountPrev === room.maxPlayerCount &&
+        room.players.length < playerCountPrev
+      ) {
+        globalThis.io
+          .in(SOCKET_CHANNEL_PUBLIC)
+          .emit("publicRoomCreated", mapRoomDataToPublicRoomData(room));
+      } else {
+        globalThis.io
+          .in(SOCKET_CHANNEL_PUBLIC)
+          .emit("publicRoomUpdated", mapRoomDataToPublicRoomData(room));
+      }
     }
+  }
+
+  private moveToTeam(userId: string, teamName: TeamName) {
+    const room = this.rooms.find((r) => r.players.find((p) => p.id === userId));
+    if (!room) return;
+
+    const player = room.players.find((p) => p.id === userId);
+    if (!player) return;
+
+    player.team = teamName;
+
+    room.players = room.players.map((p) => {
+      if (p.id === userId) {
+        return player;
+      }
+      return p;
+    });
+
+    const channelName: SocketChannelsType = `room_${room.id}`;
+    globalThis.io.in(channelName).emit("roomPlayerUpdated", player);
   }
 }

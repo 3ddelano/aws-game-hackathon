@@ -1,18 +1,13 @@
 import { createServer } from "node:http";
 import {
   type ClientToServerEvents,
-  type PlayerData,
-  type PublicRoomData,
   type RawMapData,
-  type RoomData,
   SOCKET_CHANNEL_PUBLIC,
   type ServerToClientEvents,
-  mapRoomDataToPublicRoomData,
 } from "@repo/common";
 import level01Data from "@repo/common/assets/maps/level01.json";
 import { logger } from "@repo/common/logger";
 import express from "express";
-import { nanoid } from "nanoid";
 import * as socketio from "socket.io";
 import { RoomManager } from "./managers/room-manager";
 
@@ -79,7 +74,7 @@ async function main() {
     socket.join(SOCKET_CHANNEL_PUBLIC);
 
     socket.onAny((eventName, ...args) => {
-      logger.info("Got event: ", eventName, args);
+      logger.info("Got event:", eventName, args);
     });
 
     socket.on("createRoom", (isPublic, callback) => {
@@ -100,6 +95,18 @@ async function main() {
       });
     });
 
+    socket.on("moveToTeamA", () => {
+      roomManager.moveToTeamA(socket.id);
+    });
+
+    socket.on("moveToTeamB", () => {
+      roomManager.moveToTeamB(socket.id);
+    });
+
+    socket.on("changeUsername", (name) => {
+      roomManager.changeUsername(socket.id, name);
+    });
+
     socket.on("disconnect", (reason) => {
       logger.info(`Client disconnected: id=${socket.id}, reason=${reason}`);
 
@@ -107,10 +114,9 @@ async function main() {
     });
   });
 
-  // Listen for connections
   const PORT = process.env.SERVER_PORT ?? 3000;
   httpServer.listen(PORT, () => {
-    logger.info(`Server listening on port ${PORT}`);
+    logger.info(`Server listening on port=${PORT}`);
   });
 }
 

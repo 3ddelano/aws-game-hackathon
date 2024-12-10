@@ -50,7 +50,7 @@ async function main() {
     connectedToServer = true;
     setTimeout(() => {
       globalThis.sceneManager.showScene("connected");
-    }, 250);
+    }, 300);
   });
 
   globalThis.socket.on("disconnect", (err) => {
