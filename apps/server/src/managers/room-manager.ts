@@ -179,8 +179,11 @@ export class RoomManager {
 
     const gameSession = new GameSession(room.id);
     for (const player of room.players) {
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      gameSession.onPlayerConnected(globalThis.io.sockets.sockets.get(player.id)!, player);
+      gameSession.onPlayerConnected(
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        globalThis.io.sockets.sockets.get(player.id)!,
+        player,
+      );
     }
 
     return gameSession;

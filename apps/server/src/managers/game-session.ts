@@ -48,7 +48,7 @@ export class GameSession {
     const gameChannelName: SocketChannelsType = `game_${this.id}`;
 
     socket.emit("mapData", this.mapManager.getMapData(this.mapId));
-    
+
     // globalThis.io.sockets.sockets.get(`game_${this.id}`)?.emit("gamePlayerJoined")
   }
 }
