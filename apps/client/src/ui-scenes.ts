@@ -1,4 +1,6 @@
+import tileset01Img from "@repo/common/assets/tilesets/tileset01.png";
 import {
+  type GameMapData,
   type GameSceneName,
   type JoinRoomCallback,
   type PublicRoomData,
@@ -26,19 +28,21 @@ export class SceneManager {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   showScene(sceneName: GameSceneName, data?: any) {
     for (const scene of this.scenes) {
+      if (scene.name === "game") continue;
       const elm = this.getSceneElm(scene.name);
       elm.classList.remove("show");
     }
 
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    const scene = this.scenes.find((s) => s.name === sceneName)!;
+
     if (sceneName === "game") {
       this.gameUiContainer.style.display = "none";
+      scene.onShow?.(data);
       return;
     }
 
     this.gameUiContainer.style.display = "absolute";
-
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    const scene = this.scenes.find((s) => s.name === sceneName)!;
     const elm = this.getSceneElm(scene.name);
     elm.classList.add("show");
     scene.onShow?.(data);
@@ -197,17 +201,6 @@ export class RoomScene implements UiScene {
   ) as HTMLButtonElement;
 
   constructor() {
-    // TODO: FOR DEBUG
-    // setTimeout(() => {
-    //   globalThis.sceneManager.showScene("room", {
-    //     id: "UF00rJx",
-    //     isPublic: false,
-    //     maxPlayerCount: ROOM_MAX_PLAYER_COUNT,
-    //     ownerId: globalThis.socket.id,
-    //     players: [{ id: globalThis.socket.id, name: "Player 1", team: "A" }],
-    //   });
-    // }, 400);
-
     globalThis.socket.on("roomPlayerJoined", (playerData) => {
       this.room.players.push(playerData);
       this.renderRoomInfo();
@@ -309,5 +302,86 @@ export class RoomScene implements UiScene {
         this.teamBContainer.appendChild(li);
       }
     }
+  }
+}
+
+export class GameScene implements UiScene {
+  name: GameSceneName = "game";
+
+  private canvas = document.getElementById("app-canvas") as HTMLCanvasElement;
+  private ctx = this.canvas.getContext("2d");
+
+  private mapData: GameMapData | undefined;
+
+  private tilesetImg: HTMLImageElement;
+  private tilesPerTilesetRow: number | undefined;
+  // const TILES_PER_ROW = this.tilesetImg.width / this.mapData.tileSize;
+
+  constructor() {
+    globalThis.socket.on("mapData", (mapData) => {
+      this.mapData = mapData;
+      this.tilesPerTilesetRow = this.tilesetImg.width / this.mapData.tileSize;
+
+      requestAnimationFrame(() => {
+        this.startDrawLoop();
+      });
+    });
+
+    this.tilesetImg = new Image();
+    this.tilesetImg.src = tileset01Img;
+  }
+
+  onShow() {
+    console.log("showing game scene");
+  }
+
+  private startDrawLoop() {
+    if (this.ctx && this.mapData) {
+      this.ctx.fillStyle = "black";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      for (let r = 0; r < this.mapData.height; r++) {
+        for (let c = 0; c < this.mapData.width; c++) {
+          const bgTileId = this.mapData.backgroundTiles[r][c];
+          const fgTileId = this.mapData.foregroundTiles[r][c];
+
+          if (bgTileId !== 0) {
+            const bgTileIndex = bgTileId - 1;
+            this.drawTile(bgTileIndex, r, c);
+          }
+          if (fgTileId !== 0) {
+            const fgTileIndex = fgTileId - 1;
+            this.drawTile(fgTileIndex, r, c);
+          }
+        }
+      }
+    }
+
+    requestAnimationFrame(() => {
+      this.startDrawLoop();
+    });
+  }
+
+  private drawTile(tileIdx: number, r: number, c: number) {
+    if (!this.ctx || !this.mapData || !this.tilesPerTilesetRow) return;
+
+    const tileRow = Math.floor(tileIdx / this.tilesPerTilesetRow);
+    const tileCol = tileIdx % this.tilesPerTilesetRow;
+
+    this.ctx.drawImage(
+      this.tilesetImg,
+
+      // x in tilesetImg
+      tileCol * this.mapData.tileSize,
+      tileRow * this.mapData.tileSize,
+      this.mapData.tileSize,
+      this.mapData.tileSize,
+
+      // x on canvas
+      c * this.mapData.tileSize,
+      r * this.mapData.tileSize,
+      this.mapData.tileSize,
+      this.mapData.tileSize,
+    );
   }
 }

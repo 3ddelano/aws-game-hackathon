@@ -1,4 +1,10 @@
-import type { PlayerData, PublicRoomData, RoomData } from "./common";
+import type {
+  GameMapData,
+  PublicRoomData,
+  RoomData,
+  RoomPlayerData,
+  SOCKET_CHANNEL_PUBLIC,
+} from "./common";
 
 export type SocketChannelsType =
   | typeof SOCKET_CHANNEL_PUBLIC
@@ -15,6 +21,8 @@ export interface ClientToServerEvents {
 
   createRoom: (isPublic: boolean, callback: CreateRoomCallback) => void;
   joinRoom: (roomId: string, callback: JoinRoomCallback) => void;
+
+  // While in room
   moveToTeamA: () => void;
   moveToTeamB: () => void;
   changeUsername: (name: string) => void;
@@ -28,9 +36,13 @@ export interface ServerToClientEvents {
   publicRoomDeleted(roomId: string): void;
 
   // Sent to the room channel
-  roomPlayerJoined(playerData: PlayerData): void;
-  roomPlayerUpdated(playerData: PlayerData): void;
+  roomPlayerJoined(playerData: RoomPlayerData): void;
+  roomPlayerUpdated(playerData: RoomPlayerData): void;
   roomPlayerLeft(playerId: string): void;
   roomOwnerChanged(newOwnerId: string): void;
   roomGameStarted(): void;
+
+  // Sent to a user when joining a game
+  mapData(data: GameMapData): void;
+  // Sent to the game channel
 }

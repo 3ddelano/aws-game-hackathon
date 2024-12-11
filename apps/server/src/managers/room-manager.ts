@@ -2,16 +2,17 @@ import {
   type CreateRoomCallback,
   type GetPublicRoomCallback,
   type JoinRoomCallback,
-  type PlayerData,
   ROOM_MAX_PLAYER_COUNT,
   type RoomData,
+  type RoomPlayerData,
   SOCKET_CHANNEL_PUBLIC,
   type SocketChannelsType,
   type TeamName,
   mapRoomDataToPublicRoomData,
-} from "@repo/common/common";
+} from "@repo/common";
 import { logger } from "@repo/common/logger";
 import { customAlphabet } from "nanoid";
+import { GameSession } from "./game-session";
 
 const nanoid = customAlphabet(
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
@@ -87,7 +88,7 @@ export class RoomManager {
       { A: 0, B: 0 },
     );
 
-    const playerData: PlayerData = {
+    const playerData: RoomPlayerData = {
       id: userId,
       name: `Player ${room.players.length + 1}`,
       team: teamCounts.A < teamCounts.B ? "A" : "B",
@@ -175,6 +176,14 @@ export class RoomManager {
         .in(SOCKET_CHANNEL_PUBLIC)
         .emit("publicRoomDeleted", room.id);
     }
+
+    const gameSession = new GameSession(room.id);
+    for (const player of room.players) {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      gameSession.onPlayerConnected(globalThis.io.sockets.sockets.get(player.id)!, player);
+    }
+
+    return gameSession;
   }
 
   public handlePlayerDisconnected(userId: string) {

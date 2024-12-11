@@ -1,57 +1,22 @@
 import { createServer } from "node:http";
 import {
   type ClientToServerEvents,
-  type RawMapData,
   SOCKET_CHANNEL_PUBLIC,
   type ServerToClientEvents,
+  TICK_RATE,
 } from "@repo/common";
-import level01Data from "@repo/common/assets/maps/level01.json";
 import { logger } from "@repo/common/logger";
 import express from "express";
 import * as socketio from "socket.io";
+import type { GameSession } from "./managers/game-session";
+import { MapManager } from "./managers/map-manager";
 import { RoomManager } from "./managers/room-manager";
-
-class GameMap {
-  private data: RawMapData;
-
-  constructor(json: unknown) {
-    if ((json as { type?: string })?.type !== "map") {
-      throw new Error(`Could not create GameMap: Invalid json: ${json}`);
-    }
-    this.data = {
-      ...(json as object),
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      layers: (json as any).layers.map((layer: any) => ({
-        ...layer,
-        data: layer.data.reduce((acc: number[][], elm: number, i: number) => {
-          const row = Math.floor(i / layer.width);
-          if (!acc[row]) {
-            acc[row] = [];
-          }
-          acc[row].push(elm);
-          return acc;
-        }, [] as number[][]),
-      })),
-    } as RawMapData;
-  }
-
-  public getLayer(name: string) {
-    const layer = this.data.layers.find((layer) => layer.name === name);
-    if (!layer) {
-      throw new Error(`Could not find layer ${name}`);
-    }
-    return layer;
-  }
-
-  public getPayload() {
-    return this.data;
-  }
-}
 
 async function main() {
   logger.info("Starting game server...");
-  // // Load map
-  // const map = new GameMap(level01Data);
+
+  logger.info("Loading maps...");
+  MapManager.getInstance();
 
   const app = express();
   const httpServer = createServer(app);
@@ -66,6 +31,7 @@ async function main() {
   });
 
   const roomManager = new RoomManager();
+  const gameSessions: GameSession[] = [];
 
   io.on("connection", (socket) => {
     logger.info(`New client connected: id ${socket.id}`);
@@ -108,7 +74,10 @@ async function main() {
     });
 
     socket.on("startGame", () => {
-      roomManager.startGame(socket.id);
+      const gameSession = roomManager.startGame(socket.id);
+      if (gameSession) {
+        gameSessions.push(gameSession);
+      }
     });
 
     socket.on("disconnect", (reason) => {
@@ -118,10 +87,28 @@ async function main() {
     });
   });
 
-  const PORT = process.env.SERVER_PORT ?? 3000;
+  const PORT = process.env.SERVER_PORT ?? 3005;
   httpServer.listen(PORT, () => {
     logger.info(`Server listening on port=${PORT}`);
   });
+
+  // Main game loop
+  logger.info(
+    `Started game loop at ${TICK_RATE}ticks/second (${1000 / TICK_RATE}ms/tick)`,
+  );
+  let currentMs = Date.now();
+  setInterval(() => {
+    const startMs = Date.now();
+    const deltaMs = startMs - currentMs;
+    for (const session of gameSessions) {
+      session.tick(deltaMs);
+    }
+    currentMs = Date.now();
+    const elapsedMs = Date.now() - startMs;
+    if (elapsedMs > 1000 / TICK_RATE) {
+      logger.info(`Tick took too long: ${elapsedMs}ms`);
+    }
+  }, 1000 / TICK_RATE);
 }
 
 main();
