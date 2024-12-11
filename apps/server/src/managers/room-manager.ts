@@ -158,11 +158,22 @@ export class RoomManager {
     const player = room.players.find((p) => p.id === userId);
     if (!player || player.id !== room.ownerId) return;
 
-    const channelName: SocketChannelsType = `room_${room.id}`;
-    globalThis.io.in(channelName).emit("roomGameStarted");
+    const roomChannelName: SocketChannelsType = `room_${room.id}`;
+    globalThis.io.in(roomChannelName).emit("roomGameStarted");
+
+    const gameChannelName = `game_${room.id}`;
 
     for (const player of room.players) {
-      globalThis.io.sockets.sockets.get(player.id)?.leave(channelName);
+      globalThis.io.sockets.sockets.get(player.id)?.leave(roomChannelName);
+      globalThis.io.sockets.sockets.get(player.id)?.join(gameChannelName);
+    }
+
+    this.rooms.splice(this.rooms.indexOf(room), 1);
+
+    if (room.isPublic) {
+      globalThis.io
+        .in(SOCKET_CHANNEL_PUBLIC)
+        .emit("publicRoomDeleted", room.id);
     }
   }
 

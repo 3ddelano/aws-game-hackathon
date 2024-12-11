@@ -1,7 +1,4 @@
-import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-} from "@repo/common/common";
+import type { ClientToServerEvents, ServerToClientEvents } from "@repo/common";
 import type { Server } from "socket.io";
 
 declare global {
