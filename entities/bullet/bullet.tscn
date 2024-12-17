@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cllo44pv1q7ue"]
+
+[ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_f41is"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2ddc"]
+bg_color = Color(0.909804, 0.0392157, 0.0392157, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkvy"]
+radius = 2.0
+
+[node name="Bullet" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_f41is")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(2, 2)
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e2ddc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dqkvy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
