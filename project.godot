@@ -23,6 +23,16 @@ window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://components/": "purple",
+"res://entities/": "green",
+"res://maps/": "orange",
+"res://scripts/": "pink",
+"res://tilesets/": "blue"
+}
+
 [global_group]
 
 player=""
@@ -60,6 +70,7 @@ shoot={
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Collectibles"
 
 [physics]
 

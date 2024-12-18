@@ -21,7 +21,6 @@ func change_move_dir():
 	else:
 		velocity.x = 0
 		velocity.y = MOVE_SPEED if randf() > 0.5 else -MOVE_SPEED
-	prints("vel", velocity)
 
 
 func _physics_process(delta: float) -> void:

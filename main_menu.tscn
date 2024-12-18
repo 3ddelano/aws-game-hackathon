@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=6 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_af11d"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_yqaei"]
+[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="3_4u5cf"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="3_d750l"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npccharacter/npc_character.tscn" id="4_fjsqa"]
 
 [node name="MainMenu" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("1_af11d")
-format = 2
+[node name="TileMap" type="Node2D" parent="."]
 
 [node name="bg" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
@@ -19,7 +18,7 @@ collision_enabled = false
 
 [node name="grass" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAACAAQAAAAFAAQAAAADAAQAAAAFAAQAAAADAAMAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAQAAAADAAUAAAAFAAQAAAAEAAUAAAAFAAQAAAAFAAUAAAAFAAQAAAAFAAQAAAAFAAQAAAAFAAMAAAAFAAQAAAAGAAMAAAAFAAQAAAAGAAQAAAAFAAQAAAAGAAUAAAAFAAQAAAA=")
+tile_map_data = PackedByteArray("AAACAAQAAAAFAAQAAAADAAQAAAAFAAQAAAADAAMAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAQAAAADAAUAAAAFAAQAAAAEAAUAAAAFAAQAAAAFAAUAAAAFAAQAAAAFAAQAAAAFAAQAAAAFAAMAAAAFAAQAAAAGAAMAAAAFAAQAAAAGAAQAAAAFAAQAAAAGAAUAAAAFAAQAAAAfAAcAAgAAAAAAAAA=")
 tile_set = ExtResource("1_af11d")
 collision_enabled = false
 
@@ -39,8 +38,17 @@ remote_path = NodePath("../../Camera2D")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(109, 80)
 
-[node name="Slime" parent="." instance=ExtResource("3_d750l")]
-position = Vector2(189, 159)
+[node name="Objects" type="Node2D" parent="."]
 
-[node name="NpcCharacter" parent="." instance=ExtResource("4_fjsqa")]
+[node name="Egg" parent="Objects" instance=ExtResource("3_4u5cf")]
+position = Vector2(54, 77)
+
+[node name="Npcs" type="Node2D" parent="."]
+
+[node name="NpcCharacter" parent="Npcs" instance=ExtResource("4_fjsqa")]
 position = Vector2(147, 153)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Slime" parent="Enemies" instance=ExtResource("3_d750l")]
+position = Vector2(189, 159)
