@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=9 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_af11d"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_yqaei"]
 [ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="3_4u5cf"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="3_d750l"]
+[ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/objects/plants/raddish.tscn" id="3_re22m"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npccharacter/npc_character.tscn" id="4_fjsqa"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="6_wq67e"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/objects/plants/corn.tscn" id="7_4p3gr"]
@@ -40,6 +41,15 @@ position = Vector2(64, 24)
 
 [node name="Corn3" parent="Plants" instance=ExtResource("7_4p3gr")]
 position = Vector2(48, 24)
+
+[node name="Raddish" parent="Plants" instance=ExtResource("3_re22m")]
+position = Vector2(32, 48)
+
+[node name="Raddish2" parent="Plants" instance=ExtResource("3_re22m")]
+position = Vector2(48, 48)
+
+[node name="Raddish3" parent="Plants" instance=ExtResource("3_re22m")]
+position = Vector2(64, 48)
 
 [node name="Objects" type="Node2D" parent="."]
 
