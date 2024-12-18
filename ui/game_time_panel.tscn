@@ -1,0 +1,172 @@
+[gd_scene load_steps=5 format=3 uid="uid://beokda11tvfox"]
+
+[ext_resource type="Theme" uid="uid://cgk3yncv8pk00" path="res://ui/game_ui_theme.tres" id="1_bdts1"]
+[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/Sprite sheet for Basic Pack.png" id="2_agthj"]
+[ext_resource type="Script" path="res://ui/game_time_panel.gd" id="2_e6lkk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f27i"]
+atlas = ExtResource("2_agthj")
+region = Rect2(261, 2, 7, 12)
+
+[node name="GameTimePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bdts1")
+script = ExtResource("2_e6lkk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -86.0
+offset_bottom = 78.0
+theme_override_constants/separation = 2
+
+[node name="DayPanel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"GameTimePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/DayPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="DayLabel" type="Label" parent="VBoxContainer/DayPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"GameTimeDayLabel"
+text = "DAY 0"
+horizontal_alignment = 1
+
+[node name="TimePanel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"GameTimePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TimePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer/TimePanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"GameTimeDayLabel"
+text = "12:30"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NormalSpeedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 18)
+layout_mode = 2
+theme_type_variation = &"GameTimeSpeedButton"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/NormalSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.5
+offset_top = -6.0
+offset_right = 3.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
+
+[node name="FastSpeedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 18)
+layout_mode = 2
+theme_type_variation = &"GameTimeSpeedButton"
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/FastSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -6.0
+offset_right = 5.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/FastSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.5
+offset_top = -6.0
+offset_right = 0.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
+
+[node name="SuperFastSpeedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 18)
+layout_mode = 2
+theme_type_variation = &"GameTimeSpeedButton"
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer/SuperFastSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = -6.0
+offset_right = 7.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/SuperFastSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.5
+offset_top = -6.0
+offset_right = 3.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/SuperFastSpeedButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.5
+offset_top = -6.0
+offset_right = -1.5
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0f27i")
