@@ -4,8 +4,8 @@ extends CharacterBody2D
 @export var move_speed = 100.0
 @export var bullet_scene: PackedScene
 
-@onready var anim_tree = $AnimationTree
-@onready var shoot_cooldown_timer: Timer = $ShootCooldownTimer
+@export var anim_tree: AnimationTree
+@export var shoot_cooldown_timer: Timer
 
 var anim_playback: AnimationNodeStateMachinePlayback
 

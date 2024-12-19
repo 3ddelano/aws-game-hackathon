@@ -3,7 +3,6 @@ extends Node
 #region Signals
 signal time_updated(day: int, hour: int, minute: int)
 signal day_changed(day: int)
-signal game_tick(tick: int)
 #endregion
 
 #region Constants
@@ -41,8 +40,10 @@ func calculate_initial_time() -> float:
 
 func recalculate_time():
 	var total_minutes = int(time / GAME_MINUTE_DURATION)
+	@warning_ignore("integer_division")
 	var new_day = int(total_minutes / MINUTES_PER_DAY)
 	var current_day_minutes = total_minutes % MINUTES_PER_DAY
+	@warning_ignore("integer_division")
 	var new_hour = int(current_day_minutes / MINUTES_PER_HR)
 	var new_minutes = int(current_day_minutes % MINUTES_PER_HR)
 
