@@ -4,11 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_v45jl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntir6"]
+radius = 10.0
 
-[node name="Egg" type="Sprite2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="Egg" type="Sprite2D" parent="."]
+position = Vector2(6, -6)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_dn1kt")
 
 [node name="CollectibleComponent" parent="." instance=ExtResource("2_v45jl")]
+position = Vector2(8, -8)
+scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+position = Vector2(-2.5, 2.5)
 shape = SubResource("CircleShape2D_ntir6")

@@ -34,13 +34,13 @@ tile_set = ExtResource("1_af11d")
 [node name="Plants" type="Node2D" parent="."]
 
 [node name="Corn" parent="Plants" instance=ExtResource("7_4p3gr")]
-position = Vector2(32, 24)
+position = Vector2(32, 32)
 
 [node name="Corn2" parent="Plants" instance=ExtResource("7_4p3gr")]
-position = Vector2(64, 24)
+position = Vector2(64, 32)
 
 [node name="Corn3" parent="Plants" instance=ExtResource("7_4p3gr")]
-position = Vector2(48, 24)
+position = Vector2(48, 32)
 
 [node name="Raddish" parent="Plants" instance=ExtResource("3_re22m")]
 position = Vector2(32, 48)

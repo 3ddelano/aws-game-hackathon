@@ -12,7 +12,7 @@ region = Rect2(16, 0, 64, 16)
 script = ExtResource("1_7bpp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -4)
+position = Vector2(8, -8)
 texture = SubResource("AtlasTexture_htxr3")
 hframes = 4
 
