@@ -70,7 +70,6 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 16.0
 neighbor_distance = 100.0
-debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("1_esjaf")
