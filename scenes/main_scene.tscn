@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=14 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/objects/plants/corn.tscn" id="2_7qngh"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2rn23fwxxa8m" path="res://entities/animals/cow.tscn" id="8_0k8cb"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="9_525yn"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="10_6y5f5"]
+[ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="10_tq6fn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_whi4u"]
 vertices = PackedVector2Array(376.906, 318.703, 371.82, 278, 405, 278, 455.133, 325.219, 427, 278, 460.383, 278, 454, 170, 459, 170, 459, 246, 427, 246, 405, 246, 373, 246, 373, 166, 454, 166)
@@ -123,6 +124,8 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(104, 104)
+
+[node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

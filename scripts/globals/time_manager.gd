@@ -13,9 +13,18 @@ const GAME_MINUTE_DURATION: float = TAU / MINUTES_PER_DAY
 #endregion
 
 var time_speed = 1.0
-var initial_day = 1
-var initial_hour = 12
-var initial_minutes = 30
+var initial_day = 1:
+	set(val):
+		initial_day = val
+		calculate_initial_time()
+var initial_hour = 12:
+	set(val):
+		initial_hour = val
+		calculate_initial_time()
+var initial_minutes = 30:
+	set(val):
+		initial_minutes = val
+		calculate_initial_time()
 
 var time = 0.0
 var current_day = 0

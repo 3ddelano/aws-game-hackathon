@@ -23,7 +23,7 @@ func change_move_dir():
 		velocity.y = MOVE_SPEED if randf() > 0.5 else -MOVE_SPEED
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 
 	if velocity.x < 0:
 		anim_player.play("walk_left")
