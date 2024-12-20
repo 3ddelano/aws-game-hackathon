@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c807n4drgjpri"]
+[gd_scene load_steps=14 format=3 uid="uid://c807n4drgjpri"]
 
 [ext_resource type="Texture2D" uid="uid://bmm1pkqs5ee68" path="res://entities/animals/chicken-spritesheet.png" id="1_nxy1p"]
 [ext_resource type="Script" path="res://entities/animals/chicken.gd" id="1_r8wn8"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_17rfq"]
+[ext_resource type="Script" path="res://entities/animals/idle.gd" id="4_snm87"]
+[ext_resource type="Script" path="res://entities/animals/walk.gd" id="5_c6rug"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xuld"]
 atlas = ExtResource("1_nxy1p")
@@ -61,18 +64,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fksyl"]
 radius = 6.0
 
-[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d", "idle_timer", "navigation_agent_2d")]
+[node name="Chicken" type="CharacterBody2D"]
 script = ExtResource("1_r8wn8")
-animated_sprite_2d = NodePath("AnimatedSprite2D")
-idle_timer = NodePath("IdleTimer")
-navigation_agent_2d = NodePath("NavigationAgent2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -6)
 sprite_frames = SubResource("SpriteFrames_fm364")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.696482
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
@@ -86,6 +85,23 @@ one_shot = true
 avoidance_enabled = true
 neighbor_distance = 100.0
 debug_enabled = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_17rfq")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("4_snm87")
+min_wait_time_sec = 5.0
+max_wait_time_sec = 10.0
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_sprite_2d", "navigation_agent_2d", "character_body_2d")]
+script = ExtResource("5_c6rug")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+character_body_2d = NodePath("../..")
+min_speed = 3.0
+max_speed = 7.0
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=11 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_bfl36"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/objects/plants/corn.tscn" id="2_hsx6d"]
@@ -6,12 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg/egg.tscn" id="4_tswx1"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_k528b"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_1ipa2"]
+[ext_resource type="PackedScene" uid="uid://c807n4drgjpri" path="res://entities/animals/chicken.tscn" id="7_5shvp"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="7_8kb8t"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="8_e840l"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ua114"]
+vertices = PackedVector2Array(427, 278, 478.648, 278, 535.453, 303.82, 433, 348.641, 370, 306.641, 459, 166, 459, 246, 427, 246, 373, 166, 370, 278, 405, 278, 405, 246, 373, 246)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(4, 9, 10), PackedInt32Array(0, 4, 10), PackedInt32Array(7, 0, 10, 11), PackedInt32Array(8, 7, 11), PackedInt32Array(8, 11, 12)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(360, 152, 472, 152, 472, 264, 560, 304, 432, 360, 360, 312)])
+source_geometry_mode = 2
+
 [node name="MainMenu" type="Node2D"]
+y_sort_enabled = true
 
 [node name="TileMap" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="bg" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
@@ -25,10 +34,10 @@ tile_map_data = PackedByteArray("AAACAAQAAAAFAAQAAAADAAQAAAAFAAQAAAADAAMAAAAFAAQ
 tile_set = ExtResource("1_bfl36")
 collision_enabled = false
 
-[node name="fg" type="TileMapLayer" parent="TileMap"]
-z_index = 2
+[node name="fg" type="TileMapLayer" parent="TileMap" groups=["navigation_polygon_source_geometry_group"]]
+y_sort_enabled = true
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAEAAkAAQADAAAAAAANAAQAAQADAAAAAAAMAA0AAQAGAAAAAAAEAA0AAQAAAAMAAAAPAAcAAQAGAAQAAAAIAA4AAQAJAAMAAAAKAAYAAQALAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAAkAAQADAAAAAAANAAQAAQADAAAAAAAMAA0AAQAGAAAAAAAEAA0AAQAAAAMAAAAPAAcAAQAGAAQAAAAIAA4AAQAJAAMAAAAKAAYAAQALAAAAAAAWABAAAgABAAIAAAAWAA8AAgAAAAEAAAAWAA4AAgAAAAEAAAAWAA0AAgAAAAEAAAAWAAwAAgAAAAEAAAAWAAsAAgAAAAEAAAAWAAoAAgAAAAEAAAAXAAkAAgACAAMAAAAYAAkAAgACAAMAAAAZAAkAAgACAAMAAAAaAAkAAgACAAMAAAAbAAkAAgACAAMAAAAcAAkAAgACAAMAAAAdAAkAAgADAAAAAAAWAAkAAgABAAAAAAAdAAoAAgAAAAEAAAAdAAsAAgAAAAEAAAAdAAwAAgAAAAEAAAAdAA0AAgAAAAEAAAAdAA4AAgAAAAEAAAAdAA8AAgAAAAEAAAAdABAAAgADAAIAAAAcABAAAgACAAMAAAAbABAAAgABAAMAAAAXABAAAgACAAMAAAAYABAAAgADAAMAAAA=")
 tile_set = ExtResource("1_bfl36")
 
 [node name="Plants" type="Node2D" parent="."]
@@ -52,22 +61,42 @@ position = Vector2(48, 48)
 position = Vector2(64, 48)
 
 [node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Egg" parent="Objects" instance=ExtResource("4_tswx1")]
 position = Vector2(54, 77)
 
 [node name="Npcs" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="NpcCharacter" parent="Npcs" instance=ExtResource("5_k528b")]
 position = Vector2(147, 153)
 
 [node name="Enemies" type="Node2D" parent="."]
+visible = false
+y_sort_enabled = true
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_1ipa2")]
 position = Vector2(189, 159)
 
+[node name="Animals" type="Node2D" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Animals"]
+navigation_polygon = SubResource("NavigationPolygon_ua114")
+
+[node name="Chicken" parent="Animals" instance=ExtResource("7_5shvp")]
+position = Vector2(448, 184)
+
+[node name="Chicken2" parent="Animals" instance=ExtResource("7_5shvp")]
+position = Vector2(384, 240)
+
+[node name="Chicken3" parent="Animals" instance=ExtResource("7_5shvp")]
+position = Vector2(384, 184)
+
+[node name="Chicken4" parent="Animals" instance=ExtResource("7_5shvp")]
+position = Vector2(424, 216)
+
 [node name="Player" parent="." instance=ExtResource("7_8kb8t")]
-y_sort_enabled = true
 position = Vector2(104, 104)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]

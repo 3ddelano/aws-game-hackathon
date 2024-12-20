@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ojajykdpkok6" path="res://entities/npcs/male1-spritesheet.png" id="1_3toyd"]
 [ext_resource type="Script" path="res://entities/npcs/npc_character.gd" id="1_76syq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbm0s"]
-size = Vector2(16, 42)
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5k60"]
+radius = 7.0
 
 [sub_resource type="Animation" id="Animation_rl18j"]
 length = 0.001
@@ -87,13 +87,13 @@ _data = {
 script = ExtResource("1_76syq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, -21)
-shape = SubResource("RectangleShape2D_qbm0s")
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_o5k60")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(9, -19)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("1_3toyd")
+offset = Vector2(0, -14.59)
 hframes = 8
 vframes = 12
 

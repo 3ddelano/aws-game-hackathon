@@ -42,6 +42,7 @@ folder_colors={
 [global_group]
 
 player=""
+navigation_polygon_source_geometry_group=""
 
 [input]
 
@@ -78,10 +79,11 @@ shoot={
 [layer_names]
 
 2d_physics/layer_1="Environment"
-2d_navigation/layer_1="Chickens"
+2d_navigation/layer_1="Animals"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Collectibles"
+avoidance/layer_1="Animals"
 
 [physics]
 
