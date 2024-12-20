@@ -82,6 +82,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 avoidance_enabled = true
 neighbor_distance = 100.0
 debug_enabled = true

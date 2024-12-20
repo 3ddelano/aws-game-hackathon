@@ -66,6 +66,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_v0061")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 avoidance_enabled = true
 radius = 16.0
 neighbor_distance = 100.0
