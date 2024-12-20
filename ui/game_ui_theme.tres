@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=17 format=3 uid="uid://cgk3yncv8pk00"]
 
 [ext_resource type="FontFile" uid="uid://0flmqpccsyqk" path="res://ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_qd28b"]
-[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/Sprite sheet for Basic Pack.png" id="2_xup2s"]
+[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/ui-spritesheet.png" id="2_xup2s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyypv"]
 atlas = ExtResource("2_xup2s")

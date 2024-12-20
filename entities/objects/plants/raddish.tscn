@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cayu6mo8m3wvy"]
 
 [ext_resource type="Script" path="res://entities/objects/plants/raddish.gd" id="1_gwm10"]
-[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/objects/plants/Basic_Plants.png" id="2_ttu14"]
+[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/objects/plants/plants-spritesheet.png" id="2_ttu14"]
 [ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="3_eeglv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]

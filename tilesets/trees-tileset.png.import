@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yxwono5kh3qo"
-path="res://.godot/imported/Male3.png-e21538a8dbba5682ec929a665b2cf3a9.ctex"
+uid="uid://qfay1dqxuu47"
+path="res://.godot/imported/trees-tileset.png-bbea67059464533e31794ea15bf5b8b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/npccharacter/Male3.png"
-dest_files=["res://.godot/imported/Male3.png-e21538a8dbba5682ec929a665b2cf3a9.ctex"]
+source_file="res://tilesets/trees-tileset.png"
+dest_files=["res://.godot/imported/trees-tileset.png-bbea67059464533e31794ea15bf5b8b1.ctex"]
 
 [params]
 

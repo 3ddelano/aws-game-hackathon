@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1cpuqegupu0e"
-path="res://.godot/imported/Male2.png-c04b6326371271f28cc56fa27050a880.ctex"
+uid="uid://jklrosdxeedj"
+path="res://.godot/imported/plants-spritesheet.png-95d8ee22f6bc25fb4a361b3f05366202.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/npccharacter/Male2.png"
-dest_files=["res://.godot/imported/Male2.png-c04b6326371271f28cc56fa27050a880.ctex"]
+source_file="res://entities/objects/plants/plants-spritesheet.png"
+dest_files=["res://.godot/imported/plants-spritesheet.png-95d8ee22f6bc25fb4a361b3f05366202.ctex"]
 
 [params]
 

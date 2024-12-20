@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4q1b6daer4cv"
-path="res://.godot/imported/Female1.png-ed0efdbad26d2ad3b5cabdb71c17c8e0.ctex"
+uid="uid://bmm1pkqs5ee68"
+path="res://.godot/imported/chicken-spritesheet.png-76de1973bb45f0324653ca47e57df08d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/npccharacter/Female1.png"
-dest_files=["res://.godot/imported/Female1.png-ed0efdbad26d2ad3b5cabdb71c17c8e0.ctex"]
+source_file="res://entities/animals/chicken-spritesheet.png"
+dest_files=["res://.godot/imported/chicken-spritesheet.png-76de1973bb45f0324653ca47e57df08d.ctex"]
 
 [params]
 

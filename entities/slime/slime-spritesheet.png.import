@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b83bjfhdv4lwv"
-path="res://.godot/imported/New Basic Tiles Free.png-021142bb6d8fb37e7d70167c94b97b2b.ctex"
+uid="uid://c1luoeq3dcpq5"
+path="res://.godot/imported/slime-spritesheet.png-7addd17f55ff551d239741c6927acc2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/New Basic Tiles Free.png"
-dest_files=["res://.godot/imported/New Basic Tiles Free.png-021142bb6d8fb37e7d70167c94b97b2b.ctex"]
+source_file="res://entities/slime/slime-spritesheet.png"
+dest_files=["res://.godot/imported/slime-spritesheet.png-7addd17f55ff551d239741c6927acc2c.ctex"]
 
 [params]
 

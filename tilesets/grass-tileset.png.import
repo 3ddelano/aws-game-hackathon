@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1gf50mdnlhrh"
-path="res://.godot/imported/Sprite sheet for Basic Pack.png-f2d41f70a67331508aa26f3f39d8c71b.ctex"
+uid="uid://b83bjfhdv4lwv"
+path="res://.godot/imported/grass-tileset.png-69e38302f306028a0bac95398a60b396.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/Sprite sheet for Basic Pack.png"
-dest_files=["res://.godot/imported/Sprite sheet for Basic Pack.png-f2d41f70a67331508aa26f3f39d8c71b.ctex"]
+source_file="res://tilesets/grass-tileset.png"
+dest_files=["res://.godot/imported/grass-tileset.png-69e38302f306028a0bac95398a60b396.ctex"]
 
 [params]
 

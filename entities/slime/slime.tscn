@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://cbp3wa7yyhxbb"]
 
 [ext_resource type="Script" path="res://entities/slime/slime.gd" id="1_q5opr"]
-[ext_resource type="Texture2D" uid="uid://c1luoeq3dcpq5" path="res://entities/slime/Slime3.png" id="1_roib5"]
+[ext_resource type="Texture2D" uid="uid://c1luoeq3dcpq5" path="res://entities/slime/slime-spritesheet.png" id="1_roib5"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_5ad7t"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="3_tjp5s"]
 

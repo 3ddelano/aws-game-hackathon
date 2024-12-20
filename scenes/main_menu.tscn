@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_bfl36"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/objects/plants/corn.tscn" id="2_hsx6d"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/objects/plants/raddish.tscn" id="3_csjjd"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="4_tswx1"]
-[ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npccharacter/npc_character.tscn" id="5_k528b"]
+[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg/egg.tscn" id="4_tswx1"]
+[ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_k528b"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_1ipa2"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="7_8kb8t"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="8_e840l"]
@@ -21,7 +21,7 @@ collision_enabled = false
 
 [node name="grass" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAACAAQAAAAFAAQAAAADAAQAAAAFAAQAAAADAAMAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAQAAAADAAUAAAAFAAQAAAAEAAUAAAAFAAQAAAAFAAUAAAAFAAQAAAAFAAQAAAAFAAQAAAAFAAMAAAAFAAQAAAAGAAMAAAAFAAQAAAAGAAQAAAAFAAQAAAAGAAUAAAAFAAQAAAAfAAcAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAAQAAAAFAAQAAAADAAQAAAAFAAQAAAADAAMAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAQAAAADAAUAAAAFAAQAAAAEAAUAAAAFAAQAAAAFAAUAAAAFAAQAAAAFAAQAAAAFAAQAAAAFAAMAAAAFAAQAAAAGAAMAAAAFAAQAAAAGAAQAAAAFAAQAAAAGAAUAAAAFAAQAAAA=")
 tile_set = ExtResource("1_bfl36")
 collision_enabled = false
 

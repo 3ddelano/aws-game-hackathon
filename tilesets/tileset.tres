@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b5hyncrbrskd5"]
 
-[ext_resource type="Texture2D" uid="uid://b83bjfhdv4lwv" path="res://tilesets/New Basic Tiles Free.png" id="1_eoe7g"]
-[ext_resource type="Texture2D" uid="uid://qfay1dqxuu47" path="res://tilesets/Trees and bushes.png" id="2_q35cf"]
+[ext_resource type="Texture2D" uid="uid://b83bjfhdv4lwv" path="res://tilesets/grass-tileset.png" id="1_ruj6j"]
+[ext_resource type="Texture2D" uid="uid://qfay1dqxuu47" path="res://tilesets/trees-tileset.png" id="2_rvs3b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gkod5"]
-texture = ExtResource("1_eoe7g")
+texture = ExtResource("1_ruj6j")
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
@@ -210,7 +210,7 @@ texture = ExtResource("1_eoe7g")
 11:12/0/terrains_peering_bit/top_left_corner = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q3o75"]
-texture = ExtResource("2_q35cf")
+texture = ExtResource("2_rvs3b")
 20:0/0 = 0
 20:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 21:0/0 = 0

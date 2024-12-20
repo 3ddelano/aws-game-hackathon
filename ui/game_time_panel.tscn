@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://beokda11tvfox"]
 
 [ext_resource type="Theme" uid="uid://cgk3yncv8pk00" path="res://ui/game_ui_theme.tres" id="1_bdts1"]
-[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/Sprite sheet for Basic Pack.png" id="2_agthj"]
+[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/ui-spritesheet.png" id="2_agthj"]
 [ext_resource type="Script" path="res://ui/game_time_panel.gd" id="2_e6lkk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0f27i"]

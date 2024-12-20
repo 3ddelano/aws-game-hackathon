@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4inqk27b21ua"
-path="res://.godot/imported/Egg_item.png-daa2868d27a0c7f761fe085cdc62fb0f.ctex"
+uid="uid://yxwono5kh3qo"
+path="res://.godot/imported/male3--spritesheet.png-90c673ecaf9124939e0193566a51d6ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/Egg_item.png"
-dest_files=["res://.godot/imported/Egg_item.png-daa2868d27a0c7f761fe085cdc62fb0f.ctex"]
+source_file="res://entities/npcs/male3--spritesheet.png"
+dest_files=["res://.godot/imported/male3--spritesheet.png-90c673ecaf9124939e0193566a51d6ce.ctex"]
 
 [params]
 
