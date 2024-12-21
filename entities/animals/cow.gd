@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	interactable_component.interacted.connect(_on_interactable_component_interacted)
+	interactable_component.enable()
 
 
 func _on_interactable_component_interacted() -> void:

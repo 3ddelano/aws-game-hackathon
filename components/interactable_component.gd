@@ -6,6 +6,16 @@ signal interacted
 var player_in_area = false
 
 
+func enable():
+	monitorable = true
+	monitoring = true
+
+
+func disable():
+	monitorable = false
+	monitoring = false
+
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player_in_area = true
@@ -16,7 +26,5 @@ func _on_body_exited(body: Node2D) -> void:
 		player_in_area = false
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed(&"interact") and player_in_area:
-		get_viewport().set_input_as_handled()
-		interacted.emit()
+func interact():
+	interacted.emit()

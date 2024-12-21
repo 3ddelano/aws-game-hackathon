@@ -7,7 +7,12 @@ extends CharacterBody2D
 @export var anim_tree: AnimationTree
 @export var shoot_cooldown_timer: Timer
 
+@onready var facing_direction: Marker2D = $FacingDirection
+@onready var interactable_finder: Area2D = $FacingDirection/InteractableFinder
+
+
 var anim_playback: AnimationNodeStateMachinePlayback
+var nearest_interactable: Area2D = null
 
 
 func _ready():
@@ -15,9 +20,9 @@ func _ready():
 
 
 func _process(_delta):
-
 	if Input.is_action_pressed(&"shoot"):
 		handle_shoot()
+	check_nearest_interactable()
 
 
 func _physics_process(_delta):
@@ -25,16 +30,19 @@ func _physics_process(_delta):
 
 
 func handle_movement():
-	#var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var input_vector = Vector2()
 	if Input.is_action_pressed(&"move_right"):
 		input_vector.x = 1
+		facing_direction.rotation_degrees = 90
 	elif Input.is_action_pressed(&"move_left"):
 		input_vector.x = -1
+		facing_direction.rotation_degrees = 270
 	elif Input.is_action_pressed(&"move_up"):
 		input_vector.y = -1
+		facing_direction.rotation_degrees = 0
 	elif Input.is_action_pressed(&"move_down"):
 		input_vector.y = 1
+		facing_direction.rotation_degrees = 180
 	velocity = input_vector * move_speed
 	move_and_slide()
 
@@ -44,6 +52,7 @@ func handle_movement():
 		anim_playback.travel(&"Walk")
 	else:
 		anim_playback.travel(&"Idle")
+
 
 func handle_shoot():
 	if not shoot_cooldown_timer.is_stopped():
@@ -57,3 +66,24 @@ func handle_shoot():
 	get_tree().get_current_scene().add_child(bullet)
 
 	shoot_cooldown_timer.start()
+
+
+func check_nearest_interactable():
+	var shortest_dist = INF
+	var next_nearest_interactable = null
+
+	for area in interactable_finder.get_overlapping_areas():
+		var dist = area.global_position.distance_squared_to(global_position)
+		if dist < shortest_dist:
+			shortest_dist = dist
+			next_nearest_interactable = area
+	
+	if nearest_interactable != next_nearest_interactable:
+		nearest_interactable = next_nearest_interactable
+		Events.nearest_interactable_changed.emit(nearest_interactable)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if nearest_interactable and Input.is_action_just_pressed(&"interact"):
+		nearest_interactable.interact()
+		get_viewport().set_input_as_handled()

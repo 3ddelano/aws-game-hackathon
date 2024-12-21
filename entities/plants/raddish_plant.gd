@@ -10,6 +10,7 @@ extends Node2D
 
 func _ready() -> void:
 	growth_cycle_component.stage_changed.connect(_on_growth_stage_changed)
+	growth_cycle_component.matured.connect(_on_growth_matured)
 	interactable_component.interacted.connect(_on_interactable_component_interacted)
 
 
@@ -20,4 +21,9 @@ func _on_growth_stage_changed(stage_idx: int):
 func _on_interactable_component_interacted() -> void:
 	if growth_cycle_component.is_matured():
 		growth_cycle_component.reset()
+		interactable_component.disable()
 		drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)
+
+
+func _on_growth_matured():
+	interactable_component.enable()

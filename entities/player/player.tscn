@@ -1,9 +1,10 @@
-[gd_scene load_steps=64 format=3 uid="uid://bg3c5my8jn044"]
+[gd_scene load_steps=66 format=3 uid="uid://bg3c5my8jn044"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_uj6ap"]
 [ext_resource type="Texture2D" uid="uid://dfd8x6ww4wjxu" path="res://entities/player/player-spritesheet.png" id="2_5lww4"]
 [ext_resource type="PackedScene" uid="uid://cllo44pv1q7ue" path="res://entities/bullet/bullet.tscn" id="2_ysilp"]
 [ext_resource type="Texture2D" uid="uid://gc2fdyqk0kt4" path="res://entities/player/player-spritesheet2.png" id="4_825ym"]
+[ext_resource type="Script" path="res://scripts/nearest_interactable_indicator.gd" id="5_rkqlp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dfspj"]
 radius = 9.0
@@ -706,6 +707,9 @@ states/Idle/position = Vector2(421.5, 99.9375)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_in5qd")
 states/Walk/position = Vector2(603.5, 99.875)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrye4"]
+size = Vector2(28, 31)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree", "shoot_cooldown_timer") groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_uj6ap")
@@ -766,3 +770,33 @@ parameters/Walk/blend_position = Vector2(0.429651, -0.253602)
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="FacingDirection" type="Marker2D" parent="."]
+
+[node name="InteractableFinder" type="Area2D" parent="FacingDirection"]
+position = Vector2(0, -14)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FacingDirection/InteractableFinder"]
+position = Vector2(-7.23998e-06, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_mrye4")
+
+[node name="NearestInteractableIndicator" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_rkqlp")
+
+[node name="Label" type="Label" parent="NearestInteractableIndicator"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -50.0
+offset_right = 4.0
+offset_bottom = -33.0
+theme_override_font_sizes/font_size = 12
+text = "E"
