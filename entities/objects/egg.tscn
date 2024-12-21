@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cchwqjulx0sei"]
+
+[ext_resource type="Texture2D" uid="uid://d4inqk27b21ua" path="res://entities/objects/egg.png" id="1_dn1kt"]
+[ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_v45jl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ntir6"]
+
+[node name="Egg" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_dn1kt")
+
+[node name="CollectibleComponent" parent="." instance=ExtResource("2_v45jl")]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.8, 0.8)
+collectible_name = "egg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+position = Vector2(-9.53674e-07, 9.53674e-07)
+shape = SubResource("CircleShape2D_ntir6")

@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://c807n4drgjpri"]
+
+[ext_resource type="Texture2D" uid="uid://bmm1pkqs5ee68" path="res://entities/animals/chicken-spritesheet.png" id="1_nxy1p"]
+[ext_resource type="Script" path="res://entities/animals/chicken.gd" id="1_r8wn8"]
+[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="2_c6csg"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_17rfq"]
+[ext_resource type="Script" path="res://entities/animals/idle.gd" id="4_snm87"]
+[ext_resource type="Script" path="res://entities/animals/walk.gd" id="5_c6rug"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="6_51cpj"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="7_6tmmx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xuld"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43wcj"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxlfx"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvd55"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sncvh"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmna0"]
+atlas = ExtResource("1_nxy1p")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fm364"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xuld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43wcj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxlfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvd55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sncvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmna0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fksyl"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01iq0"]
+
+[node name="Chicken" type="CharacterBody2D"]
+script = ExtResource("1_r8wn8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -6)
+sprite_frames = SubResource("SpriteFrames_fm364")
+animation = &"walk"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_fksyl")
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+neighbor_distance = 100.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_17rfq")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("4_snm87")
+min_wait_time_sec = 5.0
+max_wait_time_sec = 10.0
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_sprite_2d", "navigation_agent_2d", "character_body_2d")]
+script = ExtResource("5_c6rug")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+character_body_2d = NodePath("../..")
+min_speed = 3.0
+max_speed = 7.0
+
+[node name="InteractableComponent" parent="." instance=ExtResource("6_51cpj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_01iq0")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(0, 5)
+
+[node name="DropItemComponent" parent="." instance=ExtResource("7_6tmmx")]
+scene = ExtResource("2_c6csg")
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
