@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bmm1pkqs5ee68" path="res://entities/animals/chicken-spritesheet.png" id="1_nxy1p"]
 [ext_resource type="Script" path="res://entities/animals/chicken.gd" id="1_r8wn8"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg/egg.tscn" id="2_c6csg"]
+[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="2_c6csg"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_17rfq"]
 [ext_resource type="Script" path="res://entities/animals/idle.gd" id="4_snm87"]
 [ext_resource type="Script" path="res://entities/animals/walk.gd" id="5_c6rug"]

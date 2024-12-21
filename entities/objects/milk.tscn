@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://58lb6nd6bwek"]
+
+[ext_resource type="Texture2D" uid="uid://8my8e24nh71t" path="res://entities/objects/milk.png" id="1_vw5p2"]
+[ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_rvn8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cttu2"]
+atlas = ExtResource("1_vw5p2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v5ek3"]
+
+[node name="Milk" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_cttu2")
+
+[node name="CollectibleComponent" parent="." instance=ExtResource("2_rvn8a")]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.8, 0.8)
+collectible_name = "milk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+position = Vector2(-9.53674e-07, 9.53674e-07)
+shape = SubResource("CircleShape2D_v5ek3")
