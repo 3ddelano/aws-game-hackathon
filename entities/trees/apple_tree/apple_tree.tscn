@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b254vk8id2gmj"]
+[gd_scene load_steps=12 format=3 uid="uid://b254vk8id2gmj"]
 
 [ext_resource type="Texture2D" uid="uid://k6adcdyx51au" path="res://entities/trees/trees-tileset.png" id="1_a5l0l"]
 [ext_resource type="Script" path="res://entities/trees/apple_tree/apple_tree.gd" id="1_ohev6"]
 [ext_resource type="PackedScene" uid="uid://3mf88b575qed" path="res://entities/trees/apple_tree/apple.tscn" id="2_6d6kb"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="2_tx47l"]
 [ext_resource type="Script" path="res://components/growth_cycle_component.gd" id="4_bqbej"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="5_t73gu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axwxv"]
 atlas = ExtResource("1_a5l0l")
@@ -42,7 +43,6 @@ radius = 18.0278
 [node name="AppleTree" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_ohev6")
-apple_scene = ExtResource("2_6d6kb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
@@ -66,6 +66,5 @@ num_stages = 2
 [node name="DropMarker" type="Marker2D" parent="."]
 position = Vector2(0, 10)
 
-[connection signal="interacted" from="InteractableComponent" to="." method="_on_interactable_component_interacted"]
-[connection signal="matured" from="GrowthCycleComponent" to="." method="_on_growth_cycle_component_matured"]
-[connection signal="stage_changed" from="GrowthCycleComponent" to="." method="_on_growth_cycle_component_stage_changed"]
+[node name="DropItemComponent" parent="." instance=ExtResource("5_t73gu")]
+scene = ExtResource("2_6d6kb")

@@ -1,19 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwcbq5g6mye3q"]
+[gd_scene load_steps=5 format=3 uid="uid://cx5fphh61hoyl"]
 
-[ext_resource type="Script" path="res://entities/plants/corn.gd" id="1_7bpp7"]
-[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="1_hd8l1"]
+[ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_h0hvl"]
 [ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_vkcdr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0b52"]
 atlas = ExtResource("2_vkcdr")
-region = Rect2(16, 0, 64, 16)
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fd5f2"]
+radius = 12.0
 
 [node name="Corn" type="Node2D"]
-script = ExtResource("1_7bpp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, -8)
-texture = SubResource("AtlasTexture_htxr3")
-hframes = 4
+texture = SubResource("AtlasTexture_i0b52")
 
-[node name="GrowthCycleComponent" parent="." instance=ExtResource("1_hd8l1")]
+[node name="CollectibleComponent" parent="." instance=ExtResource("2_h0hvl")]
+collectible_name = "corn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+shape = SubResource("CircleShape2D_fd5f2")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=14 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
-[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/corn.tscn" id="2_7qngh"]
-[ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish.tscn" id="3_ben1v"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="4_eg1c2"]
+[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/corn_plant.tscn" id="2_7qngh"]
+[ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="3_ben1v"]
 [ext_resource type="PackedScene" uid="uid://b254vk8id2gmj" path="res://entities/trees/apple_tree/apple_tree.tscn" id="5_30gvq"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_xfomr"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_bd0t3"]
@@ -50,30 +49,25 @@ tile_map_data = PackedByteArray("AAAEAAkAAQADAAAAAAANAAQAAQADAAAAAAAMAA0AAQAGAAA
 tile_set = ExtResource("1_v2605")
 
 [node name="Plants" type="Node2D" parent="."]
-
-[node name="Corn" parent="Plants" instance=ExtResource("2_7qngh")]
-position = Vector2(32, 32)
-
-[node name="Corn2" parent="Plants" instance=ExtResource("2_7qngh")]
-position = Vector2(64, 32)
-
-[node name="Corn3" parent="Plants" instance=ExtResource("2_7qngh")]
-position = Vector2(48, 32)
-
-[node name="Raddish" parent="Plants" instance=ExtResource("3_ben1v")]
-position = Vector2(32, 48)
-
-[node name="Raddish2" parent="Plants" instance=ExtResource("3_ben1v")]
-position = Vector2(48, 48)
-
-[node name="Raddish3" parent="Plants" instance=ExtResource("3_ben1v")]
-position = Vector2(64, 48)
-
-[node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Egg" parent="Objects" instance=ExtResource("4_eg1c2")]
-position = Vector2(54, 77)
+[node name="CornPlant" parent="Plants" instance=ExtResource("2_7qngh")]
+position = Vector2(32, 32)
+
+[node name="CornPlant2" parent="Plants" instance=ExtResource("2_7qngh")]
+position = Vector2(64, 32)
+
+[node name="CornPlant3" parent="Plants" instance=ExtResource("2_7qngh")]
+position = Vector2(48, 32)
+
+[node name="RaddishPlant" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(32, 48)
+
+[node name="RaddishPlant2" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(48, 48)
+
+[node name="RaddishPlant3" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(64, 48)
 
 [node name="Trees" type="Node2D" parent="."]
 y_sort_enabled = true

@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
-@export var egg_scene: PackedScene
-
 @onready var drop_marker: Marker2D = $DropMarker
+@onready var drop_item_component: DropItemComponent = $DropItemComponent
+@onready var interactable_component: InteractableComponent = $InteractableComponent
+
+
+func _ready() -> void:
+	interactable_component.interacted.connect(_on_interactable_component_interacted)
 
 
 func _on_interactable_component_interacted() -> void:
-	var egg = egg_scene.instantiate()
-	egg.global_position = drop_marker.global_position
-	get_parent().add_child(egg)
+	drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)

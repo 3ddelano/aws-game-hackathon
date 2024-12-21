@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwcbq5g6mye3q"]
+
+[ext_resource type="Script" path="res://entities/plants/corn_plant.gd" id="1_7bpp7"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="1_hd8l1"]
+[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_vkcdr"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="4_wvt6r"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="5_acbt0"]
+[ext_resource type="PackedScene" uid="uid://cx5fphh61hoyl" path="res://entities/plants/corn.tscn" id="6_hqsn7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]
+atlas = ExtResource("2_vkcdr")
+region = Rect2(16, 0, 64, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l07d"]
+radius = 11.0
+
+[node name="CornPlant" type="Node2D"]
+script = ExtResource("1_7bpp7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = SubResource("AtlasTexture_htxr3")
+hframes = 4
+frame = 3
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("1_hd8l1")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("4_wvt6r")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_8l07d")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("5_acbt0")]
+scene = ExtResource("6_hqsn7")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(0, -7)

@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
-@export var milk_scene: PackedScene
-
 @onready var drop_marker: Marker2D = $DropMarker
+@onready var drop_item_component: DropItemComponent = $DropItemComponent
+@onready var interactable_component: InteractableComponent = $InteractableComponent
+
+
+func _ready() -> void:
+	interactable_component.interacted.connect(_on_interactable_component_interacted)
 
 
 func _on_interactable_component_interacted() -> void:
-	var milk = milk_scene.instantiate()
-	milk.global_position = drop_marker.global_position
-	get_parent().add_child(milk)
+	drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)

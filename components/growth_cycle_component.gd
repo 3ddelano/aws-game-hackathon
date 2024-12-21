@@ -14,6 +14,9 @@ func _ready() -> void:
 	TimeManager.time_updated.connect(_on_time_manager_time_updated)
 	starting_time = TimeManager.time
 
+	await owner.ready
+	stage_changed.emit(0)
+
 
 func _on_time_manager_time_updated(_day: int, _hour: int, _minute: int):
 	var days = TimeManager.to_days(TimeManager.time - starting_time)
