@@ -8,9 +8,13 @@ signal collected(collectible_name: String)
 @export var queue_free_on_collected = true
 
 
+func _ready() -> void:
+	if collectible_name == "":
+		push_error("Collectible name is required.")
+
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		print("Collected ", collectible_name)
+		print(&"Collected ", collectible_name)
 		collected.emit(collectible_name)
 		if queue_free_on_collected:
 			get_parent().queue_free()

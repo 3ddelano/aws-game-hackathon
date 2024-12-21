@@ -26,16 +26,16 @@ func change_move_dir():
 func _physics_process(_delta: float) -> void:
 
 	if velocity.x < 0:
-		anim_player.play("walk_left")
+		anim_player.play(&"walk_left")
 		sprite_2d.flip_h = false
 	elif velocity.x > 0:
-		anim_player.play("walk_left")
+		anim_player.play(&"walk_left")
 		sprite_2d.flip_h = true
 
 	if velocity.y < 0:
-		anim_player.play("walk_up")
+		anim_player.play(&"walk_up")
 	elif velocity.y > 0:
-		anim_player.play("walk_down")
+		anim_player.play(&"walk_down")
 
 
 	move_and_slide()

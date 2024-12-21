@@ -12,8 +12,8 @@ var anim_playback: AnimationNodeStateMachinePlayback
 var player: Player
 
 func _ready():
-	player = get_tree().get_first_node_in_group("player")
-	anim_playback = anim_tree.get("parameters/playback")
+	player = get_tree().get_first_node_in_group(&"player")
+	anim_playback = anim_tree.get(&"parameters/playback")
 	health_component.died.connect(func ():
 		queue_free()
 	)
@@ -45,10 +45,10 @@ func handle_movement():
 	velocity = dir_to_player * speed
 
 	if velocity:
-		anim_tree.set("parameters/Idle/blend_position", dir_to_player)
-		anim_tree.set("parameters/Walk/blend_position", dir_to_player)
-		anim_playback.travel("Walk")
+		anim_tree.set(&"parameters/Idle/blend_position", dir_to_player)
+		anim_tree.set(&"parameters/Walk/blend_position", dir_to_player)
+		anim_playback.travel(&"Walk")
 	else:
-		anim_playback.travel("Idle")
+		anim_playback.travel(&"Idle")
 
 	move_and_slide()

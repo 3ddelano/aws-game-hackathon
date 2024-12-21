@@ -11,12 +11,12 @@ var anim_playback: AnimationNodeStateMachinePlayback
 
 
 func _ready():
-	anim_playback = anim_tree.get("parameters/playback")
+	anim_playback = anim_tree.get(&"parameters/playback")
 
 
 func _process(_delta):
 
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed(&"shoot"):
 		handle_shoot()
 
 
@@ -27,23 +27,23 @@ func _physics_process(_delta):
 func handle_movement():
 	#var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var input_vector = Vector2()
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed(&"move_right"):
 		input_vector.x = 1
-	elif Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed(&"move_left"):
 		input_vector.x = -1
-	elif Input.is_action_pressed("move_up"):
+	elif Input.is_action_pressed(&"move_up"):
 		input_vector.y = -1
-	elif Input.is_action_pressed("move_down"):
+	elif Input.is_action_pressed(&"move_down"):
 		input_vector.y = 1
 	velocity = input_vector * move_speed
 	move_and_slide()
 
 	if velocity:
-		anim_tree.set("parameters/Idle/blend_position", input_vector)
-		anim_tree.set("parameters/Walk/blend_position", input_vector)
-		anim_playback.travel("Walk")
+		anim_tree.set(&"parameters/Idle/blend_position", input_vector)
+		anim_tree.set(&"parameters/Walk/blend_position", input_vector)
+		anim_playback.travel(&"Walk")
 	else:
-		anim_playback.travel("Idle")
+		anim_playback.travel(&"Idle")
 
 func handle_shoot():
 	if not shoot_cooldown_timer.is_stopped():

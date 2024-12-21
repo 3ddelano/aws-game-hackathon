@@ -7,28 +7,37 @@ signal stage_changed(stage_idx: int)
 signal matured
 
 var current_stage = 0
-var starting_day = 0
+var starting_time = 0
 
 
 func _ready() -> void:
-	TimeManager.day_changed.connect(_on_day_changed)
+	TimeManager.time_updated.connect(_on_time_manager_time_updated)
+	starting_time = TimeManager.time
 
 
-func _on_day_changed(day: int):
-	if starting_day == 0:
-		starting_day = day
+func _on_time_manager_time_updated(_day: int, _hour: int, _minute: int):
+	var days = TimeManager.to_days(TimeManager.time - starting_time)
+	update_stage(days)
 
-	update_stage(day)
 
 func update_stage(day: int):
 	if current_stage == num_stages - 1:
-		print("already reached last stage")
-		TimeManager.day_changed.disconnect(_on_day_changed)
 		return
 
-	var days_passed = day - starting_day
-	current_stage = days_passed
-	stage_changed.emit(current_stage)
+	var days_passed = day
+	if current_stage != days_passed:
+		current_stage = days_passed
+		stage_changed.emit(current_stage)
 
 	if current_stage == num_stages - 1:
 		matured.emit()
+
+
+func reset():
+	current_stage = 0
+	starting_time = TimeManager.time
+	stage_changed.emit(current_stage)
+
+
+func is_matured() -> bool:
+	return current_stage == num_stages - 1

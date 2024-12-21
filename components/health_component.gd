@@ -26,11 +26,9 @@ func damage(amt: float):
 	health = min(MAX_HEALTH, health)
 
 	if health != old_health:
-		print("HealthComponent: health changed")
 		health_changed.emit(old_health, health)
 
 	if health == 0:
-		print("HealthComponent: died")
 		died.emit()
 
 

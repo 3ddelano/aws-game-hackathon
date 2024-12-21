@@ -1,2 +1,1 @@
-class_name Cow
 extends CharacterBody2D

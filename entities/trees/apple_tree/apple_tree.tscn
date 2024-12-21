@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://b254vk8id2gmj"]
+
+[ext_resource type="Texture2D" uid="uid://k6adcdyx51au" path="res://entities/trees/trees-tileset.png" id="1_a5l0l"]
+[ext_resource type="Script" path="res://entities/trees/apple_tree/apple_tree.gd" id="1_ohev6"]
+[ext_resource type="PackedScene" uid="uid://3mf88b575qed" path="res://entities/trees/apple_tree/apple.tscn" id="2_6d6kb"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="2_tx47l"]
+[ext_resource type="Script" path="res://components/growth_cycle_component.gd" id="4_bqbej"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axwxv"]
+atlas = ExtResource("1_a5l0l")
+region = Rect2(16, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7wqu"]
+atlas = ExtResource("1_a5l0l")
+region = Rect2(48, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r5ho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axwxv")
+}],
+"loop": false,
+"name": &"notripe",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7wqu")
+}],
+"loop": false,
+"name": &"ripe",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_240yp"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evka5"]
+radius = 18.0278
+
+[node name="AppleTree" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_ohev6")
+apple_scene = ExtResource("2_6d6kb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_4r5ho")
+animation = &"notripe"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_240yp")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("2_tx47l")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_evka5")
+
+[node name="GrowthCycleComponent" type="Node2D" parent="."]
+script = ExtResource("4_bqbej")
+num_stages = 2
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(0, 10)
+
+[connection signal="interacted" from="InteractableComponent" to="." method="_on_interactable_component_interacted"]
+[connection signal="matured" from="GrowthCycleComponent" to="." method="_on_growth_cycle_component_matured"]
+[connection signal="stage_changed" from="GrowthCycleComponent" to="." method="_on_growth_cycle_component_stage_changed"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwcbq5g6mye3q"]
 
-[ext_resource type="Script" path="res://entities/objects/plants/corn.gd" id="1_7bpp7"]
+[ext_resource type="Script" path="res://entities/plants/corn.gd" id="1_7bpp7"]
 [ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="1_hd8l1"]
-[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/objects/plants/plants-spritesheet.png" id="2_vkcdr"]
+[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_vkcdr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]
 atlas = ExtResource("2_vkcdr")

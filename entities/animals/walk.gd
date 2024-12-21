@@ -1,4 +1,3 @@
-class_name AnimalWalk
 extends State
 
 
@@ -18,7 +17,7 @@ func init() -> void:
 
 
 func enter(_prev_state_path: String, _data = {}) -> void:
-	animated_sprite_2d.play("walk")
+	animated_sprite_2d.play(&"walk")
 	_set_walk_target()
 
 
@@ -47,7 +46,7 @@ func _on_target_reached():
 		_set_walk_target()
 	else:
 		character_body_2d.velocity = Vector2.ZERO
-		state_machine.change_state("idle")
+		state_machine.change_state(&"idle")
 
 
 func _set_walk_target():

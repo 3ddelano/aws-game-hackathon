@@ -21,11 +21,10 @@ func _ready() -> void:
 		child.state_machine = self
 		child.init()
 
-	current_state.enter("")
+	current_state.enter(&"")
 
 
 func change_state(new_state_path: String) -> void:
-
 	if not has_node(new_state_path):
 		printerr("(%s) StateMachine:change_state No node with path %s was found" % [owner.name, new_state_path])
 		return

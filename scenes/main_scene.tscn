@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=15 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
-[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/objects/plants/corn.tscn" id="2_7qngh"]
-[ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/objects/plants/raddish.tscn" id="3_ben1v"]
+[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/corn.tscn" id="2_7qngh"]
+[ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish.tscn" id="3_ben1v"]
 [ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg/egg.tscn" id="4_eg1c2"]
+[ext_resource type="PackedScene" uid="uid://b254vk8id2gmj" path="res://entities/trees/apple_tree/apple_tree.tscn" id="5_30gvq"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_xfomr"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_bd0t3"]
 [ext_resource type="PackedScene" uid="uid://c807n4drgjpri" path="res://entities/animals/chicken.tscn" id="7_nf2x2"]
@@ -73,6 +74,18 @@ y_sort_enabled = true
 
 [node name="Egg" parent="Objects" instance=ExtResource("4_eg1c2")]
 position = Vector2(54, 77)
+
+[node name="Trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="AppleTree" parent="Trees" instance=ExtResource("5_30gvq")]
+position = Vector2(56, 320)
+
+[node name="AppleTree2" parent="Trees" instance=ExtResource("5_30gvq")]
+position = Vector2(96, 344)
+
+[node name="AppleTree3" parent="Trees" instance=ExtResource("5_30gvq")]
+position = Vector2(56, 376)
 
 [node name="Npcs" type="Node2D" parent="."]
 y_sort_enabled = true

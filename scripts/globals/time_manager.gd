@@ -63,3 +63,9 @@ func recalculate_time():
 	if current_day != new_day:
 		current_day = new_day
 		day_changed.emit(current_day)
+
+
+func to_days(relative_time: float) -> int:
+	var minutes = int(relative_time / GAME_MINUTE_DURATION)
+	@warning_ignore("integer_division")
+	return int(minutes / MINUTES_PER_DAY)
