@@ -10,8 +10,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(160, 96, 464, 96, 464, 304, 160, 304)])
 
 [node name="Test" type="Node2D"]
+y_sort_enabled = true
 
 [node name="TileMap" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="bg" type="TileMapLayer" parent="TileMap"]
 use_parent_material = true
@@ -36,6 +38,7 @@ position = Vector2(104, 80)
 remote_path = NodePath("../../Camera2D")
 
 [node name="Chickens" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chickens"]
 navigation_polygon = SubResource("NavigationPolygon_jf6nr")
