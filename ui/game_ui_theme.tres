@@ -16,7 +16,6 @@ texture_margin_bottom = 4.0
 region_rect = Rect2(0, 0, 35, 18)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iwnnu"]
-load_path = "res://.godot/imported/Sprite sheet for Basic Pack.png-f2d41f70a67331508aa26f3f39d8c71b.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_41nvx"]
 atlas = SubResource("CompressedTexture2D_iwnnu")
@@ -30,7 +29,6 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7jwwx"]
-load_path = "res://.godot/imported/Sprite sheet for Basic Pack.png-f2d41f70a67331508aa26f3f39d8c71b.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51gmr"]
 atlas = SubResource("CompressedTexture2D_7jwwx")
@@ -44,7 +42,6 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vfds8"]
-load_path = "res://.godot/imported/Sprite sheet for Basic Pack.png-f2d41f70a67331508aa26f3f39d8c71b.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7ifr"]
 atlas = SubResource("CompressedTexture2D_vfds8")
