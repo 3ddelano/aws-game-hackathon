@@ -1,9 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://bg3c5my8jn044"]
+[gd_scene load_steps=32 format=3 uid="uid://bg3c5my8jn044"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_uj6ap"]
 [ext_resource type="PackedScene" uid="uid://cllo44pv1q7ue" path="res://entities/bullet/bullet.tscn" id="2_ysilp"]
+[ext_resource type="Resource" uid="uid://cluv1qqokdp8e" path="res://scripts/inventory/test_inventory_data.tres" id="3_d1tpt"]
 [ext_resource type="Texture2D" uid="uid://cmgyapcv7yv4w" path="res://characters/main_character.png" id="5_c25y2"]
+[ext_resource type="PackedScene" uid="uid://dsjmoqm3mxywc" path="res://scripts/inventory/inventory.tscn" id="5_jeocm"]
 [ext_resource type="Script" path="res://scripts/nearest_interactable_indicator.gd" id="5_rkqlp"]
+[ext_resource type="Script" path="res://entities/player/inventory_manager.gd" id="6_s41gi"]
+[ext_resource type="PackedScene" uid="uid://brc0abny3hcf4" path="res://scripts/inventory/slot.tscn" id="8_c5t8c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4usk5"]
 radius = 5.0
@@ -241,6 +245,7 @@ script = ExtResource("1_uj6ap")
 bullet_scene = ExtResource("2_ysilp")
 anim_tree = NodePath("Visuals/AnimationTree")
 shoot_cooldown_timer = NodePath("ShootCooldownTimer")
+inventory_data = ExtResource("3_d1tpt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
@@ -296,8 +301,38 @@ script = ExtResource("5_rkqlp")
 [node name="Label" type="Label" parent="NearestInteractableIndicator"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = -50.0
+offset_top = -38.0
 offset_right = 4.0
-offset_bottom = -33.0
+offset_bottom = -21.0
 theme_override_font_sizes/font_size = 12
 text = "E"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_s41gi")
+player = NodePath("../..")
+player_inventory = NodePath("PlayerInventory")
+
+[node name="PlayerInventory" parent="CanvasLayer/InventoryManager" instance=ExtResource("5_jeocm")]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="GrabbedSlot" parent="CanvasLayer/InventoryManager" instance=ExtResource("8_c5t8c")]
+visible = false
+modulate = Color(1, 1, 1, 0.498039)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2

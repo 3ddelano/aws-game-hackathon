@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cuhg2v7lraxc2"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_fav77"]
+[ext_resource type="Texture2D" uid="uid://k6adcdyx51au" path="res://entities/trees/trees-tileset.png" id="2_gvs5a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ggkq"]
+atlas = ExtResource("2_gvs5a")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+script = ExtResource("1_fav77")
+name = "Apple"
+description = "A sweet, juicy fruit perfect for snacking, cooking, or making cider."
+texture = SubResource("AtlasTexture_8ggkq")
+stackable = true

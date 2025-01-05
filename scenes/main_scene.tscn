@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
-[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/corn_plant.tscn" id="2_7qngh"]
+[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="3_ben1v"]
 [ext_resource type="PackedScene" uid="uid://b254vk8id2gmj" path="res://entities/trees/apple_tree/apple_tree.tscn" id="5_30gvq"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_xfomr"]
@@ -134,14 +134,16 @@ position = Vector2(568, 192)
 position = Vector2(504, 232)
 
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(1512, 562)
+position = Vector2(304, 280)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1512, 562)
+visible = false
+position = Vector2(304, 280)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 

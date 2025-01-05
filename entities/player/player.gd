@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 @export var anim_tree: AnimationTree
 @export var shoot_cooldown_timer: Timer
+@export var inventory_data: InventoryData
+
 
 @onready var facing_direction: Marker2D = $FacingDirection
 @onready var interactable_finder: Area2D = $FacingDirection/InteractableFinder
@@ -55,6 +57,7 @@ func handle_movement():
 
 
 func handle_shoot():
+	if Events.is_player_inventory_visible: return
 	if not shoot_cooldown_timer.is_stopped():
 		return
 	var bullet = bullet_scene.instantiate()
@@ -87,3 +90,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if nearest_interactable and Input.is_action_just_pressed(&"interact"):
 		nearest_interactable.interact()
 		get_viewport().set_input_as_handled()
+
+	if Input.is_action_just_pressed(&"toggle_inventory"):
+		Events.toggle_player_inventory()
