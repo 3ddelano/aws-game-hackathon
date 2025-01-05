@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_o3mdq"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_t8g5h"]
-[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/corn_plant.tscn" id="3_g6whm"]
+[ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="3_g6whm"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="4_82mo0"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="4_qcgr7"]
 

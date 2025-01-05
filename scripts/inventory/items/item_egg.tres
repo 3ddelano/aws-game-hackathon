@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bee4tfym5u5pf"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_gr47m"]
+[ext_resource type="Texture2D" uid="uid://d4inqk27b21ua" path="res://entities/objects/egg.png" id="2_duku8"]
+
+[resource]
+script = ExtResource("1_gr47m")
+name = "Egg"
+description = "A versatile ingredient laid by chickens, great for baking or crafting."
+texture = ExtResource("2_duku8")
+stackable = true

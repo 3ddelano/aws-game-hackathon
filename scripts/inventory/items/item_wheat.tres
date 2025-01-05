@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dyh3y756kyy3u"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_arb87"]
+[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_q65ty"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut5yc"]
+atlas = ExtResource("2_q65ty")
+region = Rect2(80, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_arb87")
+name = "Wheat"
+description = "A staple crop for baking bread and crafting other essential recipes."
+texture = SubResource("AtlasTexture_ut5yc")
+stackable = true

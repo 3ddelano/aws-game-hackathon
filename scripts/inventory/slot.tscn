@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://brc0abny3hcf4"]
+
+[ext_resource type="Script" path="res://scripts/inventory/slot.gd" id="1_8nrkt"]
+[ext_resource type="FontFile" uid="uid://d0dbloy6rfxps" path="res://ui/fonts/Roboto-Regular.ttf" id="2_pyxdk"]
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(28, 28)
+offset_right = 20.0
+offset_bottom = 16.0
+script = ExtResource("1_8nrkt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_pyxdk")
+theme_override_font_sizes/font_size = 12
+text = "x99"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
