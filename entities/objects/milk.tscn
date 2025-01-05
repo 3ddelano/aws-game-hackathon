@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://58lb6nd6bwek"]
+[gd_scene load_steps=8 format=3 uid="uid://58lb6nd6bwek"]
 
 [ext_resource type="Texture2D" uid="uid://8my8e24nh71t" path="res://entities/objects/milk.png" id="1_vw5p2"]
 [ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_rvn8a"]
+[ext_resource type="Resource" uid="uid://bk2pq12rv75ue" path="res://scripts/inventory/items/item_milk.tres" id="3_xpj1q"]
+[ext_resource type="Script" path="res://scripts/inventory/slot_data.gd" id="4_vmwhx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cttu2"]
 atlas = ExtResource("1_vw5p2")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_51ff1"]
+script = ExtResource("4_vmwhx")
+item_data = ExtResource("3_xpj1q")
+item_count = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v5ek3"]
 
@@ -19,7 +26,7 @@ texture = SubResource("AtlasTexture_cttu2")
 [node name="CollectibleComponent" parent="." instance=ExtResource("2_rvn8a")]
 position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.8, 0.8)
-collectible_name = "milk"
+slot_data = SubResource("Resource_51ff1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
 position = Vector2(-9.53674e-07, 9.53674e-07)

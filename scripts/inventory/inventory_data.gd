@@ -8,23 +8,27 @@ signal inventory_updated(inventory_data: InventoryData)
 signal inventory_slot_clicked(inventory_data: InventoryData, slot_index: int, button_index: int)
 
 
-func add_item(item_data: ItemData):
+## Returns true if successfully picked up
+func pick_up_slot_data(to_pick_up_slot_data: SlotData) -> bool:
+	# Try to merge in existing
 	for slot_data in slot_datas:
-		if slot_data.item_data == item_data:
-			if item_data.stackable:
-				slot_data.item_count += 1
-			else:
-				var empty_slot_index = _find_empty_slot_index()
-				
-				if empty_slot_index == null:
-					push_error("Cannot add item:%s, reason: inventory is full" % item_data.name)
-					return
-				
-				slot_datas[empty_slot_index] = SlotData.new()
-				slot_datas[empty_slot_index].item_data = item_data
-				slot_datas[empty_slot_index].item_count = 1
-			
-			break
+		if slot_data.can_fully_merge_with(to_pick_up_slot_data):
+			slot_data.fully_merge_with(to_pick_up_slot_data)
+			inventory_updated.emit(self)
+			return true
+	
+	# Try to find empty slot
+	var empty_slot_index = _find_empty_slot_index()
+	if empty_slot_index == null:
+		push_error("Cannot add item=%s, count=%s, reason: inventory is full" % [to_pick_up_slot_data.item_data.name, to_pick_up_slot_data.item_count])
+		return false
+	
+	slot_datas[empty_slot_index] = SlotData.new()
+	slot_datas[empty_slot_index].item_data = to_pick_up_slot_data.item_data
+	slot_datas[empty_slot_index].item_count = 1
+	inventory_updated.emit(self)
+	
+	return true
 
 
 func on_slot_clicked(slot_index: int, button_index: int):

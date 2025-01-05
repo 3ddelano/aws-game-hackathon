@@ -1,0 +1,51 @@
+[gd_scene load_steps=14 format=3 uid="uid://bdypidgpixqti"]
+
+[ext_resource type="Script" path="res://entities/objects/medicine_machine.gd" id="1_7nc3k"]
+[ext_resource type="Texture2D" uid="uid://v5ishw35yi63" path="res://tilesets/20_Subway_and_Train_Station_16x16.png" id="1_p78q6"]
+[ext_resource type="Script" path="res://scripts/inventory/inventory_data.gd" id="2_t13wh"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_0y5x7"]
+[ext_resource type="Script" path="res://scripts/inventory/slot_data.gd" id="3_y6ehe"]
+[ext_resource type="Resource" uid="uid://cuhg2v7lraxc2" path="res://scripts/inventory/items/item_apple.tres" id="4_0fjmc"]
+[ext_resource type="Resource" uid="uid://dyh3y756kyy3u" path="res://scripts/inventory/items/item_wheat.tres" id="5_m05jt"]
+
+[sub_resource type="Resource" id="Resource_k6a2b"]
+script = ExtResource("3_y6ehe")
+item_data = ExtResource("4_0fjmc")
+item_count = 2
+
+[sub_resource type="Resource" id="Resource_hd6hg"]
+script = ExtResource("3_y6ehe")
+item_data = ExtResource("5_m05jt")
+item_count = 1
+
+[sub_resource type="Resource" id="Resource_6qbpc"]
+script = ExtResource("2_t13wh")
+slot_datas = Array[ExtResource("3_y6ehe")]([SubResource("Resource_k6a2b"), null, null, null, SubResource("Resource_hd6hg")])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vr7b0"]
+size = Vector2(26, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kql7f"]
+atlas = ExtResource("1_p78q6")
+region = Rect2(35, 298, 25, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmiem"]
+size = Vector2(26, 6)
+
+[node name="MedicineMachine" type="StaticBody2D"]
+script = ExtResource("1_7nc3k")
+inventory_data = SubResource("Resource_6qbpc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_vr7b0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
+texture = SubResource("AtlasTexture_kql7f")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_0y5x7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_pmiem")

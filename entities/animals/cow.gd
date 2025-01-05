@@ -12,3 +12,4 @@ func _ready() -> void:
 
 func _on_interactable_component_interacted() -> void:
 	drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)
+

@@ -1,16 +1,16 @@
 class_name CollectibleComponent
 extends Area2D
 
-signal collected(collectible_name: String)
+signal collected(item_data: SlotData)
 
 
-@export var collectible_name: String
+@export var slot_data: SlotData
 @export var queue_free_on_collected = true
 
 
 func _ready() -> void:
-	if collectible_name == "":
-		push_error("Collectible name is required.")
+	if not slot_data:
+		push_error("slot_data is required.")
 
 
 	monitoring = false
@@ -19,8 +19,8 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		print(&"Collected ", collectible_name)
-		collected.emit(collectible_name)
+	if body is Player and body.inventory_data.pick_up_slot_data(slot_data):
+		print(&"Collected item=%s, count=%s" % [slot_data.item_data.name, slot_data.item_count])
+		collected.emit(slot_data)
 		if queue_free_on_collected:
 			get_parent().queue_free()

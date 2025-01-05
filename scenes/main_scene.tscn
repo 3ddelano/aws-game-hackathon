@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=16 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b254vk8id2gmj" path="res://entities/trees/apple_tree/apple_tree.tscn" id="5_30gvq"]
 [ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_xfomr"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_bd0t3"]
+[ext_resource type="PackedScene" uid="uid://bdypidgpixqti" path="res://entities/objects/medicine_machine.tscn" id="7_k7ovx"]
 [ext_resource type="PackedScene" uid="uid://c807n4drgjpri" path="res://entities/animals/chicken.tscn" id="7_nf2x2"]
 [ext_resource type="PackedScene" uid="uid://c2rn23fwxxa8m" path="res://entities/animals/cow.tscn" id="8_0k8cb"]
+[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="8_nj6b4"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="9_525yn"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="10_6y5f5"]
 [ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="10_tq6fn"]
@@ -103,6 +105,23 @@ y_sort_enabled = true
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_bd0t3")]
 position = Vector2(189, 159)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="MedicineMachine" parent="Objects" instance=ExtResource("7_k7ovx")]
+position = Vector2(248, 264)
+
+[node name="Egg" parent="Objects" instance=ExtResource("8_nj6b4")]
+position = Vector2(152, 288)
+
+[node name="Egg2" parent="Objects" instance=ExtResource("8_nj6b4")]
+position = Vector2(152, 248)
+
+[node name="Egg3" parent="Objects" instance=ExtResource("8_nj6b4")]
+position = Vector2(184, 232)
+
+[node name="Egg4" parent="Objects" instance=ExtResource("8_nj6b4")]
+position = Vector2(192, 272)
 
 [node name="Animals" type="Node2D" parent="."]
 
