@@ -153,7 +153,7 @@ position = Vector2(568, 192)
 position = Vector2(504, 232)
 
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(1365, 1258)
+position = Vector2(8, 296)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -162,7 +162,7 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position = Vector2(1365, 1258)
+position = Vector2(8, 296)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
