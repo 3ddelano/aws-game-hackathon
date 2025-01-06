@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ba55nwbkqs5sy"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_v888b"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_auc3d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrbfl"]
+atlas = ExtResource("2_auc3d")
+region = Rect2(608, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_v888b")
+name = "Cucumber"
+description = "A crisp, cool vegetable with a mild, refreshing flavor."
+texture = SubResource("AtlasTexture_mrbfl")
+stackable = true

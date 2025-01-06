@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cx7hq1ddrahsv"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_jhofu"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_uxj0g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf3en"]
+atlas = ExtResource("2_uxj0g")
+region = Rect2(384, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_jhofu")
+name = "Garlic"
+description = "A pungent bulb that adds a savory kick to any dish."
+texture = SubResource("AtlasTexture_mf3en")
+stackable = true

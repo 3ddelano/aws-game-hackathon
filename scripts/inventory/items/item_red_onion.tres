@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ern73h2gqwoh"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_jwta8"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_65ypa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysf4v"]
+atlas = ExtResource("2_65ypa")
+region = Rect2(448, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_jwta8")
+name = "Red Onion"
+description = "A sweet and slightly sharp onion variety with deep red skin and crisp texture."
+texture = SubResource("AtlasTexture_ysf4v")
+stackable = true

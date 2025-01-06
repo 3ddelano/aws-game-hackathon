@@ -14,10 +14,11 @@ func set_item_count(new_count: int):
 		item_count = 1
 		push_error("%s is not stackable" % item_data.name)
 
+
 func can_merge_with(other_slot_data: SlotData) -> bool:
-	return item_data == other_slot_data.item_data and \
+	return  item_data == other_slot_data.item_data and \
 		item_data.stackable and \
-		item_count < MAX_STACK_SIZE
+		item_count < MAX_STACK_SIZE	
 
 
 func can_fully_merge_with(other_slot_data: SlotData) -> bool:
@@ -34,4 +35,10 @@ func decrease_single_item_count():
 	var slot_data = duplicate()
 	slot_data.item_count = 1
 	item_count -= 1
+	return slot_data
+
+
+static func from_item_data(p_item_data: ItemData):
+	var slot_data = SlotData.new()
+	slot_data.item_data = p_item_data
 	return slot_data

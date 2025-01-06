@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bo4xxyaovsdyf"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_rgt40"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_fwry2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgwgq"]
+atlas = ExtResource("2_fwry2")
+region = Rect2(800, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_rgt40")
+name = "Green Grapes"
+description = "Crisp, sweet fruits with a bright green color and refreshing taste."
+texture = SubResource("AtlasTexture_xgwgq")
+stackable = true

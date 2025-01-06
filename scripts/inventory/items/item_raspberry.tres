@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ceds560ci7hcv"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_o7uhf"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_qb65p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl2ko"]
+atlas = ExtResource("2_qb65p")
+region = Rect2(704, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_o7uhf")
+name = "Raspberry"
+description = "A delicate, sweet-tart berry with soft, red or golden drupelets."
+texture = SubResource("AtlasTexture_yl2ko")
+stackable = true

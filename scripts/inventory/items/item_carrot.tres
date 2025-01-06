@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cgnamj4gi3ccr"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_e7l5r"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_185dw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sxqf"]
+atlas = ExtResource("2_185dw")
+region = Rect2(192, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_e7l5r")
+name = "Carrot"
+description = "A crunchy, orange root vegetable rich in vitamins and flavor."
+texture = SubResource("AtlasTexture_0sxqf")
+stackable = true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://mlg3vftoohmm"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_bfa32"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_e3ffu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjqkr"]
+atlas = ExtResource("2_e3ffu")
+region = Rect2(384, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_bfa32")
+name = "Broccoli"
+description = "A green, crunchy vegetable with a slightly bitter, earthy flavor."
+texture = SubResource("AtlasTexture_jjqkr")
+stackable = true
