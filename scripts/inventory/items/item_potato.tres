@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bigq2k4wrajxh"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_hq28v"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_o4kxq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ufjs"]
+atlas = ExtResource("2_o4kxq")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_hq28v")
+name = "Potato"
+description = "A hearty, starchy tuber perfect for a variety of dishes."
+texture = SubResource("AtlasTexture_3ufjs")
+stackable = true

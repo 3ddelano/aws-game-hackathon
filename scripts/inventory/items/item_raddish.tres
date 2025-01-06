@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://pe0fqbc3gf2i"]
 
 [ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_g7rrc"]
-[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_ktymn"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_jj8eh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnwqe"]
-atlas = ExtResource("2_ktymn")
-region = Rect2(80, 16, 16, 16)
+atlas = ExtResource("2_jj8eh")
+region = Rect2(256, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_g7rrc")
 name = "Raddish"
-description = "A crunchy, peppery root vegetable that adds flavor to dishes or can be sold for profit."
+description = "A spicy, crisp root vegetable with a sharp bite and vibrant color."
 texture = SubResource("AtlasTexture_vnwqe")
 stackable = true

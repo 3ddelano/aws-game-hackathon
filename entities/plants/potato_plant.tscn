@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq2coqd28dhso"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_u2g10"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_terwx"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="3_bbeir"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="4_miwp1"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="5_qiaov"]
+[ext_resource type="Resource" uid="uid://bigq2k4wrajxh" path="res://scripts/inventory/items/item_potato.tres" id="6_umch0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="PotatoPlant" type="Node2D"]
+script = ExtResource("1_u2g10")
+growth_frame_ids = Array[int]([32, 96, 160, 224])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_terwx")
+hframes = 32
+vframes = 32
+frame = 224
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("3_bbeir")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("4_miwp1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("5_qiaov")]
+item_data = ExtResource("6_umch0")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)

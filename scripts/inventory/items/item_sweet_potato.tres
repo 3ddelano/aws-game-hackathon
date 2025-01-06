@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://8yb8syvo8l70"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_dk3by"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_f80a6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owoev"]
+atlas = ExtResource("2_f80a6")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_dk3by")
+name = "Sweet Potato"
+description = "A nutritious, slightly sweet root vegetable with a soft texture when cooked."
+texture = SubResource("AtlasTexture_owoev")
+stackable = true

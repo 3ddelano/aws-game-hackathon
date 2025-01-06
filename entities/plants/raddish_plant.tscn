@@ -1,27 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://cayu6mo8m3wvy"]
+[gd_scene load_steps=8 format=3 uid="uid://cayu6mo8m3wvy"]
 
 [ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_gwm10"]
-[ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_ttu14"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_e51e3"]
 [ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="3_eeglv"]
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_tuufx"]
 [ext_resource type="Resource" uid="uid://pe0fqbc3gf2i" path="res://scripts/inventory/items/item_raddish.tres" id="5_g0ako"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="6_7r41t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]
-atlas = ExtResource("2_ttu14")
-region = Rect2(16, 16, 64, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_yele6"]
-radius = 11.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y75hu"]
+size = Vector2(16, 16)
 
 [node name="RaddishPlant" type="Node2D"]
 script = ExtResource("1_gwm10")
+growth_frame_ids = Array[int]([40, 104, 168, 0])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_htxr3")
-hframes = 4
-frame = 3
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_e51e3")
+hframes = 32
+vframes = 32
+frame = 232
 
 [node name="GrowthCycleComponent" parent="." instance=ExtResource("3_eeglv")]
 
@@ -31,8 +30,8 @@ item_data = ExtResource("5_g0ako")
 [node name="InteractableComponent" parent="." instance=ExtResource("6_7r41t")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
-position = Vector2(0, -7)
-shape = SubResource("CircleShape2D_yele6")
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_y75hu")
 
 [node name="DropMarker" type="Marker2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(8, -8)

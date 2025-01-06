@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://8a2oqffcnoew"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_e6d52"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_i8ss5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuwc3"]
+atlas = ExtResource("2_i8ss5")
+region = Rect2(864, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_e6d52")
+name = "Pumpkin"
+description = "A large, orange squash with a sweet, hearty flavor, perfect for baking or roasting."
+texture = SubResource("AtlasTexture_kuwc3")
+stackable = true

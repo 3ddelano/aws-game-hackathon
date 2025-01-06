@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhrxw58uji2jk"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_olow6"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="2_hakjt"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_k4362"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_7twcn"]
+[ext_resource type="Resource" uid="uid://cgnamj4gi3ccr" path="res://scripts/inventory/items/item_carrot.tres" id="5_gqeop"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ovcjb"]
+load_path = "res://.godot/imported/plants2-spritesheet.png-376f3169c87747b34ae0b617bfd91967.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="CarrotPlant" type="Node2D"]
+script = ExtResource("1_olow6")
+growth_frame_ids = Array[int]([38, 102, 166, 230])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_ovcjb")
+hframes = 32
+vframes = 32
+frame = 230
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("2_hakjt")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_k4362")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("4_7twcn")]
+item_data = ExtResource("5_gqeop")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)

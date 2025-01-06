@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=4 uid="uid://d3ybm7pcr2ym0"]
+[gd_scene load_steps=16 format=4 uid="uid://d3ybm7pcr2ym0"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_o3mdq"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_t8g5h"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="3_g6whm"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="4_82mo0"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="4_qcgr7"]
+[ext_resource type="PackedScene" uid="uid://cq2coqd28dhso" path="res://entities/plants/potato_plant.tscn" id="6_7owb6"]
+[ext_resource type="PackedScene" uid="uid://5jw6vod8icrc" path="res://entities/plants/sweet_potato_plant.tscn" id="6_v4y2x"]
+[ext_resource type="PackedScene" uid="uid://bhrxw58uji2jk" path="res://entities/plants/carrot_plant.tscn" id="7_f0y5k"]
+[ext_resource type="PackedScene" uid="uid://dlenkqd105tlr" path="res://entities/plants/garlic_plant.tscn" id="8_iv2en"]
+[ext_resource type="PackedScene" uid="uid://do5wbud34qbfs" path="res://entities/plants/red_onion_plant.tscn" id="10_nq8km"]
+[ext_resource type="PackedScene" uid="uid://c3l88ndihikkv" path="res://entities/plants/hot_pepper_plant.tscn" id="11_xx8fg"]
+[ext_resource type="PackedScene" uid="uid://btlww06d8pukc" path="res://entities/plants/watermelon_plant.tscn" id="12_o2s3q"]
+[ext_resource type="PackedScene" uid="uid://87wuhuwvnlhf" path="res://entities/plants/pumpkin_plant.tscn" id="13_374n0"]
+[ext_resource type="PackedScene" uid="uid://dr8qe4tf2rxew" path="res://entities/plants/cauliflower_plant.tscn" id="14_jqbbx"]
+[ext_resource type="PackedScene" uid="uid://clg8amoi3y0y3" path="res://entities/plants/broccoli_plant.tscn" id="15_vab30"]
 
 [node name="Test" type="Node2D"]
 y_sort_enabled = true
@@ -29,7 +39,7 @@ use_parent_material = true
 tile_set = ExtResource("1_o3mdq")
 
 [node name="Player" parent="." instance=ExtResource("2_t8g5h")]
-position = Vector2(104, 80)
+position = Vector2(120, 112)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -37,26 +47,80 @@ remote_path = NodePath("../../Camera2D")
 [node name="Plants" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="CornPlant" parent="Plants" instance=ExtResource("3_g6whm")]
-position = Vector2(40, 40)
+[node name="WheatPlant" parent="Plants" instance=ExtResource("3_g6whm")]
+position = Vector2(32, 32)
 
-[node name="CornPlant2" parent="Plants" instance=ExtResource("3_g6whm")]
-position = Vector2(64, 40)
+[node name="WheatPlant2" parent="Plants" instance=ExtResource("3_g6whm")]
+position = Vector2(48, 32)
 
-[node name="CornPlant3" parent="Plants" instance=ExtResource("3_g6whm")]
-position = Vector2(88, 40)
+[node name="WheatPlant3" parent="Plants" instance=ExtResource("3_g6whm")]
+position = Vector2(64, 32)
+
+[node name="WheatPlant4" parent="Plants" instance=ExtResource("3_g6whm")]
+position = Vector2(80, 32)
 
 [node name="RaddishPlant" parent="Plants" instance=ExtResource("4_82mo0")]
-position = Vector2(40, 80)
+position = Vector2(32, 64)
 
 [node name="RaddishPlant2" parent="Plants" instance=ExtResource("4_82mo0")]
-position = Vector2(64, 80)
+position = Vector2(48, 64)
 
 [node name="RaddishPlant3" parent="Plants" instance=ExtResource("4_82mo0")]
-position = Vector2(88, 80)
+position = Vector2(64, 64)
+
+[node name="RaddishPlant4" parent="Plants" instance=ExtResource("4_82mo0")]
+position = Vector2(80, 64)
+
+[node name="PotatoPlant" parent="Plants" instance=ExtResource("6_7owb6")]
+position = Vector2(32, 48)
+
+[node name="PotatoPlant2" parent="Plants" instance=ExtResource("6_7owb6")]
+position = Vector2(48, 48)
+
+[node name="PotatoPlant3" parent="Plants" instance=ExtResource("6_7owb6")]
+position = Vector2(64, 48)
+
+[node name="PotatoPlant4" parent="Plants" instance=ExtResource("6_7owb6")]
+position = Vector2(80, 48)
+
+[node name="SweetPotatoPlant" parent="Plants" instance=ExtResource("6_v4y2x")]
+position = Vector2(32, 80)
+
+[node name="SweetPotatoPlant2" parent="Plants" instance=ExtResource("6_v4y2x")]
+position = Vector2(48, 80)
+
+[node name="SweetPotatoPlant3" parent="Plants" instance=ExtResource("6_v4y2x")]
+position = Vector2(64, 80)
+
+[node name="SweetPotatoPlant4" parent="Plants" instance=ExtResource("6_v4y2x")]
+position = Vector2(80, 80)
+
+[node name="CarrotPlant" parent="Plants" instance=ExtResource("7_f0y5k")]
+position = Vector2(32, 96)
+
+[node name="CarrotPlant2" parent="Plants" instance=ExtResource("7_f0y5k")]
+position = Vector2(48, 96)
+
+[node name="CarrotPlant3" parent="Plants" instance=ExtResource("7_f0y5k")]
+position = Vector2(64, 96)
+
+[node name="CarrotPlant4" parent="Plants" instance=ExtResource("7_f0y5k")]
+position = Vector2(80, 96)
+
+[node name="GarlicPlant" parent="Plants" instance=ExtResource("8_iv2en")]
+position = Vector2(32, 112)
+
+[node name="GarlicPlant2" parent="Plants" instance=ExtResource("8_iv2en")]
+position = Vector2(48, 112)
+
+[node name="GarlicPlant3" parent="Plants" instance=ExtResource("8_iv2en")]
+position = Vector2(64, 112)
+
+[node name="GarlicPlant4" parent="Plants" instance=ExtResource("8_iv2en")]
+position = Vector2(80, 112)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(104, 80)
+position = Vector2(120, 112)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -66,3 +130,75 @@ anchor_left = 1.0
 anchor_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="RedOnionPlant" parent="." instance=ExtResource("10_nq8km")]
+position = Vector2(32, 128)
+
+[node name="RedOnionPlant2" parent="." instance=ExtResource("10_nq8km")]
+position = Vector2(48, 128)
+
+[node name="RedOnionPlant3" parent="." instance=ExtResource("10_nq8km")]
+position = Vector2(64, 128)
+
+[node name="RedOnionPlant4" parent="." instance=ExtResource("10_nq8km")]
+position = Vector2(80, 128)
+
+[node name="HotPepperPlant" parent="." instance=ExtResource("11_xx8fg")]
+position = Vector2(32, 144)
+
+[node name="HotPepperPlant2" parent="." instance=ExtResource("11_xx8fg")]
+position = Vector2(48, 144)
+
+[node name="HotPepperPlant3" parent="." instance=ExtResource("11_xx8fg")]
+position = Vector2(64, 144)
+
+[node name="HotPepperPlant4" parent="." instance=ExtResource("11_xx8fg")]
+position = Vector2(80, 144)
+
+[node name="WatermelonPlant" parent="." instance=ExtResource("12_o2s3q")]
+position = Vector2(32, 160)
+
+[node name="WatermelonPlant2" parent="." instance=ExtResource("12_o2s3q")]
+position = Vector2(48, 160)
+
+[node name="WatermelonPlant3" parent="." instance=ExtResource("12_o2s3q")]
+position = Vector2(64, 160)
+
+[node name="WatermelonPlant4" parent="." instance=ExtResource("12_o2s3q")]
+position = Vector2(80, 160)
+
+[node name="PumpkinPlant" parent="." instance=ExtResource("13_374n0")]
+position = Vector2(32, 176)
+
+[node name="PumpkinPlant2" parent="." instance=ExtResource("13_374n0")]
+position = Vector2(48, 176)
+
+[node name="PumpkinPlant3" parent="." instance=ExtResource("13_374n0")]
+position = Vector2(64, 176)
+
+[node name="PumpkinPlant4" parent="." instance=ExtResource("13_374n0")]
+position = Vector2(80, 176)
+
+[node name="CauliflowerPlant" parent="." instance=ExtResource("14_jqbbx")]
+position = Vector2(32, 192)
+
+[node name="CauliflowerPlant2" parent="." instance=ExtResource("14_jqbbx")]
+position = Vector2(48, 192)
+
+[node name="CauliflowerPlant3" parent="." instance=ExtResource("14_jqbbx")]
+position = Vector2(64, 192)
+
+[node name="CauliflowerPlant4" parent="." instance=ExtResource("14_jqbbx")]
+position = Vector2(80, 192)
+
+[node name="BroccoliPlant" parent="." instance=ExtResource("15_vab30")]
+position = Vector2(32, 208)
+
+[node name="BroccoliPlant2" parent="." instance=ExtResource("15_vab30")]
+position = Vector2(48, 208)
+
+[node name="BroccoliPlant3" parent="." instance=ExtResource("15_vab30")]
+position = Vector2(64, 208)
+
+[node name="BroccoliPlant4" parent="." instance=ExtResource("15_vab30")]
+position = Vector2(80, 208)

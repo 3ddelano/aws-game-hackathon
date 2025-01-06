@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://2rpaylxwg21a"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_64yk7"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_nsf2w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm7dl"]
+atlas = ExtResource("2_nsf2w")
+region = Rect2(544, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_64yk7")
+name = "Hot Pepper"
+description = "A fiery, spicy fruit that adds heat to dishes."
+texture = SubResource("AtlasTexture_xm7dl")
+stackable = true

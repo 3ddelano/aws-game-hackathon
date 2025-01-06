@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dh58weknutc2l"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_veyrn"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_d8h3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n8fw"]
+atlas = ExtResource("2_d8h3y")
+region = Rect2(896, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_veyrn")
+name = "Tomato"
+description = "A juicy, red fruit with a balance of sweet and tart flavors."
+texture = SubResource("AtlasTexture_7n8fw")
+stackable = true

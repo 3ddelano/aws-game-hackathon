@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://clg8amoi3y0y3"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_14j2d"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="2_u6ohg"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_by6qa"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_3wncu"]
+[ext_resource type="Resource" uid="uid://mlg3vftoohmm" path="res://scripts/inventory/items/item_broccoli.tres" id="5_nxa3t"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_swvbs"]
+load_path = "res://.godot/imported/plants2-spritesheet.png-376f3169c87747b34ae0b617bfd91967.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="BroccoliPlant" type="Node2D"]
+script = ExtResource("1_14j2d")
+growth_frame_ids = Array[int]([364, 428, 492, 556])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_swvbs")
+hframes = 32
+vframes = 32
+frame = 556
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("2_u6ohg")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_by6qa")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("4_3wncu")]
+item_data = ExtResource("5_nxa3t")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)

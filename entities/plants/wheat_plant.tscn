@@ -11,14 +11,14 @@
 atlas = ExtResource("2_vkcdr")
 region = Rect2(16, 0, 64, 16)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8l07d"]
-radius = 11.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kltcd"]
+size = Vector2(16, 16)
 
 [node name="WheatPlant" type="Node2D"]
 script = ExtResource("1_5e82f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(8, -8)
 texture = SubResource("AtlasTexture_htxr3")
 hframes = 4
 frame = 3
@@ -28,11 +28,11 @@ frame = 3
 [node name="InteractableComponent" parent="." instance=ExtResource("4_wvt6r")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
-position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_8l07d")
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_kltcd")
 
 [node name="DropItemComponent" parent="." instance=ExtResource("5_acbt0")]
 item_data = ExtResource("6_wany6")
 
 [node name="DropMarker" type="Marker2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(8, -8)

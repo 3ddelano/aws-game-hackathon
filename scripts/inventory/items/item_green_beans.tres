@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c58ws80o51npd"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_hyvjs"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_n7g7w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxr68"]
+atlas = ExtResource("2_n7g7w")
+region = Rect2(992, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_hyvjs")
+name = "Green beans"
+description = "Crisp, tender beans with a mild, fresh flavor."
+texture = SubResource("AtlasTexture_rxr68")
+stackable = true

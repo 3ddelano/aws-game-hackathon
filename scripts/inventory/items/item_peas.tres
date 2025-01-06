@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://3sg28lw8tbd4"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_xi72n"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_mtivr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rei53"]
+atlas = ExtResource("2_mtivr")
+region = Rect2(928, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_xi72n")
+name = "Peas"
+description = "Sweet, tender green pods filled with small, round seeds."
+texture = SubResource("AtlasTexture_rei53")
+stackable = true
