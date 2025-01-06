@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3igwmmghp24o"]
+[gd_scene load_steps=8 format=3 uid="uid://07ce1wllsckk"]
 
 [ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_jrglk"]
 [ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_ttu14"]

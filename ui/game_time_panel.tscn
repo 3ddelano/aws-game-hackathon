@@ -67,6 +67,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(26, 18)
 layout_mode = 2
+focus_mode = 1
 theme_type_variation = &"GameTimeSpeedButton"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/NormalSpeedButton"]
@@ -88,6 +89,7 @@ texture = SubResource("AtlasTexture_0f27i")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(26, 18)
 layout_mode = 2
+focus_mode = 1
 theme_type_variation = &"GameTimeSpeedButton"
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/FastSpeedButton"]
@@ -124,6 +126,7 @@ texture = SubResource("AtlasTexture_0f27i")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(26, 18)
 layout_mode = 2
+focus_mode = 1
 theme_type_variation = &"GameTimeSpeedButton"
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer/SuperFastSpeedButton"]

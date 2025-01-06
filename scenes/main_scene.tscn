@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=17 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
@@ -13,6 +13,38 @@
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="9_525yn"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="10_6y5f5"]
 [ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="10_tq6fn"]
+
+[sub_resource type="GDScript" id="GDScript_tuwvi"]
+script/source = "extends Node2D
+
+
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
+@onready var drop_item_component: DropItemComponent = $DropItemComponent
+@onready var drop_marker: Marker2D = $DropMarker
+@onready var interactable_component: InteractableComponent = $InteractableComponent
+
+
+func _ready() -> void:
+	growth_cycle_component.stage_changed.connect(_on_growth_stage_changed)
+	growth_cycle_component.matured.connect(_on_growth_matured)
+	interactable_component.interacted.connect(_on_interactable_component_interacted)
+
+
+func _on_growth_stage_changed(stage_idx: int):
+	sprite_2d.frame = stage_idx
+
+
+func _on_interactable_component_interacted() -> void:
+	if growth_cycle_component.is_matured():
+		growth_cycle_component.reset()
+		interactable_component.disable()
+		drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)
+
+
+func _on_growth_matured():
+	interactable_component.enable()
+"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_whi4u"]
 vertices = PackedVector2Array(376.906, 318.703, 371.82, 278, 405, 278, 455.133, 325.219, 427, 278, 460.383, 278, 454, 170, 459, 170, 459, 246, 427, 246, 405, 246, 373, 246, 373, 166, 454, 166)
@@ -65,12 +97,15 @@ y_sort_enabled = true
 
 [node name="CornPlant" parent="Plants" instance=ExtResource("2_7qngh")]
 position = Vector2(32, 32)
+script = SubResource("GDScript_tuwvi")
 
 [node name="CornPlant2" parent="Plants" instance=ExtResource("2_7qngh")]
 position = Vector2(64, 32)
+script = SubResource("GDScript_tuwvi")
 
 [node name="CornPlant3" parent="Plants" instance=ExtResource("2_7qngh")]
 position = Vector2(48, 32)
+script = SubResource("GDScript_tuwvi")
 
 [node name="RaddishPlant" parent="Plants" instance=ExtResource("3_ben1v")]
 position = Vector2(32, 48)

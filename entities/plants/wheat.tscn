@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx5fphh61hoyl"]
+[gd_scene load_steps=8 format=3 uid="uid://d2f16hqxir8a1"]
 
 [ext_resource type="PackedScene" uid="uid://cbmk7kwlmmdg" path="res://components/collectible_component.tscn" id="2_h0hvl"]
 [ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_vkcdr"]
@@ -17,7 +17,7 @@ item_count = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_fd5f2"]
 radius = 12.0
 
-[node name="Corn" type="Node2D"]
+[node name="Wheat" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_i0b52")

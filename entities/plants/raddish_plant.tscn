@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cayu6mo8m3wvy"]
 
-[ext_resource type="Script" path="res://entities/plants/raddish_plant.gd" id="1_gwm10"]
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_gwm10"]
 [ext_resource type="Texture2D" uid="uid://jklrosdxeedj" path="res://entities/plants/plants-spritesheet.png" id="2_ttu14"]
 [ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="3_eeglv"]
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_tuufx"]
-[ext_resource type="PackedScene" uid="uid://3igwmmghp24o" path="res://entities/plants/raddish.tscn" id="5_hvmxd"]
+[ext_resource type="Resource" uid="uid://pe0fqbc3gf2i" path="res://scripts/inventory/items/item_raddish.tres" id="5_g0ako"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="6_7r41t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_htxr3"]
@@ -26,7 +26,7 @@ frame = 3
 [node name="GrowthCycleComponent" parent="." instance=ExtResource("3_eeglv")]
 
 [node name="DropItemComponent" parent="." instance=ExtResource("4_tuufx")]
-scene = ExtResource("5_hvmxd")
+item_data = ExtResource("5_g0ako")
 
 [node name="InteractableComponent" parent="." instance=ExtResource("6_7r41t")]
 
