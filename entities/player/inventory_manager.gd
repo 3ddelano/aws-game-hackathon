@@ -4,6 +4,7 @@ extends Control
 @export var player: Player
 @export var player_inventory: Inventory
 @export var external_inventory: Inventory
+@onready var external_inventory_container: VBoxContainer = $ExternalInventoryContainer
 
 @onready var grabbed_slot: Slot = $GrabbedSlot
 
@@ -49,7 +50,7 @@ func set_external_inventory(inv_owner: Node):
 	var inv_data = inv_owner.inventory_data
 	inv_data.inventory_slot_clicked.connect(_on_inventory_slot_clicked)
 	external_inventory.set_inventory_data(inv_data)
-	external_inventory.show()
+	external_inventory_container.show()
 
 
 func clear_external_inventory():
@@ -59,7 +60,7 @@ func clear_external_inventory():
 		external_inventory.clear_inventory_data(inv_data)
 
 	external_inventory_owner = null
-	external_inventory.hide()
+	external_inventory_container.hide()
 
 
 func _on_inventory_slot_clicked(inv_data: InventoryData, slot_index: int, button_index: int):
