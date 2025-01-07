@@ -80,3 +80,28 @@ func drop_single_slot_data(grabbed_slot_data: SlotData, slot_index: int) -> Slot
 		return grabbed_slot_data
 
 	return null
+
+
+func consume_item(item_data: ItemData, count = 1):
+	for i in range(len(slot_datas)):
+		var slot_data = slot_datas[i]
+		
+		if slot_data and slot_data.item_data == item_data:
+			# We can consume some
+			if slot_data.item_count < count:
+				# this means we cannot consume fully
+				count -= slot_data.item_count
+				slot_data.item_count = 0
+			else:
+				slot_data.item_count -= count
+				count = 0
+				
+				
+			if slot_data.item_count == 0:
+				slot_datas[i] = SlotData.new()
+			
+			if count == 0:
+				break
+	
+	inventory_updated.emit(self)
+	

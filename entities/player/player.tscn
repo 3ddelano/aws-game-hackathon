@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bg3c5my8jn044"]
+[gd_scene load_steps=33 format=3 uid="uid://bg3c5my8jn044"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_uj6ap"]
 [ext_resource type="PackedScene" uid="uid://cllo44pv1q7ue" path="res://entities/bullet/bullet.tscn" id="2_ysilp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/nearest_interactable_indicator.gd" id="5_rkqlp"]
 [ext_resource type="Script" path="res://entities/player/inventory_manager.gd" id="6_s41gi"]
 [ext_resource type="PackedScene" uid="uid://brc0abny3hcf4" path="res://scripts/inventory/slot.tscn" id="8_c5t8c"]
+[ext_resource type="FontFile" uid="uid://0flmqpccsyqk" path="res://ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="8_qchfm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4usk5"]
 radius = 5.0
@@ -311,7 +312,7 @@ text = "E"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory", "external_inventory")]
+[node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory", "external_inventory", "make_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -321,7 +322,8 @@ grow_vertical = 2
 script = ExtResource("6_s41gi")
 player = NodePath("../..")
 player_inventory = NodePath("PlayerInventory")
-external_inventory = NodePath("ExternalInventory")
+external_inventory = NodePath("ExternalInventoryContainer/ExternalInventory")
+make_button = NodePath("ExternalInventoryContainer/MakeButton")
 
 [node name="PlayerInventory" parent="CanvasLayer/InventoryManager" instance=ExtResource("5_jeocm")]
 visible = false
@@ -331,7 +333,7 @@ offset_top = 8.0
 offset_right = 48.0
 offset_bottom = 48.0
 
-[node name="ExternalInventory" parent="CanvasLayer/InventoryManager" instance=ExtResource("5_jeocm")]
+[node name="ExternalInventoryContainer" type="VBoxContainer" parent="CanvasLayer/InventoryManager"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -339,12 +341,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -26.5
+offset_top = -25.5
+offset_right = 26.5
+offset_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ExternalInventory" parent="CanvasLayer/InventoryManager/ExternalInventoryContainer" instance=ExtResource("5_jeocm")]
+layout_mode = 2
+
+[node name="MakeButton" type="Button" parent="CanvasLayer/InventoryManager/ExternalInventoryContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("8_qchfm")
+theme_override_font_sizes/font_size = 18
+text = "MAKE"
 
 [node name="GrabbedSlot" parent="CanvasLayer/InventoryManager" instance=ExtResource("8_c5t8c")]
 visible = false

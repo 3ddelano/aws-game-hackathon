@@ -4,8 +4,11 @@ import boto3
 import json
 from botocore.exceptions import ClientError
 from flask import Flask, request, jsonify
+import time
 
 load_dotenv()
+
+MOCK_RESPONSE = True
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -50,10 +53,16 @@ def post_ai_response():
             "temperature": 1,
             "top_p": 1
         }
-
+        
+        if MOCK_RESPONSE:
+            time.sleep(3)
+            return jsonify({"output": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. Praesent quis felis viverra, faucibus nisi nec, ullamcorper magna. Phasellus ut augue ac tortor elementum euismod nec sed felis. Fusce ut arcu pretium massa gravida sodales non at diam. Donec non risus ipsum."}), 200
+        
+        print(f"Calling AWS bedrock: model={MODEL_ID}")
+        start_time = time.time()
         brt_response = brt.invoke_model(modelId=MODEL_ID, body=json.dumps(native_request).encode())
         response_body = json.loads(brt_response['body'].read())
-        print("response_body=", response_body)
+        print(f"Took={time.time() - start_time}, response_body={response_body}")
 
         output_value = response_body['generation']
 
