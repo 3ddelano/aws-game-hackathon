@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://qffid421rfhc"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_w4m7c"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="2_0vbam"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_lj4fd"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_uagwc"]
+[ext_resource type="Resource" uid="uid://ceds560ci7hcv" path="res://scripts/inventory/items/item_raspberry.tres" id="5_wnw1l"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_swvbs"]
+load_path = "res://.godot/imported/plants2-spritesheet.png-376f3169c87747b34ae0b617bfd91967.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="RaspberryPlant" type="Node2D"]
+script = ExtResource("1_w4m7c")
+growth_frame_ids = Array[int]([374, 438, 502, 566])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_swvbs")
+hframes = 32
+vframes = 32
+frame = 566
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("2_0vbam")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_lj4fd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("4_uagwc")]
+item_data = ExtResource("5_wnw1l")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)
