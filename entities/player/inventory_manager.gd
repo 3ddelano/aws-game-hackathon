@@ -4,8 +4,9 @@ extends Control
 @export var player: Player
 @export var player_inventory: Inventory
 @export var external_inventory: Inventory
-@onready var external_inventory_container: VBoxContainer = $ExternalInventoryContainer
+@export var make_button: Button
 
+@onready var external_inventory_container: VBoxContainer = $ExternalInventoryContainer
 @onready var grabbed_slot: Slot = $GrabbedSlot
 
 
@@ -21,6 +22,8 @@ func _ready() -> void:
 	
 	Events.toggle_external_inventory.connect(_on_toggle_external_inventory)
 	Events.clear_external_inventory.connect(_on_clear_external_inventory)
+	
+	make_button.pressed.connect(_on_make_button_pressed)
 
 
 func _process(delta: float) -> void:
@@ -81,3 +84,8 @@ func _on_inventory_slot_clicked(inv_data: InventoryData, slot_index: int, button
 func update_grabbed_slot():
 	grabbed_slot.visible = !!grabbed_slot_data
 	grabbed_slot.set_slot_data(grabbed_slot_data)
+
+
+func _on_make_button_pressed():
+	if external_inventory_owner and external_inventory_owner.has_method("on_make_button_pressed"):
+		external_inventory_owner.on_make_button_pressed()

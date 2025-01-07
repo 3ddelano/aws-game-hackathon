@@ -37,3 +37,5 @@ texture = SubResource("AtlasTexture_kql7f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_pmiem")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
