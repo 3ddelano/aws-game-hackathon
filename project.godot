@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 TimeManager="*res://scripts/globals/time_manager.gd"
 Events="*res://scripts/globals/events.gd"
+Medicines="*res://scripts/medicines.gd"
 
 [display]
 

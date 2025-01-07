@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_rtg6k"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_cb4w6"]
 [ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="3_lnir6"]
-[ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="4_71jeb"]
+[ext_resource type="PackedScene" uid="uid://dnl0sgmtd1s1x" path="res://ui/game_ui.tscn" id="4_jxxwq"]
 
 [node name="Test" type="Node2D"]
 y_sort_enabled = true
@@ -32,11 +32,4 @@ position = Vector2(192, 160)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("3_lnir6")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GameTimePanel" parent="CanvasLayer" instance=ExtResource("4_71jeb")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 1
+[node name="GameUI" parent="." instance=ExtResource("4_jxxwq")]
