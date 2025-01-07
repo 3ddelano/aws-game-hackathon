@@ -1,13 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://bg3c5my8jn044"]
+[gd_scene load_steps=27 format=3 uid="uid://naftlo1j12xu"]
 
-[ext_resource type="Script" path="res://entities/player/player.gd" id="1_uj6ap"]
-[ext_resource type="PackedScene" uid="uid://cllo44pv1q7ue" path="res://entities/bullet/bullet.tscn" id="2_ysilp"]
-[ext_resource type="Resource" uid="uid://cluv1qqokdp8e" path="res://scripts/inventory/test_inventory_data.tres" id="3_d1tpt"]
-[ext_resource type="Texture2D" uid="uid://cmgyapcv7yv4w" path="res://characters/main_character.png" id="5_c25y2"]
-[ext_resource type="PackedScene" uid="uid://dsjmoqm3mxywc" path="res://scripts/inventory/inventory.tscn" id="5_jeocm"]
-[ext_resource type="Script" path="res://scripts/nearest_interactable_indicator.gd" id="5_rkqlp"]
-[ext_resource type="Script" path="res://entities/player/inventory_manager.gd" id="6_s41gi"]
-[ext_resource type="PackedScene" uid="uid://brc0abny3hcf4" path="res://scripts/inventory/slot.tscn" id="8_c5t8c"]
+[ext_resource type="Script" path="res://entities/npcs/npc_player.gd" id="1_xaaxj"]
+[ext_resource type="Texture2D" uid="uid://47aocsdvhj" path="res://characters/ada_merrick.png" id="2_oiug7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4usk5"]
 radius = 5.0
@@ -15,6 +9,7 @@ height = 18.0
 
 [sub_resource type="Animation" id="Animation_pdxn7"]
 length = 0.001
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,6 +21,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ilgix"]
+resource_name = "RESET_2"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_fegw1"]
@@ -100,6 +112,24 @@ tracks/0/keys = {
 "values": [Vector2i(6, 1), Vector2i(7, 1), Vector2i(8, 1), Vector2i(9, 1), Vector2i(10, 1), Vector2i(11, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_7krlf"]
+resource_name = "phone"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6), Vector2i(8, 6)]
+}
+
 [sub_resource type="Animation" id="Animation_injvm"]
 resource_name = "walk_down"
 length = 0.6
@@ -121,7 +151,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_md3w3"]
 resource_name = "walk_left"
 length = 0.6
-loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -175,10 +204,12 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6p6ey"]
 _data = {
 "RESET": SubResource("Animation_pdxn7"),
+"RESET_2": SubResource("Animation_ilgix"),
 "idle_down": SubResource("Animation_fegw1"),
 "idle_left": SubResource("Animation_1803h"),
 "idle_right": SubResource("Animation_3yvuh"),
 "idle_up": SubResource("Animation_w7f7d"),
+"phone": SubResource("Animation_7krlf"),
 "walk_down": SubResource("Animation_injvm"),
 "walk_left": SubResource("Animation_md3w3"),
 "walk_right": SubResource("Animation_15yd0"),
@@ -233,21 +264,13 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_smgix"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_nvsn2")
-states/Idle/position = Vector2(418.5, 100)
+states/Idle/position = Vector2(417.5, 100)
 states/Start/position = Vector2(235, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_in5qd")
 states/Walk/position = Vector2(603.5, 99.875)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrye4"]
-size = Vector2(28, 31)
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree", "shoot_cooldown_timer") groups=["player"]]
-collision_layer = 2
-script = ExtResource("1_uj6ap")
-bullet_scene = ExtResource("2_ysilp")
-anim_tree = NodePath("Visuals/AnimationTree")
-shoot_cooldown_timer = NodePath("ShootCooldownTimer")
-inventory_data = ExtResource("3_d1tpt")
+[node name="npc_player" type="CharacterBody2D"]
+script = ExtResource("1_xaaxj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
@@ -257,100 +280,24 @@ shape = SubResource("CapsuleShape2D_4usk5")
 scale = Vector2(0.75, 0.75)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("5_c25y2")
+texture = ExtResource("2_oiug7")
 centered = false
 offset = Vector2(-7.6, -31.86)
 hframes = 56
 vframes = 20
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Visuals")
 libraries = {
 "": SubResource("AnimationLibrary_6p6ey")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Visuals"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+root_node = NodePath("../Visuals")
 tree_root = SubResource("AnimationNodeStateMachine_smgix")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(-1.31017, 0.244681)
 parameters/Walk/blend_position = Vector2(0.460222, 0.0425532)
 
-[node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="FacingDirection" type="Marker2D" parent="."]
-
-[node name="InteractableFinder" type="Area2D" parent="FacingDirection"]
-position = Vector2(0, -14)
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FacingDirection/InteractableFinder"]
-visible = false
-position = Vector2(-7.23998e-06, 0)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_mrye4")
-
-[node name="NearestInteractableIndicator" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_rkqlp")
-
-[node name="Label" type="Label" parent="NearestInteractableIndicator"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -38.0
-offset_right = 4.0
-offset_bottom = -21.0
-theme_override_font_sizes/font_size = 12
-text = "E"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory", "external_inventory")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_s41gi")
-player = NodePath("../..")
-player_inventory = NodePath("PlayerInventory")
-external_inventory = NodePath("ExternalInventory")
-
-[node name="PlayerInventory" parent="CanvasLayer/InventoryManager" instance=ExtResource("5_jeocm")]
-visible = false
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 48.0
-offset_bottom = 48.0
-
-[node name="ExternalInventory" parent="CanvasLayer/InventoryManager" instance=ExtResource("5_jeocm")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GrabbedSlot" parent="CanvasLayer/InventoryManager" instance=ExtResource("8_c5t8c")]
-visible = false
-modulate = Color(1, 1, 1, 0.498039)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 28.0
-offset_bottom = 28.0
-mouse_filter = 2
+[node name="MoveDirTimer" type="Timer" parent="."]

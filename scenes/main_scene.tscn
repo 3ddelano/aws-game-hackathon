@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=19 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="3_ben1v"]
 [ext_resource type="PackedScene" uid="uid://b254vk8id2gmj" path="res://entities/trees/apple_tree/apple_tree.tscn" id="5_30gvq"]
-[ext_resource type="PackedScene" uid="uid://bgkibrn2j5gip" path="res://entities/npcs/npc_character.tscn" id="5_xfomr"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_bd0t3"]
 [ext_resource type="PackedScene" uid="uid://bdypidgpixqti" path="res://entities/objects/medicine_machine.tscn" id="7_k7ovx"]
 [ext_resource type="PackedScene" uid="uid://c807n4drgjpri" path="res://entities/animals/chicken.tscn" id="7_nf2x2"]
@@ -13,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="9_525yn"]
 [ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="10_6y5f5"]
 [ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="10_tq6fn"]
+[ext_resource type="Texture2D" uid="uid://47aocsdvhj" path="res://characters/ada_merrick.png" id="14_sc2ne"]
+[ext_resource type="Texture2D" uid="uid://cftgeolpf7n65" path="res://characters/reuben.png" id="15_hmc0b"]
+[ext_resource type="PackedScene" uid="uid://naftlo1j12xu" path="res://entities/npcs/npc_player.tscn" id="15_kltdm"]
 
 [sub_resource type="GDScript" id="GDScript_tuwvi"]
 script/source = "extends Node2D
@@ -128,12 +130,6 @@ position = Vector2(96, 199)
 [node name="AppleTree3" parent="Trees" instance=ExtResource("5_30gvq")]
 position = Vector2(56, 227)
 
-[node name="Npcs" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="NpcCharacter" parent="Npcs" instance=ExtResource("5_xfomr")]
-position = Vector2(-131, 758)
-
 [node name="Enemies" type="Node2D" parent="."]
 visible = false
 y_sort_enabled = true
@@ -188,7 +184,7 @@ position = Vector2(568, 192)
 position = Vector2(504, 232)
 
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(8, 296)
+position = Vector2(1407, 804)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -197,7 +193,7 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position = Vector2(8, 296)
+position = Vector2(1407, 804)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
@@ -210,3 +206,16 @@ anchor_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Npcs" type="Node2D" parent="."]
+
+[node name="npc_player" parent="Npcs" instance=ExtResource("15_kltdm")]
+position = Vector2(1486, 904)
+custom_texture = ExtResource("14_sc2ne")
+is_idle = true
+
+[node name="npc_player2" parent="Npcs" instance=ExtResource("15_kltdm")]
+position = Vector2(1541, 899)
+custom_texture = ExtResource("15_hmc0b")
+is_idle = true
+is_phone = true
