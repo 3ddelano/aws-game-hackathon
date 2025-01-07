@@ -53,6 +53,7 @@ def post_ai_response():
 
         brt_response = brt.invoke_model(modelId=MODEL_ID, body=json.dumps(native_request).encode())
         response_body = json.loads(brt_response['body'].read())
+        print("response_body=", response_body)
 
         output_value = response_body['generation']
 
