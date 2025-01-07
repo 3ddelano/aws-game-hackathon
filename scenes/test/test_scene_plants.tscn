@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://d3ybm7pcr2ym0"]
+[gd_scene load_steps=25 format=4 uid="uid://d3ybm7pcr2ym0"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_o3mdq"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_t8g5h"]
@@ -15,6 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://87wuhuwvnlhf" path="res://entities/plants/pumpkin_plant.tscn" id="13_374n0"]
 [ext_resource type="PackedScene" uid="uid://dr8qe4tf2rxew" path="res://entities/plants/cauliflower_plant.tscn" id="14_jqbbx"]
 [ext_resource type="PackedScene" uid="uid://clg8amoi3y0y3" path="res://entities/plants/broccoli_plant.tscn" id="15_vab30"]
+[ext_resource type="PackedScene" uid="uid://bbutkkqolhml7" path="res://entities/plants/cucumber_plant.tscn" id="16_trlxf"]
+[ext_resource type="PackedScene" uid="uid://24gfxf0qqglk" path="res://entities/plants/strawberry_plant.tscn" id="17_2qvo8"]
+[ext_resource type="PackedScene" uid="uid://dny8d88k4mm4q" path="res://entities/plants/blueberry_plant.tscn" id="18_1t7jy"]
+[ext_resource type="PackedScene" uid="uid://qffid421rfhc" path="res://entities/plants/raspberry_plant.tscn" id="19_pnfwr"]
+[ext_resource type="PackedScene" uid="uid://bj1frxmgj53xy" path="res://entities/plants/purple_grapes_plant.tscn" id="20_uapuy"]
+[ext_resource type="PackedScene" uid="uid://cdf0p24nccdr3" path="res://entities/plants/green_grapes_plant.tscn" id="21_xp06c"]
+[ext_resource type="PackedScene" uid="uid://dlyij2dlympv8" path="res://entities/plants/tomato_plant.tscn" id="22_0xgmf"]
+[ext_resource type="PackedScene" uid="uid://caif5xjdimjp1" path="res://entities/plants/peas_plant.tscn" id="23_do8u3"]
+[ext_resource type="PackedScene" uid="uid://bfeqos1cluebw" path="res://entities/plants/green_beans_plant.tscn" id="24_trbr6"]
 
 [node name="Test" type="Node2D"]
 y_sort_enabled = true
@@ -202,3 +211,111 @@ position = Vector2(64, 208)
 
 [node name="BroccoliPlant4" parent="." instance=ExtResource("15_vab30")]
 position = Vector2(80, 208)
+
+[node name="CucumberPlant" parent="." instance=ExtResource("16_trlxf")]
+position = Vector2(32, 224)
+
+[node name="CucumberPlant2" parent="." instance=ExtResource("16_trlxf")]
+position = Vector2(48, 224)
+
+[node name="CucumberPlant3" parent="." instance=ExtResource("16_trlxf")]
+position = Vector2(64, 224)
+
+[node name="CucumberPlant4" parent="." instance=ExtResource("16_trlxf")]
+position = Vector2(80, 224)
+
+[node name="StrawberryPlant" parent="." instance=ExtResource("17_2qvo8")]
+position = Vector2(32, 240)
+
+[node name="StrawberryPlant2" parent="." instance=ExtResource("17_2qvo8")]
+position = Vector2(48, 240)
+
+[node name="StrawberryPlant3" parent="." instance=ExtResource("17_2qvo8")]
+position = Vector2(64, 240)
+
+[node name="StrawberryPlant4" parent="." instance=ExtResource("17_2qvo8")]
+position = Vector2(80, 240)
+
+[node name="BlueberryPlant" parent="." instance=ExtResource("18_1t7jy")]
+position = Vector2(32, 256)
+
+[node name="BlueberryPlant2" parent="." instance=ExtResource("18_1t7jy")]
+position = Vector2(48, 256)
+
+[node name="BlueberryPlant3" parent="." instance=ExtResource("18_1t7jy")]
+position = Vector2(64, 256)
+
+[node name="BlueberryPlant4" parent="." instance=ExtResource("18_1t7jy")]
+position = Vector2(80, 256)
+
+[node name="RaspberryPlant" parent="." instance=ExtResource("19_pnfwr")]
+position = Vector2(32, 272)
+
+[node name="RaspberryPlant2" parent="." instance=ExtResource("19_pnfwr")]
+position = Vector2(48, 272)
+
+[node name="RaspberryPlant3" parent="." instance=ExtResource("19_pnfwr")]
+position = Vector2(64, 272)
+
+[node name="RaspberryPlant4" parent="." instance=ExtResource("19_pnfwr")]
+position = Vector2(80, 272)
+
+[node name="PurpleGrapesPlant" parent="." instance=ExtResource("20_uapuy")]
+position = Vector2(32, 288)
+
+[node name="PurpleGrapesPlant2" parent="." instance=ExtResource("20_uapuy")]
+position = Vector2(48, 288)
+
+[node name="PurpleGrapesPlant3" parent="." instance=ExtResource("20_uapuy")]
+position = Vector2(64, 288)
+
+[node name="PurpleGrapesPlant4" parent="." instance=ExtResource("20_uapuy")]
+position = Vector2(80, 288)
+
+[node name="GreenGrapesPlant" parent="." instance=ExtResource("21_xp06c")]
+position = Vector2(32, 304)
+
+[node name="GreenGrapesPlant2" parent="." instance=ExtResource("21_xp06c")]
+position = Vector2(48, 304)
+
+[node name="GreenGrapesPlant3" parent="." instance=ExtResource("21_xp06c")]
+position = Vector2(64, 304)
+
+[node name="GreenGrapesPlant4" parent="." instance=ExtResource("21_xp06c")]
+position = Vector2(80, 304)
+
+[node name="TomatoPlant" parent="." instance=ExtResource("22_0xgmf")]
+position = Vector2(32, 320)
+
+[node name="TomatoPlant2" parent="." instance=ExtResource("22_0xgmf")]
+position = Vector2(48, 320)
+
+[node name="TomatoPlant3" parent="." instance=ExtResource("22_0xgmf")]
+position = Vector2(64, 320)
+
+[node name="TomatoPlant4" parent="." instance=ExtResource("22_0xgmf")]
+position = Vector2(80, 320)
+
+[node name="PeasPlant" parent="." instance=ExtResource("23_do8u3")]
+position = Vector2(32, 336)
+
+[node name="PeasPlant2" parent="." instance=ExtResource("23_do8u3")]
+position = Vector2(48, 336)
+
+[node name="PeasPlant3" parent="." instance=ExtResource("23_do8u3")]
+position = Vector2(64, 336)
+
+[node name="PeasPlant4" parent="." instance=ExtResource("23_do8u3")]
+position = Vector2(80, 336)
+
+[node name="PeasPlant5" parent="." instance=ExtResource("24_trbr6")]
+position = Vector2(32, 352)
+
+[node name="PeasPlant6" parent="." instance=ExtResource("24_trbr6")]
+position = Vector2(48, 352)
+
+[node name="PeasPlant7" parent="." instance=ExtResource("24_trbr6")]
+position = Vector2(64, 352)
+
+[node name="PeasPlant8" parent="." instance=ExtResource("24_trbr6")]
+position = Vector2(80, 352)

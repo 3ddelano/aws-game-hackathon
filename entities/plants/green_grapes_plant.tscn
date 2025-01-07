@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdf0p24nccdr3"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_h0t14"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="2_move5"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_a51jf"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_3bfml"]
+[ext_resource type="Resource" uid="uid://bo4xxyaovsdyf" path="res://scripts/inventory/items/item_green_grapes.tres" id="5_4x885"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_swvbs"]
+load_path = "res://.godot/imported/plants2-spritesheet.png-376f3169c87747b34ae0b617bfd91967.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="GreenGrapesPlant" type="Node2D"]
+script = ExtResource("1_h0t14")
+growth_frame_ids = Array[int]([377, 441, 505, 569])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_swvbs")
+hframes = 32
+vframes = 32
+frame = 569
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("2_move5")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_a51jf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("4_3bfml")]
+item_data = ExtResource("5_4x885")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)

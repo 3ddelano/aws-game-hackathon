@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://dlyij2dlympv8"]
+
+[ext_resource type="Script" path="res://entities/plants/plant.gd" id="1_lnp7i"]
+[ext_resource type="Texture2D" uid="uid://4lx6k3p46llw" path="res://entities/plants/plants2-spritesheet.png" id="2_p7xbf"]
+[ext_resource type="PackedScene" uid="uid://bw8rk4mhlp8e4" path="res://components/growth_cycle_component.tscn" id="2_qghim"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_6j5xh"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="4_x8xif"]
+[ext_resource type="Resource" uid="uid://dh58weknutc2l" path="res://scripts/inventory/items/item_tomato.tres" id="6_v4eah"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ovcjb"]
+load_path = "res://.godot/imported/plants2-spritesheet.png-376f3169c87747b34ae0b617bfd91967.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp5u4"]
+atlas = ExtResource("2_p7xbf")
+region = Rect2(896, 448, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx548"]
+atlas = ExtResource("2_p7xbf")
+region = Rect2(896, 512, 32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixaio"]
+size = Vector2(16, 16)
+
+[node name="TomatoPlant" type="Node2D"]
+script = ExtResource("1_lnp7i")
+use_sprites_list = true
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_ovcjb")
+hframes = 32
+vframes = 32
+frame = 380
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_ovcjb")
+hframes = 32
+vframes = 32
+frame = 444
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_pp5u4")
+offset = Vector2(0, -16)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprites"]
+position = Vector2(8, -8)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_jx548")
+offset = Vector2(0, -16)
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("2_qghim")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_6j5xh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_ixaio")
+
+[node name="DropItemComponent" parent="." instance=ExtResource("4_x8xif")]
+item_data = ExtResource("6_v4eah")
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(8, -8)
