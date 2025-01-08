@@ -23,6 +23,9 @@ var can_shoot = true
 func _ready():
 	anim_playback = anim_tree.get(&"parameters/playback")
 	DialogManager.dialogbox_visibility_changed.connect(_on_dialogmanager_dialogbox_visibility_changed)
+	
+	interactable_finder.area_entered.connect(_on_interactable_finder_area_entered)
+	interactable_finder.area_exited.connect(_on_interactable_finder_area_exited)
 
 
 func _process(_delta):
@@ -110,3 +113,15 @@ func _on_dialogmanager_dialogbox_visibility_changed(dialogbox_visible: bool):
 	else:
 		can_move = true
 		can_shoot = true
+
+
+func _on_interactable_finder_area_entered(area):
+	if area is InteractableComponent:
+		area.player_in_area = true
+		area.player_in_area_changed.emit(true)
+
+
+func _on_interactable_finder_area_exited(area):
+	if area is InteractableComponent:
+		area.player_in_area = false
+		area.player_in_area_changed.emit(false)

@@ -283,7 +283,7 @@ one_shot = true
 
 [node name="InteractableFinder" type="Area2D" parent="FacingDirection"]
 position = Vector2(0, -14)
-collision_layer = 0
+collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FacingDirection/InteractableFinder"]

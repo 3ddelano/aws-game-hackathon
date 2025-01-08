@@ -4,7 +4,7 @@
 
 [node name="InteractableComponent" type="Area2D"]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 16
 monitoring = false
 monitorable = false
 script = ExtResource("1_5yeel")
