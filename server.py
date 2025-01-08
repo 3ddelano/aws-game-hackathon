@@ -8,13 +8,13 @@ import time
 
 load_dotenv()
 
-MOCK_RESPONSE = True
+MOCK_RESPONSE = False
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_REGION = 'us-east-1'
 # MODEL_ID = "mistral.mistral-7b-instruct-v0:2"
-MODEL_ID = "us.meta.llama3-3-70b-instruct-v1:0"
+MODEL_ID = "us.meta.llama3-3-70b-instruct-v1:0" 
 # prompt = "Provide output strictly as JSON: {name,statement}. You are Delano. Your task is to speak about any one of the given topics in a few words. Choose a topic randomly from the following list: ['List innovative farming methods and how they work', 'How is food security handled for settlements', 'The battle against contaminated soil and methods']. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic."
 
 brt = boto3.client("bedrock-runtime", 
@@ -45,7 +45,9 @@ def post_ai_response():
 
         input_value = data['prompt']
 
-        prompt = input_value + "\n Respond only in plain text.\n\n"
+        prompt = input_value + "\n Strictly respond in plain text, limited to 100 words."
+
+
 
         native_request = {
             "prompt": prompt,
