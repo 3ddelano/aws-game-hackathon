@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b3fluc4p136f1"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_iceym"]
+[ext_resource type="Texture2D" uid="uid://b1a2cd7i06gb" path="res://scripts/inventory/items/Small Elixir - YELLOW - 0000.png" id="2_fbptg"]
+
+[resource]
+script = ExtResource("1_iceym")
+name = "Detoxifier"
+description = "Cleanses toxins for a refreshed and healthier you."
+texture = ExtResource("2_fbptg")
+stackable = true
