@@ -76,5 +76,5 @@ func _ready():
 			illnesses.append(illness)
 		
 	
-	print("Medicine categories: ", medicine_categories)
-	print("Illnesses: ", illnesses)
+	#print("Medicine categories: ", medicine_categories)
+	#print("Illnesses: ", illnesses)

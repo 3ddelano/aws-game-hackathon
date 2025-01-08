@@ -16,9 +16,13 @@ extends CharacterBody2D
 var anim_playback: AnimationNodeStateMachinePlayback
 var nearest_interactable: Area2D = null
 
+var can_move = true
+var can_shoot = true
+
 
 func _ready():
 	anim_playback = anim_tree.get(&"parameters/playback")
+	DialogManager.dialogbox_visibility_changed.connect(_on_dialogmanager_dialogbox_visibility_changed)
 
 
 func _process(_delta):
@@ -32,6 +36,8 @@ func _physics_process(_delta):
 
 
 func handle_movement():
+	if not can_move: return
+		
 	var input_vector = Vector2()
 	if Input.is_action_pressed(&"move_right"):
 		input_vector.x = 1
@@ -45,6 +51,7 @@ func handle_movement():
 	elif Input.is_action_pressed(&"move_down"):
 		input_vector.y = 1
 		facing_direction.rotation_degrees = 180
+	
 	velocity = input_vector * move_speed
 	move_and_slide()
 
@@ -57,6 +64,7 @@ func handle_movement():
 
 
 func handle_shoot():
+	if not can_shoot: return
 	if Events.is_player_inventory_visible: return
 	if not shoot_cooldown_timer.is_stopped():
 		return
@@ -93,3 +101,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if Input.is_action_just_pressed(&"toggle_inventory"):
 		Events.toggle_player_inventory()
+
+
+func _on_dialogmanager_dialogbox_visibility_changed(dialogbox_visible: bool):
+	if dialogbox_visible:
+		can_move = false
+		can_shoot = false
+	else:
+		can_move = true
+		can_shoot = true

@@ -65,17 +65,7 @@ Available Items:
 	for item: ItemData in item_counts:
 		inventory_data.consume_item(item)
 	
-	var output = await _get_ai_response(prompt)
+	var output = await AIAPI.make_ai_response(prompt)
 	
 	print("AI Response: ", output)
 	
-
-func _get_ai_response(prompt: String):
-	http_request.request("http://127.0.0.1:5000/ai-response", ["Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"prompt": prompt}))
-	var resp = await http_request.request_completed
-	var body_str = resp[3].get_string_from_utf8()
-	
-	var json = JSON.new()
-	json.parse(body_str)
-	var response = json.get_data()
-	return response["output"]

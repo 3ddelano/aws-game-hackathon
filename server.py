@@ -56,7 +56,7 @@ def post_ai_response():
         
         if MOCK_RESPONSE:
             time.sleep(3)
-            return jsonify({"output": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. Praesent quis felis viverra, faucibus nisi nec, ullamcorper magna. Phasellus ut augue ac tortor elementum euismod nec sed felis. Fusce ut arcu pretium massa gravida sodales non at diam. Donec non risus ipsum."}), 200
+            return jsonify({"output": "Mocked resposne. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. Praesent quis felis viverra, faucibus nisi nec, ullamcorper magna. Phasellus ut augue ac tortor elementum euismod nec sed felis. Fusce ut arcu pretium massa gravida sodales non at diam. Donec non risus ipsum."}), 200
         
         print(f"Calling AWS bedrock: model={MODEL_ID}")
         start_time = time.time()

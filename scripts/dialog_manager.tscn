@@ -1,0 +1,214 @@
+[gd_scene load_steps=15 format=3 uid="uid://cfe0dakuc4odk"]
+
+[ext_resource type="Script" path="res://scripts/dialog_manager.gd" id="1_nnxqa"]
+[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/ui-spritesheet.png" id="2_ygi1a"]
+[ext_resource type="FontFile" uid="uid://0flmqpccsyqk" path="res://ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="3_h2qsx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7difp"]
+atlas = ExtResource("2_ygi1a")
+region = Rect2(291, 52, 10, 9)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1b5c8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfvbw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5en3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n2ltj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogi3r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcxgt"]
+
+[sub_resource type="Animation" id="Animation_xk7ki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/DialogBox/MarginContainer/VBoxContainer/LoadingText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/DialogBox/NextIndicator:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(461, 107)]
+}
+
+[sub_resource type="Animation" id="Animation_khete"]
+resource_name = "loading_text"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/DialogBox/MarginContainer/VBoxContainer/LoadingText:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["", ".", "..", "..."]
+}
+
+[sub_resource type="Animation" id="Animation_mtepk"]
+resource_name = "next_indicator"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/DialogBox/NextIndicator:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(461, 107), Vector2(461, 111.54), Vector2(461, 107)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5bofy"]
+_data = {
+"RESET": SubResource("Animation_xk7ki"),
+"loading_text": SubResource("Animation_khete"),
+"next_indicator": SubResource("Animation_mtepk")
+}
+
+[node name="DialogManager" type="Control" node_paths=PackedStringArray("anim_player")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_nnxqa")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="DialogBox" type="NinePatchRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 25)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -126.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_ygi1a")
+region_rect = Rect2(259, 180, 90, 25)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DialogBox/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="SpeakerName" type="Label" parent="CanvasLayer/DialogBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.440723, 0.293421, 0.0665347, 1)
+theme_override_fonts/font = ExtResource("3_h2qsx")
+theme_override_font_sizes/font_size = 18
+text = "Name"
+
+[node name="DialogText" type="Label" parent="CanvasLayer/DialogBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.596078, 0.34902, 0.121569, 1)
+theme_override_fonts/font = ExtResource("3_h2qsx")
+theme_override_font_sizes/font_size = 18
+text = "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet "
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="LoadingText" type="Label" parent="CanvasLayer/DialogBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.596078, 0.34902, 0.121569, 1)
+theme_override_fonts/font = ExtResource("3_h2qsx")
+theme_override_font_sizes/font_size = 18
+text = "."
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="NextIndicator" type="TextureRect" parent="CanvasLayer/DialogBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -19.0
+offset_right = -8.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_7difp")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="CanvasLayer/DialogBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1b5c8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pfvbw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u5en3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n2ltj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogi3r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fcxgt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5bofy")
+}
+
+[connection signal="pressed" from="CanvasLayer/DialogBox/Button" to="." method="_on_button_pressed"]
