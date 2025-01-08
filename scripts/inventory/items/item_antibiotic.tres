@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://knqyypylopn1"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_x3weo"]
+[ext_resource type="Texture2D" uid="uid://b0vqgfu087kqf" path="res://scripts/inventory/items/Small Elixir - RED - 0000.png" id="2_2btak"]
+
+[resource]
+script = ExtResource("1_x3weo")
+name = "Antibiotic"
+description = "Fights infections and restores your body’s defenses."
+texture = ExtResource("2_2btak")
+stackable = true

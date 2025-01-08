@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bqjwj723qcsuq"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_jaifk"]
+[ext_resource type="Texture2D" uid="uid://cpwmv6ftppamj" path="res://scripts/inventory/items/Small Elixir - BLUE -0000.png" id="2_q6p8y"]
+
+[resource]
+script = ExtResource("1_jaifk")
+name = "Pain Reliever"
+description = "Eases aches and soothes discomfort for quick relief."
+texture = ExtResource("2_q6p8y")
+stackable = true
