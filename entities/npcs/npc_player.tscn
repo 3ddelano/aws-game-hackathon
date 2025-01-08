@@ -1,7 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://naftlo1j12xu"]
+[gd_scene load_steps=30 format=3 uid="uid://naftlo1j12xu"]
 
 [ext_resource type="Script" path="res://entities/npcs/npc_player.gd" id="1_xaaxj"]
 [ext_resource type="Texture2D" uid="uid://47aocsdvhj" path="res://characters/ada_merrick.png" id="2_oiug7"]
+[ext_resource type="PackedScene" uid="uid://cqj3j7g5fic42" path="res://components/ai_dialog_component.tscn" id="3_tlbv2"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="4_ow5q1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4usk5"]
 radius = 5.0
@@ -269,7 +271,11 @@ states/Start/position = Vector2(235, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_in5qd")
 states/Walk/position = Vector2(603.5, 99.875)
 
-[node name="npc_player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sdchy"]
+radius = 7.0
+height = 24.0
+
+[node name="NPCPlayer" type="CharacterBody2D"]
 script = ExtResource("1_xaaxj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -301,3 +307,13 @@ parameters/Idle/blend_position = Vector2(-1.31017, 0.244681)
 parameters/Walk/blend_position = Vector2(0.460222, 0.0425532)
 
 [node name="MoveDirTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="AIDialogComponent" parent="." instance=ExtResource("3_tlbv2")]
+
+[node name="InteractableComponent" parent="." instance=ExtResource("4_ow5q1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_sdchy")
