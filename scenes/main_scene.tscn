@@ -209,12 +209,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Npcs" type="Node2D" parent="."]
 
-[node name="npc_player" parent="Npcs" instance=ExtResource("15_kltdm")]
+[node name="ada_merrick" parent="Npcs" instance=ExtResource("15_kltdm")]
 position = Vector2(1486, 904)
 custom_texture = ExtResource("14_sc2ne")
 is_idle = true
 
-[node name="npc_player2" parent="Npcs" instance=ExtResource("15_kltdm")]
+[node name="reuben" parent="Npcs" instance=ExtResource("15_kltdm")]
 position = Vector2(1541, 899)
 custom_texture = ExtResource("15_hmc0b")
 is_idle = true
