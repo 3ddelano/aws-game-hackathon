@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dpx0k8ycgxnkl" path="res://entities/animals/cow-spritesheet.png" id="1_lwnm3"]
 [ext_resource type="Script" path="res://entities/animals/cow.gd" id="1_yingc"]
 [ext_resource type="Script" path="res://entities/animals/idle.gd" id="2_jsrgh"]
-[ext_resource type="PackedScene" uid="uid://58lb6nd6bwek" path="res://entities/objects/milk.tscn" id="2_nqy7y"]
 [ext_resource type="Script" path="res://entities/animals/walk.gd" id="3_bjpas"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="6_q4t0g"]
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="7_2x70v"]
+[ext_resource type="Resource" uid="uid://bk2pq12rv75ue" path="res://scripts/inventory/items/item_milk.tres" id="8_gq2a3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8jim"]
 atlas = ExtResource("1_lwnm3")
@@ -102,4 +102,4 @@ shape = SubResource("CapsuleShape2D_bqb10")
 position = Vector2(0, 6)
 
 [node name="DropItemComponent" parent="." instance=ExtResource("7_2x70v")]
-scene = ExtResource("2_nqy7y")
+item_data = ExtResource("8_gq2a3")

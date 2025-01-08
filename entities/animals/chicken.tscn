@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://bmm1pkqs5ee68" path="res://entities/animals/chicken-spritesheet.png" id="1_nxy1p"]
 [ext_resource type="Script" path="res://entities/animals/chicken.gd" id="1_r8wn8"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="2_c6csg"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_17rfq"]
 [ext_resource type="Script" path="res://entities/animals/idle.gd" id="4_snm87"]
 [ext_resource type="Script" path="res://entities/animals/walk.gd" id="5_c6rug"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="6_51cpj"]
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="7_6tmmx"]
+[ext_resource type="Resource" uid="uid://bee4tfym5u5pf" path="res://scripts/inventory/items/item_egg.tres" id="8_43twn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xuld"]
 atlas = ExtResource("1_nxy1p")
@@ -118,7 +118,7 @@ shape = SubResource("CircleShape2D_01iq0")
 position = Vector2(0, 5)
 
 [node name="DropItemComponent" parent="." instance=ExtResource("7_6tmmx")]
-scene = ExtResource("2_c6csg")
+item_data = ExtResource("8_43twn")
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

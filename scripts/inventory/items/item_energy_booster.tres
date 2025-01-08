@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://wjecrxaxqms1"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_xdbbx"]
+[ext_resource type="Texture2D" uid="uid://cud84nw8lu0qy" path="res://scripts/inventory/items/Small Elixir - GOLD - 0000.png" id="2_2bs8c"]
+
+[resource]
+script = ExtResource("1_xdbbx")
+name = "Energy Booster"
+description = "Recharges energy and combats fatigue instantly."
+texture = ExtResource("2_2bs8c")
+stackable = true

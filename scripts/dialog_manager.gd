@@ -48,8 +48,8 @@ func hide_loading_indicator():
 	dialog_text.show()
 
 
-func set_speaker_name(str: String):
-	speaker_name.text = str
+func set_speaker_name(p_speaker_name: String):
+	speaker_name.text = p_speaker_name
 
 
 func start_dialog(text: String):
@@ -60,7 +60,6 @@ func start_dialog(text: String):
 	dialog_chunks = _split_text_into_chunks(text, MAX_LINES * MAX_CHARS_PER_LINE)
 	
 	print("--- Starting dialog ---")
-	print("dialog_chunks ", dialog_chunks)
 	
 	current_chunk_index = 0
 	_show_dialog_chunk()

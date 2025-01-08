@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://du3qbb583f6hs"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_hxvjk"]
+[ext_resource type="Texture2D" uid="uid://clijbjarsd6ty" path="res://scripts/inventory/items/Small Elixir - PURPLE -0000.png" id="2_otlxl"]
+
+[resource]
+script = ExtResource("1_hxvjk")
+name = "Anti-Inflammatory"
+description = "Reduces swelling and restores natural balance."
+texture = ExtResource("2_otlxl")
+stackable = true

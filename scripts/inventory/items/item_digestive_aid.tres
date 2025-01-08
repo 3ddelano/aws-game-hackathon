@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://qeeagt2sq856"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_oiu8h"]
+[ext_resource type="Texture2D" uid="uid://dc7ennbyd4oov" path="res://scripts/inventory/items/Small Elixir - CYAN -0000.png" id="2_wai0x"]
+
+[resource]
+script = ExtResource("1_oiu8h")
+name = "Digestive Aid"
+description = "Promotes smooth digestion and relieves stomach troubles."
+texture = ExtResource("2_wai0x")
+stackable = true

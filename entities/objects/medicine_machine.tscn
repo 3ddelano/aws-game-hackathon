@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdypidgpixqti"]
+[gd_scene load_steps=11 format=3 uid="uid://bdypidgpixqti"]
 
 [ext_resource type="Script" path="res://entities/objects/medicine_machine.gd" id="1_7nc3k"]
 [ext_resource type="Texture2D" uid="uid://v5ishw35yi63" path="res://tilesets/20_Subway_and_Train_Station_16x16.png" id="1_p78q6"]
 [ext_resource type="Script" path="res://scripts/inventory/inventory_data.gd" id="2_t13wh"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="3_0y5x7"]
 [ext_resource type="Script" path="res://scripts/inventory/slot_data.gd" id="3_y6ehe"]
+[ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="6_3nm4o"]
 
 [sub_resource type="Resource" id="Resource_6qbpc"]
 script = ExtResource("2_t13wh")
@@ -18,7 +19,7 @@ atlas = ExtResource("1_p78q6")
 region = Rect2(35, 298, 25, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmiem"]
-size = Vector2(26, 6)
+size = Vector2(36, 32)
 
 [node name="MedicineMachine" type="StaticBody2D"]
 script = ExtResource("1_7nc3k")
@@ -33,9 +34,15 @@ position = Vector2(0, -11)
 texture = SubResource("AtlasTexture_kql7f")
 
 [node name="InteractableComponent" parent="." instance=ExtResource("3_0y5x7")]
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
-position = Vector2(0, 2)
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_pmiem")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="DropItemComponent" parent="." instance=ExtResource("6_3nm4o")]
+
+[node name="DropMarker" type="Marker2D" parent="."]
+position = Vector2(0, 5)

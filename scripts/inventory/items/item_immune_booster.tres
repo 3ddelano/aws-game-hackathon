@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://d4k7ibn273x31"]
+
+[ext_resource type="Script" path="res://scripts/inventory/items/item_data.gd" id="1_4udas"]
+[ext_resource type="Texture2D" uid="uid://bm0oqorxjpv6l" path="res://scripts/inventory/items/Small Elixir - GREEN -0000.png" id="2_babhj"]
+
+[resource]
+script = ExtResource("1_4udas")
+name = "Immune Booster"
+description = "Strengthens immunity to ward off illnesses."
+texture = ExtResource("2_babhj")
+stackable = true
