@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bchn2n0vhuev4"]
+
+[ext_resource type="Texture2D" uid="uid://dwvvqndmucelj" path="res://tilesets/doors/Garden_Villa_Door_1_16x16.png" id="1_6koq0"]
+
+[sub_resource type="Animation" id="Animation_m10yj"]
+resource_name = "close"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqrcl"]
+_data = {
+"close": SubResource("Animation_m10yj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfwrh"]
+size = Vector2(29, 31)
+
+[node name="Node2D" type="StaticBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rqrcl")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6koq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_gfwrh")
