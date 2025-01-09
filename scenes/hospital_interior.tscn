@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://cvai2of4ueo3e"]
+[gd_scene load_steps=4 format=4 uid="uid://cvai2of4ueo3e"]
 
 [ext_resource type="TileSet" uid="uid://c5paiq30u8voi" path="res://scenes/wallsorfloors.tres" id="1_5b4kc"]
 [ext_resource type="TileSet" uid="uid://67fboajsudub" path="res://tilesets/interior/base_interior.tres" id="2_b73bx"]
+[ext_resource type="PackedScene" uid="uid://bdypidgpixqti" path="res://entities/objects/medicine_machine.tscn" id="3_4lreu"]
 
 [node name="HospitalInterior" type="Node2D"]
 
@@ -21,3 +22,6 @@ tile_set = ExtResource("2_b73bx")
 
 [node name="something on object" type="TileMapLayer" parent="hospitaltile"]
 tile_set = ExtResource("2_b73bx")
+
+[node name="MedicineMachine" parent="." instance=ExtResource("3_4lreu")]
+position = Vector2(90, 45)
