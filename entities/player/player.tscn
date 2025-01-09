@@ -357,7 +357,6 @@ theme_override_font_sizes/font_size = 12
 text = "E"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory", "external_inventory", "action_button")]
 layout_mode = 3
