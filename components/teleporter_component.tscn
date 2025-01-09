@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://jy0qlif1y70r"]
+
+[ext_resource type="Script" path="res://components/teleporter_component.gd" id="1_qmqqt"]
+[ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="2_vjkdp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg7b7"]
+
+[node name="TeleporterComponent" type="Node2D"]
+script = ExtResource("1_qmqqt")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("2_vjkdp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+shape = SubResource("CircleShape2D_hg7b7")

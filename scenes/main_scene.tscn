@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=39 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cvai2of4ueo3e" path="res://scenes/hospital_interior.tscn" id="1_w4flj"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://do5wbud34qbfs" path="res://entities/plants/red_onion_plant.tscn" id="19_3hbie"]
 [ext_resource type="PackedScene" uid="uid://bhrxw58uji2jk" path="res://entities/plants/carrot_plant.tscn" id="20_kcblq"]
 [ext_resource type="PackedScene" uid="uid://24gfxf0qqglk" path="res://entities/plants/strawberry_plant.tscn" id="21_hrkqk"]
+[ext_resource type="PackedScene" uid="uid://jy0qlif1y70r" path="res://components/teleporter_component.tscn" id="26_fggsw"]
 [ext_resource type="PackedScene" uid="uid://dnl0sgmtd1s1x" path="res://ui/game_ui.tscn" id="29_d22y8"]
 [ext_resource type="PackedScene" uid="uid://drlkgnfjph00d" path="res://scenes/base2_interior.tscn" id="34_3mijn"]
 
@@ -82,19 +83,13 @@ source_geometry_mode = 2
 [node name="MainMenu" type="Node2D"]
 y_sort_enabled = true
 
-[node name="HospitalInterior" parent="." instance=ExtResource("1_w4flj")]
-position = Vector2(-3605, 344)
-
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(-3428, 1389)
+position = Vector2(-4046, 1280)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 metadata/_edit_lock_ = true
-
-[node name="BaseInterior" parent="." instance=ExtResource("2_e0txf")]
-position = Vector2(-3561, 1308)
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -475,6 +470,27 @@ position = Vector2(1947, 1091)
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Teleports" type="Node2D" parent="."]
+
+[node name="Base" type="Node2D" parent="Teleports"]
+position = Vector2(-47, 0)
+
+[node name="TeleporterComponent" parent="Teleports/Base" node_paths=PackedStringArray("to_marker") instance=ExtResource("26_fggsw")]
+position = Vector2(-297, 627)
+to_marker = NodePath("../../../Scenes/BaseInterior/BaseInMarker")
+
+[node name="BaseOutMarker" type="Marker2D" parent="Teleports/Base"]
+position = Vector2(-296, 643)
+
+[node name="Hospital" type="Node2D" parent="Teleports"]
+
+[node name="TeleporterComponent" parent="Teleports/Hospital" node_paths=PackedStringArray("to_marker") instance=ExtResource("26_fggsw")]
+position = Vector2(208, 1072)
+to_marker = NodePath("../../../Scenes/HospitalInterior/HospitalInMarker")
+
+[node name="HospitalOutMarker" type="Marker2D" parent="Teleports/Hospital"]
+position = Vector2(209, 1088)
+
 [node name="Animals" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -512,7 +528,7 @@ position = Vector2(4302, 1278)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position = Vector2(-3428, 1389)
+position = Vector2(-4046, 1280)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
@@ -529,5 +545,29 @@ speaker_name = "Reuben"
 main_prompt = "You are {speaker_name}. Speak about {topic}. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic. nova force is an organization that handles the well being and security of its citizens"
 topics = Array[String](["what is nova force"])
 
-[node name="Base2Interior" parent="." instance=ExtResource("34_3mijn")]
+[node name="Scenes" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-544, -306)
+
+[node name="HospitalInterior" parent="Scenes" instance=ExtResource("1_w4flj")]
+position = Vector2(-3605, 344)
+
+[node name="TeleporterComponent" parent="Scenes/HospitalInterior" node_paths=PackedStringArray("to_marker") instance=ExtResource("26_fggsw")]
+position = Vector2(184, 281)
+to_marker = NodePath("../../../Teleports/Hospital/HospitalOutMarker")
+
+[node name="HospitalInMarker" type="Marker2D" parent="Scenes/HospitalInterior"]
+position = Vector2(183, 256)
+
+[node name="BaseInterior" parent="Scenes" instance=ExtResource("2_e0txf")]
+position = Vector2(-3561, 1308)
+
+[node name="TeleporterComponent" parent="Scenes/BaseInterior" node_paths=PackedStringArray("to_marker") instance=ExtResource("26_fggsw")]
+position = Vector2(64, 325)
+to_marker = NodePath("../../../Teleports/Base/BaseOutMarker")
+
+[node name="BaseInMarker" type="Marker2D" parent="Scenes/BaseInterior"]
+position = Vector2(64, 299)
+
+[node name="Base2Interior" parent="Scenes" instance=ExtResource("34_3mijn")]
 position = Vector2(-5595, 1142)
