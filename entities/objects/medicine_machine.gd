@@ -24,13 +24,9 @@ func _on_player_in_area_changed(player_in_area: bool):
 		Events.clear_external_inventory.emit(self)
 
 
-func on_make_button_pressed():
+func on_action_button_pressed():
 	# Get the items put into the machine
-	var avail_items = []
-	for slot_data in inventory_data.slot_datas:
-		if slot_data and slot_data.item_data:
-			var item = slot_data.item_data
-			avail_items.append(item)
+	var avail_items = inventory_data.get_items()
 	
 	# Make array of item name strings
 	var avail_items_str = []
@@ -50,14 +46,14 @@ func on_make_button_pressed():
 		inventory_data.consume_item(item)
 	
 	# Make the medicine item with custom name
-	var item_data = Medicines.get_medicine_item_from_recipie(possible_recipes[0]["recipe_name"])
+	var item_data = Medicines.get_medicine_item_from_recipe(possible_recipes[0]["recipe_name"])
 
 	drop_item_component.item_data = item_data
 	drop_item_component.drop_at_position(get_parent(), drop_marker.global_position)
 
 
 # # Another approach using AI
-#func on_make_button_pressed():
+#func on_action_button_pressed():
 	#var item_counts = {}
 	#
 	#for slot_data in inventory_data.slot_datas:

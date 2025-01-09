@@ -4,6 +4,7 @@ extends Node2D
 
 #region Signals
 signal got_sick(illness: String)
+signal got_cured()
 #endregion
 
 
@@ -42,14 +43,27 @@ func _ready() -> void:
 	
 	if is_sick:
 		_on_got_sick()
-
-
-func _process(delta: float) -> void:
-	pass
 #endregion
 
 
 #region public methods
+func can_cure(item: ItemData):
+	# item passed as argument has the medicine name followed by hyphen and then recipe name
+	
+	# medicine item only has the medicine name
+	var medicine: ItemData = Medicines.get_medicine_item_for_illness(illness)
+	
+	if item.name.begins_with(medicine.name):
+		return true
+
+	return false
+
+
+func cure():
+	got_cured.emit()
+	reset()
+
+
 func reset():
 	_starting_time = TimeManager.time
 	is_sick = false
@@ -65,8 +79,8 @@ func _on_time_manager_time_updated(_day: int, _hour: int, _minute: int):
 
 func _on_got_sick():
 	is_sick = true
-	illness = Medicines.get_random_illness()
+	# TODO: for testing we hardcode it to fixed rather than random
+	#illness = Medicines.get_random_illness()
+	illness = "Headaches"
 	got_sick.emit(illness)
 #endregion
-
-

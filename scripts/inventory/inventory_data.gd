@@ -33,6 +33,15 @@ func on_slot_clicked(slot_index: int, button_index: int):
 	inventory_slot_clicked.emit(self, slot_index, button_index)
 
 
+func get_items() -> Array[ItemData]:
+	var avail_items: Array[ItemData] = []
+	for slot_data in slot_datas:
+		if slot_data and slot_data.item_data:
+			var item = slot_data.item_data
+			avail_items.append(item)
+	return avail_items
+
+
 func _find_empty_slot_index():
 	for i in range(len(slot_datas)):
 		var slot_data = slot_datas[i]

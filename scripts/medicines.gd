@@ -121,8 +121,16 @@ func get_possible_recipes(items: Array):
 	return ret_recipes
 
 
+## Returns the medicine ItemData that cures the illness
+func get_medicine_item_for_illness(illness: String) -> ItemData:
+	var medicine_category = _illness_to_category[illness]
+	var item_data = MEDICINES[medicine_category]["item_data"].duplicate()
+	
+	return item_data
+
+
 ## Returns an ItemData for the medicine recipe.
-func get_medicine_item_from_recipie(recipe_name = "") -> ItemData:
+func get_medicine_item_from_recipe(recipe_name: String) -> ItemData:
 	var medicine_category = _recipe_to_category[recipe_name]
 	var item_data = MEDICINES[medicine_category]["item_data"].duplicate()
 	item_data.name += " - " + recipe_name
@@ -132,6 +140,14 @@ func get_medicine_item_from_recipie(recipe_name = "") -> ItemData:
 
 func get_random_illness() -> String:
 	return _illness_to_category.keys().pick_random()
+
+
+func is_medicine(item: ItemData) -> bool:
+	for medicine in MEDICINES.values():
+		if item.name.begins_with(medicine["item_data"].name):
+			return true
+	
+	return false
 #endregion
 
 #region private methods
