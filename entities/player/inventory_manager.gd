@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if grabbed_slot.visible:
-		grabbed_slot.global_position = get_global_mouse_position()
+		grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
 
 
 func _on_player_inventory_visibility_changed(player_inv_is_visible: bool):
