@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=35 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
@@ -64,10 +64,16 @@ func _on_growth_matured():
 	interactable_component.enable()
 "
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ua114"]
-vertices = PackedVector2Array(585, 359, 382.93, 359, 382.07, 236.953, 585, 236.039)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bvt1o"]
+vertices = PackedVector2Array(769.922, 233.953, 769.07, 354.023, 375.141, 354.969, 376.859, 232.039)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(372, 227, 595, 226, 595, 369, 373, 369)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(367, 222, 780, 224, 779, 364, 365, 365)])
+source_geometry_mode = 2
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ua114"]
+vertices = PackedVector2Array(585, 359.039, 382, 359.953, 382, 236.953, 585, 236.039)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(372, 227, 595, 226, 595, 369, 372, 370)])
 source_geometry_mode = 2
 
 [node name="MainMenu" type="Node2D"]
@@ -465,7 +471,7 @@ y_sort_enabled = true
 
 [node name="NavigationRegion2D3" type="NavigationRegion2D" parent="Animals"]
 position = Vector2(3363, 941)
-navigation_polygon = SubResource("NavigationPolygon_ua114")
+navigation_polygon = SubResource("NavigationPolygon_bvt1o")
 
 [node name="NavigationRegion2D4" type="NavigationRegion2D" parent="Animals"]
 position = Vector2(3804, 936)

@@ -91,13 +91,11 @@ func _on_player_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		_player_in_area = false
 
+
 func _on_hitbox_component_got_damaged(_amt: int):
 	var original_color = _sprite_2d.self_modulate
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(_sprite_2d, "self_modulate", Color("#ff0000"), 0.08)
 	tween.tween_property(_sprite_2d, "self_modulate", original_color, 0.08)
-	
-	
-	
 #endregion
