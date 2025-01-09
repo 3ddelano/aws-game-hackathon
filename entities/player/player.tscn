@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bg3c5my8jn044"]
+[gd_scene load_steps=38 format=3 uid="uid://bg3c5my8jn044"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_uj6ap"]
 [ext_resource type="PackedScene" uid="uid://cllo44pv1q7ue" path="res://entities/bullet/bullet.tscn" id="2_ysilp"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cmgyapcv7yv4w" path="res://characters/main_character.png" id="5_c25y2"]
 [ext_resource type="PackedScene" uid="uid://dsjmoqm3mxywc" path="res://scripts/inventory/inventory.tscn" id="5_jeocm"]
 [ext_resource type="Script" path="res://scripts/nearest_interactable_indicator.gd" id="5_rkqlp"]
+[ext_resource type="Texture2D" uid="uid://1gf50mdnlhrh" path="res://ui/ui-spritesheet.png" id="6_pf1of"]
 [ext_resource type="Script" path="res://entities/player/inventory_manager.gd" id="6_s41gi"]
+[ext_resource type="FontFile" uid="uid://d0dbloy6rfxps" path="res://ui/fonts/Roboto-Regular.ttf" id="7_2mjui"]
 [ext_resource type="PackedScene" uid="uid://brc0abny3hcf4" path="res://scripts/inventory/slot.tscn" id="8_c5t8c"]
 [ext_resource type="FontFile" uid="uid://0flmqpccsyqk" path="res://ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="8_qchfm"]
 
@@ -248,6 +250,10 @@ size = Vector2(8.00003, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giah6"]
 size = Vector2(6.99997, 14)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7equ"]
+atlas = ExtResource("6_pf1of")
+region = Rect2(709, 36, 22, 24)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim_tree", "shoot_cooldown_timer") groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_uj6ap")
@@ -322,20 +328,36 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.9, 0.9)
 script = ExtResource("5_rkqlp")
+
+[node name="Panel" type="NinePatchRect" parent="NearestInteractableIndicator"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -43.0
+offset_right = 11.0
+offset_bottom = -21.0
+texture = SubResource("AtlasTexture_l7equ")
 
 [node name="Label" type="Label" parent="NearestInteractableIndicator"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = -38.0
+offset_top = -40.0
 offset_right = 4.0
-offset_bottom = -21.0
+offset_bottom = -23.0
+theme_override_colors/font_color = Color(0.666667, 0.47451, 0.34902, 1)
+theme_override_colors/font_outline_color = Color(0.666667, 0.47451, 0.34902, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("7_2mjui")
 theme_override_font_sizes/font_size = 12
 text = "E"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="InventoryManager" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "player_inventory", "external_inventory", "action_button")]
 layout_mode = 3

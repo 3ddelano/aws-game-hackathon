@@ -8,7 +8,7 @@ import time
 
 load_dotenv()
 
-MOCK_RESPONSE = False
+MOCK_RESPONSE = True
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
