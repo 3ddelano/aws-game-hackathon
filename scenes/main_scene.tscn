@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=35 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
@@ -10,16 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://bbutkkqolhml7" path="res://entities/plants/cucumber_plant.tscn" id="5_lfh7e"]
 [ext_resource type="PackedScene" uid="uid://cbp3wa7yyhxbb" path="res://entities/slime/slime.tscn" id="6_bd0t3"]
 [ext_resource type="PackedScene" uid="uid://dlenkqd105tlr" path="res://entities/plants/garlic_plant.tscn" id="6_id8rp"]
-[ext_resource type="PackedScene" uid="uid://bdypidgpixqti" path="res://entities/objects/medicine_machine.tscn" id="7_k7ovx"]
 [ext_resource type="PackedScene" uid="uid://bfeqos1cluebw" path="res://entities/plants/green_beans_plant.tscn" id="7_law8l"]
 [ext_resource type="PackedScene" uid="uid://c807n4drgjpri" path="res://entities/animals/chicken.tscn" id="7_nf2x2"]
 [ext_resource type="PackedScene" uid="uid://c2rn23fwxxa8m" path="res://entities/animals/cow.tscn" id="8_0k8cb"]
 [ext_resource type="PackedScene" uid="uid://cdf0p24nccdr3" path="res://entities/plants/green_grapes_plant.tscn" id="8_5jjf6"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="8_nj6b4"]
 [ext_resource type="PackedScene" uid="uid://c3l88ndihikkv" path="res://entities/plants/hot_pepper_plant.tscn" id="9_2gftg"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="9_525yn"]
 [ext_resource type="PackedScene" uid="uid://caif5xjdimjp1" path="res://entities/plants/peas_plant.tscn" id="10_1wx2o"]
-[ext_resource type="PackedScene" uid="uid://beokda11tvfox" path="res://ui/game_time_panel.tscn" id="10_6y5f5"]
 [ext_resource type="PackedScene" uid="uid://jrcbim7gj7y1" path="res://components/day_night_cycle_component.tscn" id="10_tq6fn"]
 [ext_resource type="PackedScene" uid="uid://dlyij2dlympv8" path="res://entities/plants/tomato_plant.tscn" id="15_bklwr"]
 [ext_resource type="Texture2D" uid="uid://cftgeolpf7n65" path="res://characters/reuben.png" id="15_hmc0b"]
@@ -33,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://do5wbud34qbfs" path="res://entities/plants/red_onion_plant.tscn" id="19_3hbie"]
 [ext_resource type="PackedScene" uid="uid://bhrxw58uji2jk" path="res://entities/plants/carrot_plant.tscn" id="20_kcblq"]
 [ext_resource type="PackedScene" uid="uid://24gfxf0qqglk" path="res://entities/plants/strawberry_plant.tscn" id="21_hrkqk"]
+[ext_resource type="PackedScene" uid="uid://dnl0sgmtd1s1x" path="res://ui/game_ui.tscn" id="29_d22y8"]
 
 [sub_resource type="GDScript" id="GDScript_tuwvi"]
 script/source = "extends Node2D
@@ -112,209 +110,13 @@ tile_set = ExtResource("1_v2605")
 tile_map_data = PackedByteArray("AAB3AAwAGQAAAAAAAABwAAkAGgAOAK8AAABwAAoAGgAPALAAAABwAAsAGgAPALEAAAByAAkAGgAQALIAAAByAAoAGgAQALMAAAByAAsAGgAQALQAAABuAAsAGgAOALQAAABtAAgAGgAVALEAAABuAAgAGgAWALEAAAB2AAYAGgAVALIAAAB2AAcAGgAVALMAAACIAAcAGgAVALIAAACIAAgAGgAVALMAAACJAAsAGgAVALIAAACJAAwAGgAVALMAAABuAAYAGgAdADcAAABuAAcAGgAdADgAAABvAAYAGgAeADcAAABvAAcAGgAeADgAAAByAAcAGgAdADcAAAByAAgAGgAdADgAAABzAAcAGgAeADcAAABzAAgAGgAeADgAAAB0AAIAGgAdADcAAAB0AAMAGgAdADgAAAB1AAIAGgAeADcAAAB1AAMAGgAeADgAAAB4AAUAGgAaAD4AAABxAAcAGgAdADsAAABwAAgAGgAdADsAAABuAAQAGgAdADsAAAB1AAgAGgAbAD0AAAB0AAgAGgAbAD0AAABwAAIAGgAbAD0AAAByAAQAGgAbAD0AAABzAAQAGgAbAD0AAAB0AAQAGgAbAD0AAAB4AAYAGgAbAD0AAAB7AAUAGgAUAGkAAAB6AAcAGgAUAGkAAACAAAcAGgAUAGkAAACKAAoAGgAUAGkAAACDAAUAGgAWAGkAAAB+AAUAGgAWAGkAAAB+AAYAGgAWAGkAAACNAAoAGgAYAGkAAACHAAcAGgAaAD4AAACAAAMAGgAaAD4AAACMAAwAGgAaAD4AAACKAAwAGgAdADsAAACIAAkAGgAdADsAAACEAAcAGgAdADsAAACCAAYAGgAcADsAAACKAAYAGgAcADsAAACLAAgAGgAdADwAAACKAAgAGgAdADwAAACKAAcAGgAdADwAAACTAAwAGgAYAGkAAADFABEAGgAYAGkAAADPAC4AGgAYAGkAAADLAC8AGgAYAGkAAADFACgAGgAYAGkAAADEAB0AGgAYAGkAAACwAAsAGgAYAGkAAACvAAsAGgAYAGkAAAChAAsAGgAYAGkAAACaAAwAGgAYAGkAAAC7AAwAGgAYAGkAAACgAAwAGgAVALMAAACWAAwAGgAVALMAAADCAA8AGgAVALMAAADBAA4AGgAVALMAAADGABQAGgAVALMAAADEACAAGgAVALMAAADJACgAGgAVALMAAADKACwAGgAVALMAAADEAC4AGgAVALMAAADOADAAGgAVALMAAADIADAAGgAVALMAAACRAAgAGgAdADsAAACWAAsAGgAdADsAAACaAAYAGgAdADsAAACgAAkAGgAdADsAAACdAAsAGgAdADsAAACeAAwAGgAdADsAAACfAAwAGgAdADsAAAClAAwAGgAdADsAAACqAAkAGgAdADsAAACtAAsAGgAdADsAAAC2AAoAGgAdADsAAAC3AAwAGgAdADsAAACxAAwAGgAdADsAAAC/AAwAGgAdADsAAADCAA0AGgAdADsAAADOACIAGgAdADsAAADXACsAGgAdADsAAADfAC0AGgAdADsAAADMACQAGgAdADsAAADHACEAGgAdADsAAADHACsAGgAdADsAAADGACsAGgAdADsAAADEACsAGgAdADsAAACRAAsAGgAbAD0AAACPAAwAGgAbAD0AAACUAAoAGgAbAD0AAACWAAcAGgAbAD0AAACRAAUAGgAbAD0AAACMAAYAGgAbAD0AAACPAAgAGgAbAD0AAACWAAQAGgAbAD0AAACcAAYAGgAbAD0AAACcAAkAGgAbAD0AAACbAAkAGgAbAD0AAACXAAkAGgAbAD0AAACZAAgAGgAbAD0AAACaAAgAGgAbAD0AAACbAAgAGgAbAD0AAACjAAcAGgAbAD0AAAClAAoAGgAbAD0AAACmAAoAGgAbAD0AAACqAAsAGgAbAD0AAACrAAwAGgAbAD0AAACsAAwAGgAbAD0AAACsAAgAGgAbAD0AAACtAAcAGgAbAD0AAACwAAcAGgAbAD0AAACxAAcAGgAbAD0AAACyAAcAGgAbAD0AAACzAAgAGgAbAD0AAACzAAsAGgAbAD0AAAC0AAwAGgAbAD0AAAC1AAwAGgAbAD0AAAC5AAsAGgAbAD0AAAC5AAoAGgAbAD0AAAC7AAkAGgAbAD0AAAC8AAkAGgAbAD0AAAC9AAkAGgAbAD0AAAC+AAkAGgAbAD0AAAC/AAkAGgAbAD0AAADAAAkAGgAbAD0AAADBAAoAGgAbAD0AAADCAAoAGgAbAD0AAADEAA0AGgAbAD0AAADFAA0AGgAbAD0AAADHAA4AGgAbAD0AAADHAA8AGgAbAD0AAADDAA4AGgAbAD0AAADDABIAGgAbAD0AAADEABIAGgAbAD0AAADFABUAGgAbAD0AAADFABYAGgAbAD0AAADFABcAGgAbAD0AAADFABgAGgAbAD0AAADGABgAGgAbAD0AAADGABkAGgAbAD0AAADFABkAGgAbAD0AAADFABoAGgAbAD0AAADFABsAGgAbAD0AAADJABsAGgAbAD0AAADKABsAGgAbAD0AAADLABsAGgAbAD0AAADKABQAGgAbAD0AAADJABQAGgAbAD0AAADJABUAGgAbAD0AAADJABYAGgAbAD0AAADJABcAGgAbAD0AAADJABgAGgAbAD0AAADJABwAGgAbAD0AAADFAB4AGgAbAD0AAADEAB4AGgAbAD0AAADEAB8AGgAbAD0AAADDACIAGgAbAD0AAADEACIAGgAbAD0AAADEACMAGgAbAD0AAADEACQAGgAbAD0AAADFACQAGgAbAD0AAADFACMAGgAbAD0AAADGACMAGgAbAD0AAADHACMAGgAbAD0AAADIACMAGgAbAD0AAADIACQAGgAbAD0AAADKACUAGgAbAD0AAADKACYAGgAbAD0AAADLACYAGgAbAD0AAADMACYAGgAbAD0AAADNACcAGgAbAD0AAADOACcAGgAbAD0AAADIACoAGgAbAD0AAADJACoAGgAbAD0AAADKACoAGgAbAD0AAADLACsAGgAbAD0AAADMACsAGgAbAD0AAADQACsAGgAbAD0AAADRACsAGgAbAD0AAADSACsAGgAbAD0AAADGACwAGgAbAD0AAADGAC0AGgAbAD0AAADIAC0AGgAbAD0AAADIAC4AGgAbAD0AAADHAC4AGgAbAD0AAADFAC4AGgAbAD0AAADFAC8AGgAbAD0AAADEAC8AGgAbAD0AAADEADAAGgAbAD0AAADGAC8AGgAbAD0AAADHAC8AGgAbAD0AAADEACkAGgAbAD0AAADGACoAGgAbAD0AAADHACkAGgAbAD0AAADIACkAGgAbAD0AAADOACkAGgAbAD0AAADPACkAGgAbAD0AAADJACYAGgAbAD0AAADIACYAGgAbAD0AAADIACUAGgAbAD0AAADHACUAGgAbAD0AAADGACUAGgAbAD0AAADFACUAGgAbAD0AAADFACYAGgAbAD0AAADNAC4AGgAbAD0AAADNAC8AGgAbAD0AAADNACoAGgAbAD0AAADOACoAGgAbAD0AAADPACoAGgAbAD0AAADTACsAGgAbAD0AAADTACwAGgAbAD0AAADUACwAGgAbAD0AAADVACwAGgAbAD0AAADWAC0AGgAbAD0AAADXAC8AGgAbAD0AAADYADAAGgAbAD0AAADXADAAGgAbAD0AAADSADAAGgAbAD0AAADUADAAGgAbAD0AAADVADAAGgAbAD0AAADWADAAGgAbAD0AAACKAA8AGgAOALQAAACqAA8AGgAOALQAAAClAA8AGgAOALQAAACoAA8AGgAQALQAAACPAA8AGgAQALQAAACPAA0AGgAQALIAAACPAA4AGgAQALMAAACFAAkAGgAQALIAAACFAAoAGgAQALMAAACFAAsAGgAQALQAAACoAA0AGgAQALIAAACoAA4AGgAQALMAAAB8AAkAGgAQALIAAAB8AAoAGgAQALMAAAB8AAsAGgAQALQAAACBAAkAGgAQALIAAACBAAoAGgAQALMAAACBAAsAGgAQALQAAACNAA8AGgAOALQAAACOAAwAGgAUALEAAACQAAwAGgAVALEAAACRAAwAGgAWALEAAACoAAsAGgAVALIAAACoAAwAGgAVALMAAACgAAsAGgAVALIAAADEABgAGgAVALIAAADEABkAGgAVALMAAAA=")
 tile_set = ExtResource("1_v2605")
 
-[node name="BlueberryPlant" parent="TileMap" instance=ExtResource("2_c73ab")]
-position = Vector2(3306, 1271)
-
-[node name="BroccoliPlant" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(3202, 1334)
-
-[node name="BroccoliPlant2" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(3206, 1352)
-
-[node name="BroccoliPlant3" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(3199, 1309)
-
-[node name="BroccoliPlant4" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(3198, 1283)
-
-[node name="CauliflowerPlant" parent="TileMap" instance=ExtResource("4_8mi5k")]
-position = Vector2(3308, 1303)
-
-[node name="CucumberPlant" parent="TileMap" instance=ExtResource("5_lfh7e")]
-position = Vector2(3312, 1339)
-
-[node name="GarlicPlant" parent="TileMap" instance=ExtResource("6_id8rp")]
-position = Vector2(3348, 1276)
-
-[node name="PeasPlant" parent="TileMap" instance=ExtResource("7_law8l")]
-position = Vector2(3349, 1299)
-
-[node name="GreenGrapesPlant" parent="TileMap" instance=ExtResource("8_5jjf6")]
-position = Vector2(3347, 1331)
-
-[node name="HotPepperPlant" parent="TileMap" instance=ExtResource("9_2gftg")]
-position = Vector2(3210, 1382)
-
-[node name="PeasPlant2" parent="TileMap" instance=ExtResource("10_1wx2o")]
-position = Vector2(3255, 1378)
-
-[node name="PotatoPlant" parent="TileMap" instance=ExtResource("15_i8cwj")]
-position = Vector2(3293, 1376)
-
-[node name="PotatoPlant2" parent="TileMap" instance=ExtResource("15_i8cwj")]
-position = Vector2(3334, 1372)
-
-[node name="PumpkinPlant" parent="TileMap" instance=ExtResource("16_nl350")]
-position = Vector2(3399, 1281)
-
-[node name="RaddishPlant" parent="TileMap" instance=ExtResource("3_ben1v")]
-position = Vector2(3405, 1302)
-
-[node name="RaspberryPlant" parent="TileMap" instance=ExtResource("18_6b8qr")]
-position = Vector2(3408, 1327)
-
-[node name="TomatoPlant" parent="TileMap" instance=ExtResource("15_bklwr")]
-position = Vector2(3406, 1371)
-
-[node name="WheatPlant" parent="TileMap" instance=ExtResource("2_7qngh")]
-position = Vector2(3437, 1275)
-
-[node name="WheatPlant2" parent="TileMap" instance=ExtResource("2_7qngh")]
-position = Vector2(3469, 1275)
-
-[node name="WatermelonPlant" parent="TileMap" instance=ExtResource("17_y26ay")]
-position = Vector2(3439, 1302)
-
-[node name="WatermelonPlant2" parent="TileMap" instance=ExtResource("17_y26ay")]
-position = Vector2(3477, 1299)
-
-[node name="WatermelonPlant3" parent="TileMap" instance=ExtResource("17_y26ay")]
-position = Vector2(1456, 1334)
-
-[node name="TomatoPlant2" parent="TileMap" instance=ExtResource("15_bklwr")]
-position = Vector2(1350, 1224)
-
-[node name="SweetPotatoPlant" parent="TileMap" instance=ExtResource("18_6gtg5")]
-position = Vector2(1421, 1295)
-
-[node name="RedOnionPlant" parent="TileMap" instance=ExtResource("19_3hbie")]
-position = Vector2(1167, 688)
-
-[node name="RaddishPlant2" parent="TileMap" instance=ExtResource("3_ben1v")]
-position = Vector2(1194, 581)
-
-[node name="PumpkinPlant2" parent="TileMap" instance=ExtResource("16_nl350")]
-position = Vector2(1151, 491)
-
-[node name="PotatoPlant3" parent="TileMap" instance=ExtResource("15_i8cwj")]
-position = Vector2(1283, 388)
-
-[node name="RaspberryPlant2" parent="TileMap" instance=ExtResource("18_6b8qr")]
-position = Vector2(1269, 203)
-
-[node name="RaspberryPlant3" parent="TileMap" instance=ExtResource("18_6b8qr")]
-position = Vector2(1498, 252)
-
-[node name="RaspberryPlant4" parent="TileMap" instance=ExtResource("18_6b8qr")]
-position = Vector2(1558, 323)
-
-[node name="RaspberryPlant5" parent="TileMap" instance=ExtResource("18_6b8qr")]
-position = Vector2(1418, 219)
-
-[node name="CucumberPlant2" parent="TileMap" instance=ExtResource("5_lfh7e")]
-position = Vector2(1546, 569)
-
-[node name="CucumberPlant3" parent="TileMap" instance=ExtResource("5_lfh7e")]
-position = Vector2(1628, 432)
-
-[node name="CauliflowerPlant2" parent="TileMap" instance=ExtResource("4_8mi5k")]
-position = Vector2(1521, 507)
-
-[node name="CauliflowerPlant3" parent="TileMap" instance=ExtResource("4_8mi5k")]
-position = Vector2(1581, 468)
-
-[node name="CarrotPlant" parent="TileMap" instance=ExtResource("20_kcblq")]
-position = Vector2(1683, 832)
-
-[node name="CarrotPlant2" parent="TileMap" instance=ExtResource("20_kcblq")]
-position = Vector2(1716, 834)
-
-[node name="BlueberryPlant2" parent="TileMap" instance=ExtResource("2_c73ab")]
-position = Vector2(1695, 855)
-
-[node name="CucumberPlant4" parent="TileMap" instance=ExtResource("5_lfh7e")]
-position = Vector2(1560, 1024)
-
-[node name="GarlicPlant2" parent="TileMap" instance=ExtResource("6_id8rp")]
-position = Vector2(1525, 989)
-
-[node name="PeasPlant3" parent="TileMap" instance=ExtResource("7_law8l")]
-position = Vector2(1614, 974)
-
-[node name="HotPepperPlant2" parent="TileMap" instance=ExtResource("9_2gftg")]
-position = Vector2(1468, 1003)
-
-[node name="HotPepperPlant3" parent="TileMap" instance=ExtResource("9_2gftg")]
-position = Vector2(1452, 966)
-
-[node name="PeasPlant4" parent="TileMap" instance=ExtResource("10_1wx2o")]
-position = Vector2(1503, 940)
-
-[node name="PeasPlant5" parent="TileMap" instance=ExtResource("10_1wx2o")]
-position = Vector2(1568, 898)
-
-[node name="TomatoPlant3" parent="TileMap" instance=ExtResource("15_bklwr")]
-position = Vector2(2211, 1217)
-
-[node name="SweetPotatoPlant2" parent="TileMap" instance=ExtResource("18_6gtg5")]
-position = Vector2(2183, 1246)
-
-[node name="WatermelonPlant4" parent="TileMap" instance=ExtResource("17_y26ay")]
-position = Vector2(1632, 1473)
-
-[node name="StrawberryPlant" parent="TileMap" instance=ExtResource("21_hrkqk")]
-position = Vector2(1806, 1079)
-
-[node name="RedOnionPlant2" parent="TileMap" instance=ExtResource("19_3hbie")]
-position = Vector2(1835, 1046)
-
-[node name="RaddishPlant3" parent="TileMap" instance=ExtResource("3_ben1v")]
-position = Vector2(1764, 1056)
-
-[node name="PumpkinPlant3" parent="TileMap" instance=ExtResource("16_nl350")]
-position = Vector2(2078, 916)
-
-[node name="PotatoPlant4" parent="TileMap" instance=ExtResource("15_i8cwj")]
-position = Vector2(2054, 1007)
-
-[node name="PeasPlant6" parent="TileMap" instance=ExtResource("10_1wx2o")]
-position = Vector2(2050, 1084)
-
-[node name="BlueberryPlant3" parent="TileMap" instance=ExtResource("2_c73ab")]
-position = Vector2(2656, 680)
-
-[node name="BroccoliPlant5" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(2655, 708)
-
-[node name="CarrotPlant3" parent="TileMap" instance=ExtResource("20_kcblq")]
-position = Vector2(2684, 681)
-
-[node name="BroccoliPlant6" parent="TileMap" instance=ExtResource("3_jojgb")]
-position = Vector2(2681, 706)
-
-[node name="Cow" parent="TileMap" instance=ExtResource("8_0k8cb")]
-position = Vector2(3792, 1205)
-
-[node name="Chicken" parent="TileMap" instance=ExtResource("7_nf2x2")]
-position = Vector2(4230, 1207)
-
-[node name="Cow2" parent="TileMap" instance=ExtResource("8_0k8cb")]
-position = Vector2(3934, 1228)
-
-[node name="Cow3" parent="TileMap" instance=ExtResource("8_0k8cb")]
-position = Vector2(4029, 1281)
-
-[node name="Cow4" parent="TileMap" instance=ExtResource("8_0k8cb")]
-position = Vector2(3843, 1276)
-
-[node name="Chicken2" parent="TileMap" instance=ExtResource("7_nf2x2")]
-position = Vector2(4267, 1249)
-
-[node name="Chicken3" parent="TileMap" instance=ExtResource("7_nf2x2")]
-position = Vector2(4315, 1207)
-
-[node name="Chicken4" parent="TileMap" instance=ExtResource("7_nf2x2")]
-position = Vector2(4302, 1278)
+[node name="Player" parent="." instance=ExtResource("9_525yn")]
+position = Vector2(1407, 804)
+safe_margin = 0.001
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+metadata/_edit_lock_ = true
 
 [node name="Plants" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -340,6 +142,294 @@ position = Vector2(48, 48)
 [node name="RaddishPlant3" parent="Plants" instance=ExtResource("3_ben1v")]
 position = Vector2(64, 48)
 
+[node name="BlueberryPlant" parent="Plants" instance=ExtResource("2_c73ab")]
+position = Vector2(3306, 1271)
+
+[node name="BroccoliPlant" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(3202, 1334)
+
+[node name="BroccoliPlant2" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(3206, 1352)
+
+[node name="BroccoliPlant3" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(3199, 1309)
+
+[node name="BroccoliPlant4" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(3198, 1283)
+
+[node name="CauliflowerPlant" parent="Plants" instance=ExtResource("4_8mi5k")]
+position = Vector2(3308, 1303)
+
+[node name="CucumberPlant" parent="Plants" instance=ExtResource("5_lfh7e")]
+position = Vector2(3312, 1339)
+
+[node name="GarlicPlant" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(3348, 1276)
+
+[node name="PeasPlant" parent="Plants" instance=ExtResource("7_law8l")]
+position = Vector2(3349, 1299)
+
+[node name="GreenGrapesPlant" parent="Plants" instance=ExtResource("8_5jjf6")]
+position = Vector2(3347, 1331)
+
+[node name="HotPepperPlant" parent="Plants" instance=ExtResource("9_2gftg")]
+position = Vector2(3210, 1382)
+
+[node name="PeasPlant2" parent="Plants" instance=ExtResource("10_1wx2o")]
+position = Vector2(3255, 1378)
+
+[node name="PotatoPlant" parent="Plants" instance=ExtResource("15_i8cwj")]
+position = Vector2(3293, 1376)
+
+[node name="PotatoPlant2" parent="Plants" instance=ExtResource("15_i8cwj")]
+position = Vector2(3334, 1372)
+
+[node name="PumpkinPlant" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(3399, 1281)
+
+[node name="RaddishPlant4" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(3405, 1302)
+
+[node name="RaspberryPlant" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(3408, 1327)
+
+[node name="TomatoPlant" parent="Plants" instance=ExtResource("15_bklwr")]
+position = Vector2(3406, 1371)
+
+[node name="WheatPlant" parent="Plants" instance=ExtResource("2_7qngh")]
+position = Vector2(3437, 1275)
+
+[node name="WheatPlant2" parent="Plants" instance=ExtResource("2_7qngh")]
+position = Vector2(3469, 1275)
+
+[node name="WatermelonPlant" parent="Plants" instance=ExtResource("17_y26ay")]
+position = Vector2(3439, 1302)
+
+[node name="WatermelonPlant2" parent="Plants" instance=ExtResource("17_y26ay")]
+position = Vector2(3477, 1299)
+
+[node name="WatermelonPlant3" parent="Plants" instance=ExtResource("17_y26ay")]
+position = Vector2(1456, 1334)
+
+[node name="TomatoPlant2" parent="Plants" instance=ExtResource("15_bklwr")]
+position = Vector2(1350, 1224)
+
+[node name="SweetPotatoPlant" parent="Plants" instance=ExtResource("18_6gtg5")]
+position = Vector2(1421, 1295)
+
+[node name="RedOnionPlant" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(1167, 688)
+
+[node name="RaddishPlant5" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(1194, 581)
+
+[node name="PumpkinPlant2" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(1151, 491)
+
+[node name="PotatoPlant3" parent="Plants" instance=ExtResource("15_i8cwj")]
+position = Vector2(1283, 388)
+
+[node name="RaspberryPlant2" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(1269, 203)
+
+[node name="RaspberryPlant3" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(1498, 252)
+
+[node name="RaspberryPlant4" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(1558, 323)
+
+[node name="RaspberryPlant5" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(1418, 219)
+
+[node name="CucumberPlant2" parent="Plants" instance=ExtResource("5_lfh7e")]
+position = Vector2(1546, 569)
+
+[node name="CucumberPlant3" parent="Plants" instance=ExtResource("5_lfh7e")]
+position = Vector2(1628, 432)
+
+[node name="CauliflowerPlant2" parent="Plants" instance=ExtResource("4_8mi5k")]
+position = Vector2(1521, 507)
+
+[node name="CauliflowerPlant3" parent="Plants" instance=ExtResource("4_8mi5k")]
+position = Vector2(1581, 468)
+
+[node name="CarrotPlant" parent="Plants" instance=ExtResource("20_kcblq")]
+position = Vector2(1683, 832)
+
+[node name="CarrotPlant2" parent="Plants" instance=ExtResource("20_kcblq")]
+position = Vector2(1716, 834)
+
+[node name="BlueberryPlant2" parent="Plants" instance=ExtResource("2_c73ab")]
+position = Vector2(1695, 855)
+
+[node name="CucumberPlant4" parent="Plants" instance=ExtResource("5_lfh7e")]
+position = Vector2(1560, 1024)
+
+[node name="GarlicPlant2" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(1525, 989)
+
+[node name="PeasPlant3" parent="Plants" instance=ExtResource("7_law8l")]
+position = Vector2(1614, 974)
+
+[node name="HotPepperPlant2" parent="Plants" instance=ExtResource("9_2gftg")]
+position = Vector2(1468, 1003)
+
+[node name="HotPepperPlant3" parent="Plants" instance=ExtResource("9_2gftg")]
+position = Vector2(1452, 966)
+
+[node name="PeasPlant4" parent="Plants" instance=ExtResource("10_1wx2o")]
+position = Vector2(1503, 940)
+
+[node name="PeasPlant5" parent="Plants" instance=ExtResource("10_1wx2o")]
+position = Vector2(1568, 898)
+
+[node name="TomatoPlant3" parent="Plants" instance=ExtResource("15_bklwr")]
+position = Vector2(2211, 1217)
+
+[node name="SweetPotatoPlant2" parent="Plants" instance=ExtResource("18_6gtg5")]
+position = Vector2(2183, 1246)
+
+[node name="WatermelonPlant4" parent="Plants" instance=ExtResource("17_y26ay")]
+position = Vector2(1632, 1473)
+
+[node name="StrawberryPlant" parent="Plants" instance=ExtResource("21_hrkqk")]
+position = Vector2(1806, 1079)
+
+[node name="RedOnionPlant2" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(1835, 1046)
+
+[node name="RaddishPlant6" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(1764, 1056)
+
+[node name="PumpkinPlant3" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(2078, 916)
+
+[node name="PotatoPlant4" parent="Plants" instance=ExtResource("15_i8cwj")]
+position = Vector2(2054, 1007)
+
+[node name="PeasPlant6" parent="Plants" instance=ExtResource("10_1wx2o")]
+position = Vector2(2050, 1084)
+
+[node name="BlueberryPlant3" parent="Plants" instance=ExtResource("2_c73ab")]
+position = Vector2(2656, 680)
+
+[node name="BroccoliPlant5" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(2655, 708)
+
+[node name="CarrotPlant3" parent="Plants" instance=ExtResource("20_kcblq")]
+position = Vector2(2684, 681)
+
+[node name="BroccoliPlant6" parent="Plants" instance=ExtResource("3_jojgb")]
+position = Vector2(2681, 706)
+
+[node name="PotatoPlant5" parent="Plants" instance=ExtResource("15_i8cwj")]
+position = Vector2(2735, 495)
+
+[node name="PumpkinPlant4" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(2234, 858)
+
+[node name="PumpkinPlant5" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(2202, 858)
+
+[node name="PumpkinPlant6" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(2204, 881)
+
+[node name="PumpkinPlant7" parent="Plants" instance=ExtResource("16_nl350")]
+position = Vector2(2235, 878)
+
+[node name="PurpleGrapesPlant" parent="Plants" instance=ExtResource("17_gmhfh")]
+position = Vector2(1941, 601)
+
+[node name="PurpleGrapesPlant2" parent="Plants" instance=ExtResource("17_gmhfh")]
+position = Vector2(1967, 602)
+
+[node name="PurpleGrapesPlant3" parent="Plants" instance=ExtResource("17_gmhfh")]
+position = Vector2(1941, 626)
+
+[node name="PurpleGrapesPlant4" parent="Plants" instance=ExtResource("17_gmhfh")]
+position = Vector2(1967, 624)
+
+[node name="RaddishPlant7" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2070, 597)
+
+[node name="RaddishPlant8" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2102, 618)
+
+[node name="RaddishPlant9" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2144, 350)
+
+[node name="RaddishPlant10" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2220, 380)
+
+[node name="RaddishPlant11" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2184, 423)
+
+[node name="RaddishPlant12" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(2193, 335)
+
+[node name="RaspberryPlant6" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(2674, 494)
+
+[node name="RaspberryPlant7" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(2747, 459)
+
+[node name="RaspberryPlant8" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(2696, 465)
+
+[node name="RedOnionPlant3" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(3237, 1292)
+
+[node name="RedOnionPlant4" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(3238, 1323)
+
+[node name="RedOnionPlant5" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(3240, 1347)
+
+[node name="RedOnionPlant6" parent="Plants" instance=ExtResource("19_3hbie")]
+position = Vector2(3234, 1272)
+
+[node name="RaddishPlant13" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(3267, 1291)
+
+[node name="RaddishPlant14" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(3268, 1309)
+
+[node name="RaddishPlant15" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(3270, 1344)
+
+[node name="RaddishPlant16" parent="Plants" instance=ExtResource("3_ben1v")]
+position = Vector2(3266, 1272)
+
+[node name="GarlicPlant3" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(2706, 706)
+
+[node name="GarlicPlant4" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(2708, 680)
+
+[node name="GarlicPlant5" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(2731, 707)
+
+[node name="GarlicPlant6" parent="Plants" instance=ExtResource("6_id8rp")]
+position = Vector2(2657, 734)
+
+[node name="PeasPlant7" parent="Plants" instance=ExtResource("10_1wx2o")]
+position = Vector2(2683, 732)
+
+[node name="RaspberryPlant9" parent="Plants" instance=ExtResource("18_6b8qr")]
+position = Vector2(2295, 703)
+
+[node name="StrawberryPlant2" parent="Plants" instance=ExtResource("21_hrkqk")]
+position = Vector2(2553, 859)
+
+[node name="StrawberryPlant3" parent="Plants" instance=ExtResource("21_hrkqk")]
+position = Vector2(2355, 861)
+
+[node name="SweetPotatoPlant3" parent="Plants" instance=ExtResource("18_6gtg5")]
+position = Vector2(2708, 730)
+
+[node name="SweetPotatoPlant4" parent="Plants" instance=ExtResource("18_6gtg5")]
+position = Vector2(2736, 729)
+
 [node name="Trees" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -353,30 +443,31 @@ position = Vector2(96, 199)
 position = Vector2(56, 227)
 
 [node name="Enemies" type="Node2D" parent="."]
-visible = false
 y_sort_enabled = true
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_bd0t3")]
 position = Vector2(189, 159)
 
+[node name="Slime2" parent="Enemies" instance=ExtResource("6_bd0t3")]
+position = Vector2(2785, 709)
+
+[node name="Slime3" parent="Enemies" instance=ExtResource("6_bd0t3")]
+position = Vector2(2410, 751)
+
+[node name="Slime4" parent="Enemies" instance=ExtResource("6_bd0t3")]
+position = Vector2(2304, 371)
+
+[node name="Slime5" parent="Enemies" instance=ExtResource("6_bd0t3")]
+position = Vector2(2109, 726)
+
+[node name="Slime6" parent="Enemies" instance=ExtResource("6_bd0t3")]
+position = Vector2(1947, 1091)
+
 [node name="Objects" type="Node2D" parent="."]
-
-[node name="MedicineMachine" parent="Objects" instance=ExtResource("7_k7ovx")]
-position = Vector2(248, 264)
-
-[node name="Egg" parent="Objects" instance=ExtResource("8_nj6b4")]
-position = Vector2(152, 288)
-
-[node name="Egg2" parent="Objects" instance=ExtResource("8_nj6b4")]
-position = Vector2(152, 248)
-
-[node name="Egg3" parent="Objects" instance=ExtResource("8_nj6b4")]
-position = Vector2(184, 232)
-
-[node name="Egg4" parent="Objects" instance=ExtResource("8_nj6b4")]
-position = Vector2(192, 272)
+y_sort_enabled = true
 
 [node name="Animals" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Animals"]
 navigation_polygon = SubResource("NavigationPolygon_whi4u")
@@ -405,13 +496,29 @@ position = Vector2(568, 192)
 [node name="Cow3" parent="Animals" instance=ExtResource("8_0k8cb")]
 position = Vector2(504, 232)
 
-[node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(1407, 804)
-safe_margin = 0.001
+[node name="Cow4" parent="Animals" instance=ExtResource("8_0k8cb")]
+position = Vector2(3792, 1205)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-metadata/_edit_lock_ = true
+[node name="Chicken5" parent="Animals" instance=ExtResource("7_nf2x2")]
+position = Vector2(4230, 1207)
+
+[node name="Cow5" parent="Animals" instance=ExtResource("8_0k8cb")]
+position = Vector2(3934, 1228)
+
+[node name="Cow6" parent="Animals" instance=ExtResource("8_0k8cb")]
+position = Vector2(4029, 1281)
+
+[node name="Cow7" parent="Animals" instance=ExtResource("8_0k8cb")]
+position = Vector2(3843, 1276)
+
+[node name="Chicken6" parent="Animals" instance=ExtResource("7_nf2x2")]
+position = Vector2(4267, 1249)
+
+[node name="Chicken7" parent="Animals" instance=ExtResource("7_nf2x2")]
+position = Vector2(4315, 1207)
+
+[node name="Chicken8" parent="Animals" instance=ExtResource("7_nf2x2")]
+position = Vector2(4302, 1278)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -419,19 +526,11 @@ position = Vector2(1407, 804)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="GameTimePanel" parent="CanvasLayer" instance=ExtResource("10_6y5f5")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
+[node name="GameUI" parent="." instance=ExtResource("29_d22y8")]
 
 [node name="Npcs" type="Node2D" parent="."]
 
-[node name="NPCPlayer" parent="." instance=ExtResource("15_kltdm")]
+[node name="NPCPlayer" parent="Npcs" instance=ExtResource("15_kltdm")]
 position = Vector2(1494, 839)
 custom_texture = ExtResource("15_hmc0b")
 is_idle = true
@@ -439,126 +538,3 @@ is_phone = true
 speaker_name = "Reuben"
 main_prompt = "You are {speaker_name}. Speak about {topic}. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic. nova force is an organization that handles the well being and security of its citizens"
 topics = Array[String](["what is nova force"])
-
-[node name="PotatoPlant" parent="." instance=ExtResource("15_i8cwj")]
-position = Vector2(2735, 495)
-
-[node name="PumpkinPlant" parent="." instance=ExtResource("16_nl350")]
-position = Vector2(2234, 858)
-
-[node name="PumpkinPlant2" parent="." instance=ExtResource("16_nl350")]
-position = Vector2(2202, 858)
-
-[node name="PumpkinPlant3" parent="." instance=ExtResource("16_nl350")]
-position = Vector2(2204, 881)
-
-[node name="PumpkinPlant4" parent="." instance=ExtResource("16_nl350")]
-position = Vector2(2235, 878)
-
-[node name="PurpleGrapesPlant" parent="." instance=ExtResource("17_gmhfh")]
-position = Vector2(1941, 601)
-
-[node name="PurpleGrapesPlant2" parent="." instance=ExtResource("17_gmhfh")]
-position = Vector2(1967, 602)
-
-[node name="PurpleGrapesPlant3" parent="." instance=ExtResource("17_gmhfh")]
-position = Vector2(1941, 626)
-
-[node name="PurpleGrapesPlant4" parent="." instance=ExtResource("17_gmhfh")]
-position = Vector2(1967, 624)
-
-[node name="RaddishPlant" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2070, 597)
-
-[node name="RaddishPlant2" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2102, 618)
-
-[node name="RaddishPlant3" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2144, 350)
-
-[node name="RaddishPlant4" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2220, 380)
-
-[node name="RaddishPlant5" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2184, 423)
-
-[node name="RaddishPlant6" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(2193, 335)
-
-[node name="RaspberryPlant" parent="." instance=ExtResource("18_6b8qr")]
-position = Vector2(2674, 494)
-
-[node name="RaspberryPlant2" parent="." instance=ExtResource("18_6b8qr")]
-position = Vector2(2747, 459)
-
-[node name="RaspberryPlant3" parent="." instance=ExtResource("18_6b8qr")]
-position = Vector2(2696, 465)
-
-[node name="RedOnionPlant" parent="." instance=ExtResource("19_3hbie")]
-position = Vector2(3237, 1292)
-
-[node name="RedOnionPlant2" parent="." instance=ExtResource("19_3hbie")]
-position = Vector2(3238, 1323)
-
-[node name="RedOnionPlant3" parent="." instance=ExtResource("19_3hbie")]
-position = Vector2(3240, 1347)
-
-[node name="RedOnionPlant4" parent="." instance=ExtResource("19_3hbie")]
-position = Vector2(3234, 1272)
-
-[node name="RaddishPlant7" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(3267, 1291)
-
-[node name="RaddishPlant8" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(3268, 1309)
-
-[node name="RaddishPlant9" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(3270, 1344)
-
-[node name="RaddishPlant10" parent="." instance=ExtResource("3_ben1v")]
-position = Vector2(3266, 1272)
-
-[node name="Slime" parent="." instance=ExtResource("6_bd0t3")]
-position = Vector2(2785, 709)
-
-[node name="Slime2" parent="." instance=ExtResource("6_bd0t3")]
-position = Vector2(2410, 751)
-
-[node name="Slime3" parent="." instance=ExtResource("6_bd0t3")]
-position = Vector2(2304, 371)
-
-[node name="Slime4" parent="." instance=ExtResource("6_bd0t3")]
-position = Vector2(2109, 726)
-
-[node name="Slime5" parent="." instance=ExtResource("6_bd0t3")]
-position = Vector2(1947, 1091)
-
-[node name="GarlicPlant" parent="." instance=ExtResource("6_id8rp")]
-position = Vector2(2706, 706)
-
-[node name="GarlicPlant2" parent="." instance=ExtResource("6_id8rp")]
-position = Vector2(2708, 680)
-
-[node name="GarlicPlant3" parent="." instance=ExtResource("6_id8rp")]
-position = Vector2(2731, 707)
-
-[node name="GarlicPlant4" parent="." instance=ExtResource("6_id8rp")]
-position = Vector2(2657, 734)
-
-[node name="PeasPlant" parent="." instance=ExtResource("10_1wx2o")]
-position = Vector2(2683, 732)
-
-[node name="RaspberryPlant4" parent="." instance=ExtResource("18_6b8qr")]
-position = Vector2(2295, 703)
-
-[node name="StrawberryPlant" parent="." instance=ExtResource("21_hrkqk")]
-position = Vector2(2553, 859)
-
-[node name="StrawberryPlant2" parent="." instance=ExtResource("21_hrkqk")]
-position = Vector2(2355, 861)
-
-[node name="SweetPotatoPlant" parent="." instance=ExtResource("18_6gtg5")]
-position = Vector2(2708, 730)
-
-[node name="SweetPotatoPlant2" parent="." instance=ExtResource("18_6gtg5")]
-position = Vector2(2736, 729)

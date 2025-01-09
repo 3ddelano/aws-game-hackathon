@@ -3,7 +3,7 @@ extends Node2D
 
 @export var slot_data: SlotData
 
-@onready var collectible_component: CollectibleComponent = $Com
+@onready var collectible_component: CollectibleComponent = $CollectibleComponent
 @onready var texture_rect: TextureRect = $TextureRect
 
 

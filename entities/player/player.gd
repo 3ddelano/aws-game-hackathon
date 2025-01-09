@@ -8,9 +8,11 @@ extends CharacterBody2D
 @export var shoot_cooldown_timer: Timer
 @export var inventory_data: InventoryData
 
-
-@onready var facing_direction: Marker2D = $FacingDirection
-@onready var interactable_finder: Area2D = $FacingDirection/InteractableFinder
+@onready var interactable_finder: Area2D = $InteractableFinder
+@onready var right_area: CollisionShape2D = $InteractableFinder/RightArea
+@onready var up_area: CollisionShape2D = $InteractableFinder/UpArea
+@onready var down_area: CollisionShape2D = $InteractableFinder/DownArea
+@onready var left_area: CollisionShape2D = $InteractableFinder/LeftArea
 
 
 var anim_playback: AnimationNodeStateMachinePlayback
@@ -30,30 +32,44 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_pressed(&"shoot"):
-		handle_shoot()
-	check_nearest_interactable()
+		_handle_shoot()
+	_check_nearest_interactable()
 
 
 func _physics_process(_delta):
-	handle_movement()
+	_handle_movement()
+	_update_interactable_finder_collisions()
 
 
-func handle_movement():
+func _update_interactable_finder_collisions():
+	if velocity != Vector2.ZERO:
+		right_area.disabled = true
+		up_area.disabled = true
+		down_area.disabled = true
+		left_area.disabled = true
+	
+	if velocity.x > 0:
+		right_area.disabled = false
+	elif velocity.x < 0:
+		left_area.disabled = false
+	elif velocity.y > 0:
+		down_area.disabled = false
+	elif velocity.y < 0:
+		up_area.disabled = false
+
+
+func _handle_movement():
 	if not can_move: return
 		
 	var input_vector = Vector2()
 	if Input.is_action_pressed(&"move_right"):
 		input_vector.x = 1
-		facing_direction.rotation_degrees = 90
 	elif Input.is_action_pressed(&"move_left"):
 		input_vector.x = -1
-		facing_direction.rotation_degrees = 270
 	elif Input.is_action_pressed(&"move_up"):
 		input_vector.y = -1
-		facing_direction.rotation_degrees = 0
 	elif Input.is_action_pressed(&"move_down"):
 		input_vector.y = 1
-		facing_direction.rotation_degrees = 180
 	
 	velocity = input_vector * move_speed
 	move_and_slide()
@@ -66,7 +82,7 @@ func handle_movement():
 		anim_playback.travel(&"Idle")
 
 
-func handle_shoot():
+func _handle_shoot():
 	if not can_shoot: return
 	if Events.is_player_inventory_visible: return
 	if not shoot_cooldown_timer.is_stopped():
@@ -82,7 +98,7 @@ func handle_shoot():
 	shoot_cooldown_timer.start()
 
 
-func check_nearest_interactable():
+func _check_nearest_interactable():
 	var shortest_dist = INF
 	var next_nearest_interactable = null
 

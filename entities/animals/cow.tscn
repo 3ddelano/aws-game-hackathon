@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="7_2x70v"]
 [ext_resource type="Resource" uid="uid://bk2pq12rv75ue" path="res://scripts/inventory/items/item_milk.tres" id="8_gq2a3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0061"]
+radius = 7.0
+height = 22.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8jim"]
 atlas = ExtResource("1_lwnm3")
 region = Rect2(0, 0, 32, 32)
@@ -50,10 +54,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0061"]
-radius = 7.0
-height = 22.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bqb10"]
 radius = 12.0
 height = 34.0
@@ -61,16 +61,17 @@ height = 34.0
 [node name="Cow" type="CharacterBody2D"]
 script = ExtResource("1_yingc")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v0061")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_q3nmf")
 animation = &"idle"
 frame_progress = 0.717811
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_v0061")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
@@ -94,6 +95,7 @@ character_body_2d = NodePath("../..")
 [node name="InteractableComponent" parent="." instance=ExtResource("6_q4t0g")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+visible = false
 position = Vector2(2, -9)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bqb10")

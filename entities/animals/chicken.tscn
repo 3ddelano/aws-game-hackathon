@@ -79,6 +79,7 @@ animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_fksyl")
 
@@ -111,6 +112,7 @@ max_speed = 7.0
 [node name="InteractableComponent" parent="." instance=ExtResource("6_51cpj")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_01iq0")
 
