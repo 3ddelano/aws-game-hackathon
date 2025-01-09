@@ -79,8 +79,6 @@ func _on_time_manager_time_updated(_day: int, _hour: int, _minute: int):
 
 func _on_got_sick():
 	is_sick = true
-	# TODO: for testing we hardcode it to fixed rather than random
-	#illness = Medicines.get_random_illness()
-	illness = "Headaches"
+	illness = Medicines.get_random_illness()
 	got_sick.emit(illness)
 #endregion

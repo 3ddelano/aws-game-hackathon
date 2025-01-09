@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://yrmp7syrxu78"]
+[gd_scene load_steps=6 format=4 uid="uid://yrmp7syrxu78"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_owau3"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_ko8t6"]
 [ext_resource type="PackedScene" uid="uid://dnl0sgmtd1s1x" path="res://ui/game_ui.tscn" id="3_dl12n"]
 [ext_resource type="PackedScene" uid="uid://naftlo1j12xu" path="res://entities/npcs/npc_player.tscn" id="4_3awm4"]
 [ext_resource type="Texture2D" uid="uid://dyl482ooaommu" path="res://characters/delano.png" id="5_wp6eb"]
-[ext_resource type="PackedScene" uid="uid://cchwqjulx0sei" path="res://entities/objects/egg.tscn" id="6_tmg4g"]
 
 [node name="Test" type="Node2D"]
 y_sort_enabled = true
@@ -47,9 +46,3 @@ position = Vector2(62, 131)
 custom_texture = ExtResource("5_wp6eb")
 speaker_name = "Delano"
 topics = Array[String](["Talk about the weather which is sunny and clear."])
-
-[node name="Egg" parent="." instance=ExtResource("6_tmg4g")]
-position = Vector2(100, 144)
-
-[node name="Egg2" parent="." instance=ExtResource("6_tmg4g")]
-position = Vector2(118, 172)
