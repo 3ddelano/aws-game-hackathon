@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=40 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cvai2of4ueo3e" path="res://scenes/hospital_interior.tscn" id="1_w4flj"]
