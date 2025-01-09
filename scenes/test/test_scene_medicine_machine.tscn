@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dgk11g5pfrq6m"]
+[gd_scene load_steps=15 format=4 uid="uid://dgk11g5pfrq6m"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_milk3"]
 [ext_resource type="PackedScene" uid="uid://bg3c5my8jn044" path="res://entities/player/player.tscn" id="2_cmyuj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cx7hq1ddrahsv" path="res://scripts/inventory/items/item_garlic.tres" id="5_05ink"]
 [ext_resource type="Resource" uid="uid://bigq2k4wrajxh" path="res://scripts/inventory/items/item_potato.tres" id="6_l2obh"]
 [ext_resource type="Resource" uid="uid://dyh3y756kyy3u" path="res://scripts/inventory/items/item_wheat.tres" id="7_euqqw"]
+[ext_resource type="PackedScene" uid="uid://naftlo1j12xu" path="res://entities/npcs/npc_player.tscn" id="10_p668w"]
 
 [sub_resource type="Resource" id="Resource_15loj"]
 script = ExtResource("4_1wsio")
@@ -68,3 +69,6 @@ visible = false
 position = Vector2(120, 112)
 
 [node name="GameUI" parent="." instance=ExtResource("3_ukfyi")]
+
+[node name="NPCPlayer" parent="." instance=ExtResource("10_p668w")]
+position = Vector2(106, 175)

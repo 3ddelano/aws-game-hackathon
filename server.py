@@ -8,7 +8,7 @@ import time
 
 load_dotenv()
 
-MOCK_RESPONSE = True
+MOCK_RESPONSE = False
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -45,13 +45,13 @@ def post_ai_response():
 
         input_value = data['prompt']
 
-        prompt = input_value + "\n Strictly respond in plain text, limited to 100 words."
+        prompt = input_value + "\n Strictly respond in plain text, limited to 4 sentences."
 
 
 
         native_request = {
             "prompt": prompt,
-            "max_gen_len": 100,
+            "max_gen_len": 256,
             "temperature": 1,
             "top_p": 1
         }

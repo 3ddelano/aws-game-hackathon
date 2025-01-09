@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=38 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
+[ext_resource type="PackedScene" uid="uid://cvai2of4ueo3e" path="res://scenes/hospital_interior.tscn" id="1_w4flj"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
 [ext_resource type="PackedScene" uid="uid://dny8d88k4mm4q" path="res://entities/plants/blueberry_plant.tscn" id="2_c73ab"]
+[ext_resource type="PackedScene" uid="uid://seb0le4bxvh5" path="res://scenes/base_interior.tscn" id="2_e0txf"]
 [ext_resource type="PackedScene" uid="uid://cayu6mo8m3wvy" path="res://entities/plants/raddish_plant.tscn" id="3_ben1v"]
 [ext_resource type="PackedScene" uid="uid://clg8amoi3y0y3" path="res://entities/plants/broccoli_plant.tscn" id="3_jojgb"]
 [ext_resource type="PackedScene" uid="uid://dr8qe4tf2rxew" path="res://entities/plants/cauliflower_plant.tscn" id="4_8mi5k"]
@@ -31,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://bhrxw58uji2jk" path="res://entities/plants/carrot_plant.tscn" id="20_kcblq"]
 [ext_resource type="PackedScene" uid="uid://24gfxf0qqglk" path="res://entities/plants/strawberry_plant.tscn" id="21_hrkqk"]
 [ext_resource type="PackedScene" uid="uid://dnl0sgmtd1s1x" path="res://ui/game_ui.tscn" id="29_d22y8"]
+[ext_resource type="PackedScene" uid="uid://drlkgnfjph00d" path="res://scenes/base2_interior.tscn" id="34_3mijn"]
 
 [sub_resource type="GDScript" id="GDScript_tuwvi"]
 script/source = "extends Node2D
@@ -79,13 +82,19 @@ source_geometry_mode = 2
 [node name="MainMenu" type="Node2D"]
 y_sort_enabled = true
 
+[node name="HospitalInterior" parent="." instance=ExtResource("1_w4flj")]
+position = Vector2(-3605, 344)
+
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(420, 207)
+position = Vector2(-3428, 1389)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 metadata/_edit_lock_ = true
+
+[node name="BaseInterior" parent="." instance=ExtResource("2_e0txf")]
+position = Vector2(-3561, 1308)
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -503,7 +512,7 @@ position = Vector2(4302, 1278)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position = Vector2(420, 207)
+position = Vector2(-3428, 1389)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 
@@ -512,10 +521,13 @@ position = Vector2(420, 207)
 [node name="Npcs" type="Node2D" parent="."]
 
 [node name="NPCPlayer" parent="Npcs" instance=ExtResource("15_kltdm")]
-position = Vector2(1494, 839)
+position = Vector2(-1030, 1430)
 custom_texture = ExtResource("15_hmc0b")
 is_idle = true
 is_phone = true
 speaker_name = "Reuben"
 main_prompt = "You are {speaker_name}. Speak about {topic}. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic. nova force is an organization that handles the well being and security of its citizens"
 topics = Array[String](["what is nova force"])
+
+[node name="Base2Interior" parent="." instance=ExtResource("34_3mijn")]
+position = Vector2(-5595, 1142)
