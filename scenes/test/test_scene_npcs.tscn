@@ -45,5 +45,4 @@ position = Vector2(120, 112)
 position = Vector2(62, 131)
 custom_texture = ExtResource("5_wp6eb")
 speaker_name = "Delano"
-main_prompt = "Strictly respond in plain text and keep your response within 100 words. You are {speaker_name}. Start by introducing yourself by name, then explain {topic} as if talking to a friend. Use simple, natural language and avoid overly complex words."
-topics = Array[String](["List innovative farming methods and how they work", "How is food security handled for settlements", "The battle against contaminated soil and methods"])
+topics = Array[String](["Talk about the weather which is sunny and clear."])

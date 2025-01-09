@@ -1,13 +1,21 @@
-[gd_scene load_steps=30 format=3 uid="uid://naftlo1j12xu"]
+[gd_scene load_steps=33 format=3 uid="uid://naftlo1j12xu"]
 
 [ext_resource type="Script" path="res://entities/npcs/npc_player.gd" id="1_xaaxj"]
+[ext_resource type="Shader" path="res://entities/npcs/npc_player.gdshader" id="2_k6kfk"]
 [ext_resource type="Texture2D" uid="uid://47aocsdvhj" path="res://characters/ada_merrick.png" id="2_oiug7"]
 [ext_resource type="PackedScene" uid="uid://cqj3j7g5fic42" path="res://components/ai_dialog_component.tscn" id="3_tlbv2"]
+[ext_resource type="PackedScene" uid="uid://b4n23lj85jd7o" path="res://components/sickness_component.tscn" id="4_hqp58"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="4_ow5q1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4usk5"]
 radius = 5.0
 height = 18.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6eyr"]
+resource_local_to_scene = true
+shader = ExtResource("2_k6kfk")
+shader_parameter/sick_color = Color(0.5, 0, 0.5, 0.5)
+shader_parameter/is_sick = false
 
 [sub_resource type="Animation" id="Animation_pdxn7"]
 length = 0.001
@@ -279,6 +287,7 @@ height = 24.0
 script = ExtResource("1_xaaxj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_4usk5")
 
@@ -286,6 +295,7 @@ shape = SubResource("CapsuleShape2D_4usk5")
 scale = Vector2(0.75, 0.75)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+material = SubResource("ShaderMaterial_d6eyr")
 texture = ExtResource("2_oiug7")
 centered = false
 offset = Vector2(-7.6, -31.86)
@@ -312,8 +322,11 @@ autostart = true
 
 [node name="AIDialogComponent" parent="." instance=ExtResource("3_tlbv2")]
 
+[node name="SicknessComponent" parent="." instance=ExtResource("4_hqp58")]
+
 [node name="InteractableComponent" parent="." instance=ExtResource("4_ow5q1")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+visible = false
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_sdchy")
