@@ -84,6 +84,7 @@ var _illness_to_category = {}
 var _item_to_recipe = {}
 var _recipe_to_category = {}
 
+#region built-in methods
 func _ready():
 	for category in MEDICINES:
 		# Make a map from illness to category as {str -> str}
@@ -101,8 +102,10 @@ func _ready():
 
 			# Make map from recipe to category as {str -> str}
 			_recipe_to_category[recipe] = category
-	
+#endregion
 
+
+#region public methods
 ## Get all possible craftable recipes given items
 func get_possible_recipes(items: Array):
 	var ret_recipes = []
@@ -118,6 +121,20 @@ func get_possible_recipes(items: Array):
 	return ret_recipes
 
 
+## Returns an ItemData for the medicine recipe.
+func get_medicine_item_from_recipie(recipe_name = "") -> ItemData:
+	var medicine_category = _recipe_to_category[recipe_name]
+	var item_data = MEDICINES[medicine_category]["item_data"].duplicate()
+	item_data.name += " - " + recipe_name
+	
+	return item_data
+
+
+func get_random_illness() -> String:
+	return _illness_to_category.keys().pick_random()
+#endregion
+
+#region private methods
 ## Returns whether the recipe can be crafted from given items
 func _can_craft_recipe(recipe: Array, _items: Array) -> bool:
 	var items = _items.duplicate()
@@ -129,12 +146,4 @@ func _can_craft_recipe(recipe: Array, _items: Array) -> bool:
 			return false
 	
 	return true
-
-
-## Returns an ItemData for the medicine recipe.
-func get_medicine_item_from_recipie(recipe_name = "") -> ItemData:
-	var medicine_category = _recipe_to_category[recipe_name]
-	var item_data = MEDICINES[medicine_category]["item_data"].duplicate()
-	item_data.name += " - " + recipe_name
-	
-	return item_data
+#endregion
