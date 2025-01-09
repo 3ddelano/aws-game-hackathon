@@ -2,53 +2,79 @@ class_name Slime
 extends CharacterBody2D
 
 
-@onready var move_dir_timer = $MoveDirTimer
-@onready var anim_tree = $AnimationTree
-@onready var health_component: HealthComponent = $HealthComponent
+#region public vars
+var move_speed = 35
+#endregion
 
-var move_dir = Vector2()
-var speed = 35
-var anim_playback: AnimationNodeStateMachinePlayback
-var player: Player
 
+#region private vars
+var _anim_playback: AnimationNodeStateMachinePlayback
+var _player: Player
+var _player_in_area = false
+#endregion
+
+
+#region @onready vars
+@onready var _move_dir_timer = $MoveDirTimer
+@onready var _anim_tree = $AnimationTree
+@onready var _health_component: HealthComponent = $HealthComponent
+#endregion
+
+
+#region built-in methods
 func _ready():
-	player = get_tree().get_first_node_in_group(&"player")
-	anim_playback = anim_tree.get(&"parameters/playback")
-	health_component.died.connect(func ():
+	_player = get_tree().get_first_node_in_group(&"player")
+	_anim_playback = _anim_tree.get(&"parameters/playback")
+	_health_component.died.connect(func():
 		queue_free()
 	)
 
-	move_dir_timer.timeout.connect(func ():
-		var dir = randi() % 4
-		if dir == 0:
-			move_dir = Vector2.UP
-		elif dir == 1:
-			move_dir = Vector2.DOWN
-		elif dir == 2:
-			move_dir = Vector2.LEFT
-		elif dir == 3:
-			move_dir = Vector2.RIGHT
-	)
+	_move_dir_timer.timeout.connect(_move_random_dir)
 
 
 func _physics_process(_delta):
-	handle_movement()
+	_handle_movement()
+#endregion
 
 
-func handle_movement():
-	if not player: return
-
-	var dir_to_player = (player.global_position - global_position).normalized()
-	if global_position.distance_squared_to(player.global_position) < 200:
-		dir_to_player = Vector2()
-
-	velocity = dir_to_player * speed
+#region private methods
+func _handle_movement():
+	if _player and _player_in_area:
+		_move_towards_player()
 
 	if velocity:
-		anim_tree.set(&"parameters/Idle/blend_position", dir_to_player)
-		anim_tree.set(&"parameters/Walk/blend_position", dir_to_player)
-		anim_playback.travel(&"Walk")
+		_anim_playback.travel(&"Walk")
 	else:
-		anim_playback.travel(&"Idle")
-
+		_anim_playback.travel(&"Idle")
 	move_and_slide()
+
+
+func _move_random_dir():
+	if _player_in_area: return
+	
+	if randf() > 0.5:
+		velocity.x = move_speed if randf() > 0.5 else -move_speed
+		velocity.y = 0
+	else:
+		velocity.x = 0
+		velocity.y = move_speed if randf() > 0.5 else -move_speed
+
+
+func _move_towards_player():
+	var dir_to_player = (_player.global_position - global_position).normalized()
+	if global_position.distance_squared_to(_player.global_position) < 200:
+		dir_to_player = Vector2()
+
+	velocity = dir_to_player * move_speed
+	if velocity:
+		_anim_tree.set(&"parameters/Idle/blend_position", dir_to_player)
+		_anim_tree.set(&"parameters/Walk/blend_position", dir_to_player)
+
+
+func _on_player_range_area_body_entered(body: Node2D) -> void:
+	_player_in_area = true
+
+
+func _on_player_range_area_body_exited(body: Node2D) -> void:
+	_player_in_area = false
+#endregion
