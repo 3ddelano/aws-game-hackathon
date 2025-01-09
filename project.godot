@@ -22,6 +22,7 @@ Events="*res://scripts/globals/events.gd"
 Medicines="*res://scripts/medicines.gd"
 DialogManager="*res://scripts/dialog_manager.tscn"
 AIAPI="*res://scripts/ai_api.gd"
+SceneManager="*res://scripts/scene_manager.tscn"
 
 [display]
 

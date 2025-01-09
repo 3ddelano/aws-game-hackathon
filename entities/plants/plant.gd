@@ -3,7 +3,6 @@ extends Node2D
 @export var growth_frame_ids: Array[int]
 @export var use_sprites_list = false
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
 @onready var drop_item_component: DropItemComponent = $DropItemComponent
 @onready var drop_marker: Marker2D = $DropMarker
@@ -25,6 +24,7 @@ func _on_growth_stage_changed(stage_idx: int):
 		return
 	
 	
+	var sprite_2d: Sprite2D = $Sprite2D
 	if len(growth_frame_ids) > 0:
 		sprite_2d.frame = growth_frame_ids[stage_idx]
 	else:
