@@ -25,5 +25,6 @@ scale = Vector2(0.8, 0.8)
 slot_data = SubResource("Resource_vyf8l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent"]
+visible = false
 position = Vector2(-9.53674e-07, 9.53674e-07)
 shape = SubResource("CircleShape2D_ntir6")

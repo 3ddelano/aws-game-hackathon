@@ -4,7 +4,7 @@ extends Control
 @export var player: Player
 @export var player_inventory: Inventory
 @export var external_inventory: Inventory
-@export var make_button: Button
+@export var action_button: Button
 
 @onready var external_inventory_container: VBoxContainer = $ExternalInventoryContainer
 @onready var grabbed_slot: Slot = $GrabbedSlot
@@ -23,22 +23,27 @@ func _ready() -> void:
 	Events.toggle_external_inventory.connect(_on_toggle_external_inventory)
 	Events.clear_external_inventory.connect(_on_clear_external_inventory)
 	
-	make_button.pressed.connect(_on_make_button_pressed)
+	action_button.pressed.connect(_on_action_button_pressed)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position()
 
 
-func _on_player_inventory_visibility_changed(is_visible: bool):
-	player_inventory.visible = is_visible
+func _on_player_inventory_visibility_changed(player_inv_is_visible: bool):
+	player_inventory.visible = player_inv_is_visible
 
 
 func _on_toggle_external_inventory(inv_owner: Node):
 	if external_inventory_owner == inv_owner:
 		clear_external_inventory()
 	else:
+		if inv_owner is MedicineMachine:
+			action_button.text = "MAKE"
+		else:
+			# For npcs
+			action_button.text = "GIVE"
 		set_external_inventory(inv_owner)
 
 
@@ -86,6 +91,6 @@ func update_grabbed_slot():
 	grabbed_slot.set_slot_data(grabbed_slot_data)
 
 
-func _on_make_button_pressed():
-	if external_inventory_owner and external_inventory_owner.has_method("on_make_button_pressed"):
-		external_inventory_owner.on_make_button_pressed()
+func _on_action_button_pressed():
+	if external_inventory_owner and external_inventory_owner.has_method("on_action_button_pressed"):
+		external_inventory_owner.on_action_button_pressed()
