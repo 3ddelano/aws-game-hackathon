@@ -8,13 +8,13 @@ import time
 
 load_dotenv()
 
-MOCK_RESPONSE = True
+MOCK_RESPONSE = False
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_REGION = 'us-east-1'
 # MODEL_ID = "mistral.mistral-7b-instruct-v0:2"
-MODEL_ID = "us.meta.llama3-3-70b-instruct-v1:0" 
+MODEL_ID = "mistral.mistral-large-2402-v1:0" 
 # prompt = "Provide output strictly as JSON: {name,statement}. You are Delano. Your task is to speak about any one of the given topics in a few words. Choose a topic randomly from the following list: ['List innovative farming methods and how they work', 'How is food security handled for settlements', 'The battle against contaminated soil and methods']. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic."
 
 brt = boto3.client("bedrock-runtime", 
@@ -45,15 +45,14 @@ def post_ai_response():
 
         input_value = data['prompt']
 
-        prompt = input_value + "\n Strictly respond in plain text, limited to 4 sentences."
+        prompt = input_value + ".Strictly respond in plain text, limited to 4 sentences."
 
 
 
         native_request = {
             "prompt": prompt,
-            "max_gen_len": 256,
-            "temperature": 1,
-            "top_p": 1
+            "temperature": 0.6,
+            "top_p": 0.9
         }
         
         if MOCK_RESPONSE:
@@ -63,10 +62,10 @@ def post_ai_response():
         print(f"Calling AWS bedrock: model={MODEL_ID}")
         start_time = time.time()
         brt_response = brt.invoke_model(modelId=MODEL_ID, body=json.dumps(native_request).encode())
+        
         response_body = json.loads(brt_response['body'].read())
         print(f"Took={time.time() - start_time}, response_body={response_body}")
-
-        output_value = response_body['generation']
+        output_value = response_body['outputs'][0]['text']
 
         return jsonify({"output": output_value}), 200
 

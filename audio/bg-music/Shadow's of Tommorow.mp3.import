@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://8hdjxyrm4yc0"
+path="res://.godot/imported/Shadow's of Tommorow.mp3-a38648b726ece0e5cccace5128340852.mp3str"
+
+[deps]
+
+source_file="res://audio/bg-music/Shadow's of Tommorow.mp3"
+dest_files=["res://.godot/imported/Shadow's of Tommorow.mp3-a38648b726ece0e5cccace5128340852.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
