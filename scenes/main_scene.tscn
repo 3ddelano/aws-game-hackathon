@@ -74,7 +74,7 @@ source_geometry_mode = 2
 y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
-position = Vector2(1407, 804)
+position = Vector2(420, 207)
 safe_margin = 0.001
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -497,7 +497,7 @@ position = Vector2(4302, 1278)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position = Vector2(1407, 804)
+position = Vector2(420, 207)
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("10_tq6fn")]
 

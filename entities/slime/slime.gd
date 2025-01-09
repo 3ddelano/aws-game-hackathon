@@ -18,6 +18,8 @@ var _player_in_area = false
 @onready var _move_dir_timer = $MoveDirTimer
 @onready var _anim_tree = $AnimationTree
 @onready var _health_component: HealthComponent = $HealthComponent
+@onready var _hitbox_component: HitboxComponent = $HitboxComponent
+@onready var _sprite_2d: Sprite2D = $Sprite2D
 #endregion
 
 
@@ -30,6 +32,9 @@ func _ready():
 	)
 
 	_move_dir_timer.timeout.connect(_move_random_dir)
+	
+	_assign_random_color()
+	_hitbox_component.got_damaged.connect(_on_hitbox_component_got_damaged)
 
 
 func _physics_process(_delta):
@@ -71,10 +76,28 @@ func _move_towards_player():
 		_anim_tree.set(&"parameters/Walk/blend_position", dir_to_player)
 
 
+func _assign_random_color():
+	var rand_color = [Color("#42d0d0"), Color("#ff91f8"), 
+					Color("#00e743"), Color("#fd8799")].pick_random()
+	_sprite_2d.self_modulate = rand_color
+
+
 func _on_player_range_area_body_entered(body: Node2D) -> void:
-	_player_in_area = true
+	if body is Player:
+		_player_in_area = true
 
 
 func _on_player_range_area_body_exited(body: Node2D) -> void:
-	_player_in_area = false
+	if body is Player:
+		_player_in_area = false
+
+func _on_hitbox_component_got_damaged(_amt: int):
+	var original_color = _sprite_2d.self_modulate
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(_sprite_2d, "self_modulate", Color("#ff0000"), 0.08)
+	tween.tween_property(_sprite_2d, "self_modulate", original_color, 0.08)
+	
+	
+	
 #endregion
