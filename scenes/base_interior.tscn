@@ -44,3 +44,4 @@ custom_texture = ExtResource("5_hmrcy")
 is_idle = true
 is_phone = true
 speaker_name = "Reuben"
+topics = Array[String](["Your life of being a nova chief officer, who is responsible for maintaining the magnus province in terms of food supply and healthcare"])

@@ -56,5 +56,3 @@ func end_transition():
 
 #region private methods
 #endregion
-
-
