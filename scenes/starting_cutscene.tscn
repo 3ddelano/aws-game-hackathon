@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=3 uid="uid://d1vxp6ev5led3"]
+
+[ext_resource type="Texture2D" uid="uid://boiut1k101plo" path="res://images/scene1.png" id="1_880y4"]
+[ext_resource type="Script" path="res://scenes/starting_cutscene.gd" id="1_kjg1k"]
+[ext_resource type="Texture2D" uid="uid://bmekgr737xk7b" path="res://images/sceneextra.png" id="3_uog35"]
+[ext_resource type="Texture2D" uid="uid://bpj8krlxu2k33" path="res://images/sceneextra1.png" id="4_xoqgv"]
+[ext_resource type="Texture2D" uid="uid://d4box5oh7spj6" path="res://images/scene2.png" id="5_5x581"]
+[ext_resource type="Texture2D" uid="uid://ugwbnf7bliae" path="res://images/scene3.png" id="6_t755p"]
+[ext_resource type="Texture2D" uid="uid://dlbdmmlgf7k17" path="res://images/scne4.png" id="7_2sqpq"]
+[ext_resource type="AudioStream" uid="uid://c03114o4p82vr" path="res://audio/speech/scene1.mp3" id="8_sjlhn"]
+[ext_resource type="AudioStream" uid="uid://k1mhj8qofnfu" path="res://audio/speech/scene2.mp3" id="9_cnqyi"]
+[ext_resource type="AudioStream" uid="uid://d32fk0ntin7fr" path="res://audio/speech/scene3.mp3" id="10_gvge1"]
+[ext_resource type="AudioStream" uid="uid://ccp64gfa0rbti" path="res://audio/speech/scene4.mp3" id="11_phydv"]
+[ext_resource type="AudioStream" uid="uid://8hdjxyrm4yc0" path="res://audio/bg-music/Shadow's of Tommorow.mp3" id="12_rsd7w"]
+[ext_resource type="FontFile" uid="uid://d0dbloy6rfxps" path="res://ui/fonts/Roboto-Regular.ttf" id="13_dl0rw"]
+
+[node name="StartingCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kjg1k")
+
+[node name="Scene1Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_sjlhn")
+max_distance = 1e+06
+
+[node name="Scene2Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_cnqyi")
+max_distance = 1e+06
+
+[node name="Scene3Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_gvge1")
+max_distance = 1e+06
+
+[node name="Scene4Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_phydv")
+max_distance = 1e+06
+
+[node name="BgAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_rsd7w")
+max_distance = 1e+06
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 90
+
+[node name="Scenes" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scene1" type="TextureRect" parent="CanvasLayer/Scenes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_880y4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SceneExtra" type="TextureRect" parent="CanvasLayer/Scenes"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_uog35")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SceneExtra1" type="TextureRect" parent="CanvasLayer/Scenes"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xoqgv")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scene2" type="TextureRect" parent="CanvasLayer/Scenes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_5x581")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scene3" type="TextureRect" parent="CanvasLayer/Scenes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_t755p")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scene4" type="TextureRect" parent="CanvasLayer/Scenes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2sqpq")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SkipLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -23.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("13_dl0rw")
+theme_override_font_sizes/font_size = 12
+text = "Left click again to skip"

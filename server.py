@@ -2,13 +2,12 @@ import os
 from dotenv import load_dotenv
 import boto3
 import json
-from botocore.exceptions import ClientError
 from flask import Flask, request, jsonify
 import time
 
 load_dotenv()
 
-MOCK_RESPONSE = False
+MOCK_RESPONSE = True
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')

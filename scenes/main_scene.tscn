@@ -1,7 +1,8 @@
-[gd_scene load_steps=37 format=4 uid="uid://4dxun7bad7do"]
+[gd_scene load_steps=38 format=4 uid="uid://4dxun7bad7do"]
 
 [ext_resource type="TileSet" uid="uid://b5hyncrbrskd5" path="res://tilesets/tileset.tres" id="1_v2605"]
 [ext_resource type="PackedScene" uid="uid://cvai2of4ueo3e" path="res://scenes/hospital_interior.tscn" id="1_w4flj"]
+[ext_resource type="PackedScene" uid="uid://d1vxp6ev5led3" path="res://scenes/starting_cutscene.tscn" id="1_wwoot"]
 [ext_resource type="PackedScene" uid="uid://cwcbq5g6mye3q" path="res://entities/plants/wheat_plant.tscn" id="2_7qngh"]
 [ext_resource type="PackedScene" uid="uid://dny8d88k4mm4q" path="res://entities/plants/blueberry_plant.tscn" id="2_c73ab"]
 [ext_resource type="PackedScene" uid="uid://seb0le4bxvh5" path="res://scenes/base_interior.tscn" id="2_e0txf"]
@@ -78,7 +79,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(372, 227, 595, 226, 595, 369, 372, 370)])
 source_geometry_mode = 2
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainScene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("9_525yn")]
@@ -567,5 +568,7 @@ position = Vector2(64, 299)
 
 [node name="Base2Interior" parent="Scenes" instance=ExtResource("34_3mijn")]
 position = Vector2(-5595, 1142)
+
+[node name="StartingCutscene" parent="." instance=ExtResource("1_wwoot")]
 
 [node name="GameUI" parent="." instance=ExtResource("29_d22y8")]
