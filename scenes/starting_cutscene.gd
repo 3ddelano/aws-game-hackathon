@@ -1,5 +1,6 @@
 extends Control
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var skip_label: Label = $CanvasLayer/SkipLabel
 @onready var scenes: Control = $CanvasLayer/Scenes
 @onready var scene1: TextureRect = $CanvasLayer/Scenes/Scene1
@@ -23,6 +24,8 @@ var _skip_pressed_count = 0
 
 
 func _ready():
+	show()
+	canvas_layer.show()
 	_reset_scenes()
 	_start_cutscene()
 
@@ -57,7 +60,7 @@ func _on_end():
 		audio.stop()
 		
 	hide()
-	$CanvasLayer.hide()
+	canvas_layer.hide()
 	SceneManager.end_transition()
 	bg_audio.play()
 

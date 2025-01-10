@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://d0dbloy6rfxps" path="res://ui/fonts/Roboto-Regular.ttf" id="13_dl0rw"]
 
 [node name="StartingCutscene" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,6 +47,7 @@ parameters/looping = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 90
+visible = false
 
 [node name="Scenes" type="Control" parent="CanvasLayer"]
 layout_mode = 3
