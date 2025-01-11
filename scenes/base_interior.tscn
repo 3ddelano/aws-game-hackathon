@@ -35,12 +35,14 @@ navigation_enabled = false
 [node name="Delano" parent="." instance=ExtResource("3_vsg2j")]
 position = Vector2(88, 189)
 custom_texture = ExtResource("4_ke3io")
+move_speed_sick_factor = 0.05
 speaker_name = "Delano"
 topics = Array[String](["innovative farming methods and how they work"])
 
 [node name="reuben" parent="." instance=ExtResource("3_vsg2j")]
 position = Vector2(91, 48)
 custom_texture = ExtResource("5_hmrcy")
+move_speed_sick_factor = 0.001
 is_idle = true
 is_phone = true
 speaker_name = "Reuben"
