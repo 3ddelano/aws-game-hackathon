@@ -1,7 +1,7 @@
 extends Node
 
 
-const RESPONSE_ENDPOINT = "http://127.0.0.1:5000/ai-response"
+const RESPONSE_ENDPOINT = "https://tbex6bc817.execute-api.us-east-1.amazonaws.com/dev/ai-response"
 
 
 func make_ai_response(prompt: String):

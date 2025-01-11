@@ -579,7 +579,7 @@ position = Vector2(-5595, 1142)
 [node name="GameUI" parent="." instance=ExtResource("29_d22y8")]
 
 [node name="NPCPlayer" parent="." instance=ExtResource("35_fgoj0")]
-position = Vector2(-244, 714)
+position = Vector2(-244, 776)
 custom_texture = ExtResource("36_y2xv2")
 speaker_name = "Clara Ashen"
 main_prompt = "You are {speaker_name}, a former teacher who lost their family and relative from the nuclear fallout. Speak about {topic}. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic."
