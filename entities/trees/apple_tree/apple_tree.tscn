@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b254vk8id2gmj"]
+[gd_scene load_steps=12 format=3 uid="uid://b254vk8id2gmj"]
 
 [ext_resource type="Texture2D" uid="uid://k6adcdyx51au" path="res://entities/trees/trees-tileset.png" id="1_a5l0l"]
 [ext_resource type="Script" path="res://entities/trees/apple_tree/apple_tree.gd" id="1_ohev6"]
 [ext_resource type="PackedScene" uid="uid://dl084f1edwavd" path="res://components/interactable_component.tscn" id="2_tx47l"]
 [ext_resource type="Script" path="res://components/growth_cycle_component.gd" id="4_bqbej"]
 [ext_resource type="PackedScene" uid="uid://clrgckm52kwm0" path="res://components/drop_item_component.tscn" id="5_t73gu"]
+[ext_resource type="Resource" uid="uid://cuhg2v7lraxc2" path="res://scripts/inventory/items/item_apple.tres" id="6_723jo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axwxv"]
 atlas = ExtResource("1_a5l0l")
@@ -49,8 +50,7 @@ sprite_frames = SubResource("SpriteFrames_4r5ho")
 animation = &"notripe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -2)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_240yp")
 
 [node name="InteractableComponent" parent="." instance=ExtResource("2_tx47l")]
@@ -68,3 +68,4 @@ num_stages = 2
 position = Vector2(0, 10)
 
 [node name="DropItemComponent" parent="." instance=ExtResource("5_t73gu")]
+item_data = ExtResource("6_723jo")
