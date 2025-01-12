@@ -29,13 +29,13 @@ As newcomers to Godot, we faced a steep learning curve, especially with our seme
 * Suno AI for creating background music
 
 ## Gameplay Images
-[Interior](/gameclips/1.png)
-[NPC Interaction](/gameclips/2.png)
-[NPC sick Dialogue](/gameclips/3.png)
-[Inventory](/gameclips/5.png)
-[NPC Medicine](/gameclips/6.png)
-[Hospital](/gameclips/7.png)
-[Farm](/gameclips/8.png)
+![Interior](/gameclips/1.png)
+![NPC Interaction](/gameclips/2.png)
+![NPC sick Dialogue](/gameclips/3.png)
+![Inventory](/gameclips/5.png)
+![NPC Medicine](/gameclips/6.png)
+![Hospital](/gameclips/7.png)
+![Farm](/gameclips/8.png)
 ## Medicine Creation
 We also incorporated AWS tools, specifically Amazon Q and Amazon Bedrock, to streamline our development process. Amazon Q proved invaluable in generating Godot 4 scripts, as most LLMs referenced outdated code. Amazon Q, however, produced the latest version of the code, saving us significant time and effort.
 
