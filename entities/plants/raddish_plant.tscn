@@ -12,7 +12,7 @@ size = Vector2(16, 16)
 
 [node name="RaddishPlant" type="Node2D"]
 script = ExtResource("1_gwm10")
-growth_frame_ids = Array[int]([40, 104, 168, 0])
+growth_frame_ids = Array[int]([40, 104, 168, 232])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -8)
