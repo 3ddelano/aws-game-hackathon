@@ -20,7 +20,7 @@ This game was created using Godot 4 and is an RPG-based game where the player, a
 In the year 2200, a catastrophic nuclear disaster ravages the world, wiping out 80% of the global population. The surviving remnants of humanity take refuge in the Magnus Province, led by the Nova Force. This is the backdrop for our game, a thrilling adventure set in a world where survival is a daily struggle.
 
 ## Development Journey
-[Development](/gameclips/0.png)
+![Development](/gameclips/0.png)
 As newcomers to Godot, we faced a steep learning curve, especially with our semester exams looming in December. Despite the time constraints, we leveraged AI tools to maximize our productivity. We utilized:
 
 * FLUX-dev for image generation
