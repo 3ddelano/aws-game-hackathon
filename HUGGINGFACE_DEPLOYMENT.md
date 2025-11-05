@@ -1,0 +1,321 @@
+# Hugging Face Gradio Space Deployment Guide
+
+## 🎉 100% Free Deployment - No Docker, No Credit Card!
+
+This guide shows you how to deploy your Godot game to Hugging Face Spaces using Google Gemini for AI dialogues - completely free!
+
+## 📋 Prerequisites
+
+1. **Hugging Face Account**: Create a free account at [huggingface.co](https://huggingface.co/)
+2. **Google Gemini API Key**: Get your free API key at [Google AI Studio](https://makersuite.google.com/app/apikey)
+3. **Godot 4.3**: Install from [godotengine.org](https://godotengine.org/)
+4. **Git LFS**: Install Git Large File Storage
+   ```bash
+   # Ubuntu/Debian
+   sudo apt-get install git-lfs
+
+   # macOS
+   brew install git-lfs
+
+   # Windows (via Git for Windows)
+   # Included in Git for Windows installer
+   ```
+
+**Note**: No Docker or containerization knowledge needed! Hugging Face Spaces handles everything automatically.
+
+## 🎮 Step 1: Export Godot Game to HTML5
+
+### 1.1 Open the Project in Godot
+
+1. Launch Godot 4.3
+2. Open the project by selecting `/home/user/aws-game-hackathon/project.godot`
+
+### 1.2 Configure Web Export
+
+The export preset is already configured in `export_presets.cfg`, but you need to:
+
+1. Go to **Project → Export**
+2. Select the **Web** preset
+3. Click **Export Project**
+4. Choose export location: Create a folder named `game` in your project root
+5. Save as `index.html` inside the `game` folder
+6. Ensure these files are exported:
+   - `index.html`
+   - `*.js` files
+   - `*.wasm` files
+   - `*.pck` files
+   - Any audio/asset files
+
+### 1.3 Verify Export
+
+Your project structure should look like:
+```
+aws-game-hackathon/
+├── app.py
+├── requirements.txt
+├── HF_README.md
+├── .gitattributes
+├── game/
+│   ├── index.html
+│   ├── index.js
+│   ├── index.wasm
+│   ├── index.pck
+│   └── index.audio.worklet.js
+└── ... (other project files)
+```
+
+## 🚀 Step 2: Create Hugging Face Space
+
+### 2.1 Create a New Space
+
+1. Go to [huggingface.co/new-space](https://huggingface.co/new-space)
+2. Fill in the details:
+   - **Space name**: `shadows-of-tomorrow` (or your preferred name)
+   - **License**: MIT
+   - **Select SDK**: Gradio
+   - **Space hardware**: CPU basic (free tier)
+   - **Visibility**: Public or Private
+
+### 2.2 Clone the Space Repository
+
+After creating the space, clone it locally:
+
+```bash
+# Clone your new space
+git clone https://huggingface.co/spaces/YOUR_USERNAME/shadows-of-tomorrow
+cd shadows-of-tomorrow
+
+# Initialize Git LFS
+git lfs install
+```
+
+## 📦 Step 3: Prepare Files for Upload
+
+### 3.1 Copy Files to Space Repository
+
+Copy the following files from your Godot project to the cloned Space directory:
+
+```bash
+# Navigate to your space directory
+cd /path/to/shadows-of-tomorrow
+
+# Copy essential files
+cp /home/user/aws-game-hackathon/app.py .
+cp /home/user/aws-game-hackathon/requirements.txt .
+cp /home/user/aws-game-hackathon/.gitattributes .
+
+# Rename HF_README.md to README.md for the space
+cp /home/user/aws-game-hackathon/HF_README.md README.md
+
+# Copy the exported game folder
+cp -r /home/user/aws-game-hackathon/game .
+
+# Optional: Copy game assets for reference
+cp /home/user/aws-game-hackathon/icon.svg .
+cp -r /home/user/aws-game-hackathon/gameclips .
+```
+
+### 3.2 Update app.py (Important!)
+
+The `app.py` needs a small modification for the iframe to work correctly in Hugging Face Spaces.
+
+Replace the iframe line in `app.py`:
+
+**OLD:**
+```python
+src="file=game/index.html"
+```
+
+**NEW:**
+```python
+src="game/index.html"
+```
+
+Or use this complete HTML block:
+```python
+gr.HTML("""
+<div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+    <iframe
+        src="game/index.html"
+        width="1920"
+        height="1080"
+        style="border: 2px solid #333; border-radius: 8px; background: #000;"
+        allow="autoplay; fullscreen; cross-origin-isolated"
+        allowfullscreen>
+    </iframe>
+</div>
+""")
+```
+
+## 🔐 Step 4: Configure Google Gemini API Key
+
+To enable AI-powered NPC dialogues:
+
+### 4.1 Get Your Free Gemini API Key
+
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click **"Get API Key"** or **"Create API Key"**
+4. Copy your API key
+
+**Important**: Google Gemini is 100% free with generous limits - no credit card required!
+
+### 4.2 Add API Key to Hugging Face Space
+
+1. Go to your Space settings: `https://huggingface.co/spaces/YOUR_USERNAME/shadows-of-tomorrow/settings`
+2. Navigate to **Repository secrets** (or **Settings → Secrets**)
+3. Click **"New secret"**
+4. Add the secret:
+   - **Name**: `GEMINI_API_KEY`
+   - **Value**: Paste your Gemini API key
+
+### 4.3 How It Works
+
+Hugging Face Spaces automatically loads secrets as environment variables. The `app.py` already has:
+
+```python
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+```
+
+Without the API key, the game will use mock responses for NPC dialogues (which still works for testing!).
+
+## 📤 Step 5: Push to Hugging Face
+
+### 5.1 Track Large Files with Git LFS
+
+```bash
+# Make sure Git LFS is tracking the right files
+git lfs track "game/*.wasm"
+git lfs track "game/*.pck"
+git lfs track "game/*.data"
+git lfs track "*.js"
+```
+
+### 5.2 Commit and Push
+
+```bash
+# Add all files
+git add .
+
+# Commit
+git commit -m "Initial deployment of Shadows of Tomorrow game"
+
+# Push to Hugging Face
+git push origin main
+```
+
+## ✅ Step 6: Verify Deployment
+
+1. Wait for the Space to build (usually 2-5 minutes)
+   - Hugging Face automatically installs dependencies from `requirements.txt`
+   - No Docker configuration needed!
+2. Visit your Space: `https://huggingface.co/spaces/YOUR_USERNAME/shadows-of-tomorrow`
+3. Test the game by clicking inside the game iframe
+4. Test the AI Dialogue Tester tab if you configured your Gemini API key
+
+## 🐛 Troubleshooting
+
+### Game Doesn't Load
+
+1. **Check browser console** for errors (F12 → Console)
+2. **Verify all files exported**: Make sure `.wasm`, `.pck`, and `.js` files are present
+3. **CORS issues**: Ensure the iframe src path is correct
+4. **File size limits**: Hugging Face free tier has storage limits (check file sizes)
+
+### AI Dialogue Not Working
+
+1. **Check API key**: Verify `GEMINI_API_KEY` is set correctly in Space Settings → Secrets
+2. **Verify API key is active**: Test your key at [Google AI Studio](https://aistudio.google.com/)
+3. **Check rate limits**: Free tier has generous limits, but check if you've exceeded them
+4. **Check logs**: Go to Space settings → Logs to see error messages
+5. **Mock mode works**: If you see mock responses, your setup is correct but API key is missing/invalid
+
+### Game Performance Issues
+
+1. **Upgrade Space hardware**: Consider using CPU Basic or better
+2. **Optimize game export**: Reduce texture sizes, compress audio
+3. **Use Godot export optimization**: Enable compression in export settings
+
+## 🔄 Updating Your Game
+
+When you make changes to your game:
+
+1. Re-export from Godot to the `game` folder
+2. Commit and push changes:
+   ```bash
+   git add game/
+   git commit -m "Update game build"
+   git push origin main
+   ```
+3. The Space will automatically rebuild
+
+## 📊 Optional: Enable Space Analytics
+
+1. Go to Space settings
+2. Enable **Analytics** to track visitors and usage
+
+## 🎨 Customization
+
+### Change Space Appearance
+
+Edit the YAML frontmatter in `README.md`:
+
+```yaml
+---
+title: Your Game Title
+emoji: 🎮
+colorFrom: purple
+colorTo: blue
+---
+```
+
+### Add Custom Styling
+
+Modify the Gradio interface in `app.py`:
+
+```python
+with gr.Blocks(title="Your Title", theme=gr.themes.Soft()) as demo:
+    # Your interface code
+```
+
+## 📚 Additional Resources
+
+- [Hugging Face Spaces Documentation](https://huggingface.co/docs/hub/spaces)
+- [Gradio Documentation](https://gradio.app/docs/)
+- [Google Gemini API Documentation](https://ai.google.dev/docs)
+- [Google AI Studio](https://aistudio.google.com/) - Test and manage your API keys
+- [Godot HTML5 Export Guide](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)
+- [Git LFS Documentation](https://git-lfs.github.com/)
+
+## 🆘 Getting Help
+
+- **Hugging Face Community**: [discuss.huggingface.co](https://discuss.huggingface.co/)
+- **Godot Community**: [godotengine.org/community](https://godotengine.org/community)
+- **GitHub Issues**: [Your repository issues page]
+
+## 📝 Notes
+
+### ✅ What's Free
+- **Hugging Face Spaces**: Free CPU Basic tier (perfect for this game!)
+- **Google Gemini API**: 100% free with generous rate limits (60 requests/minute)
+- **No credit card required**: For either service!
+- **No Docker needed**: Gradio SDK handles everything automatically
+
+### ⚠️ Limitations
+- **Free tier compute**: Hugging Face free Spaces have CPU/memory limits (but sufficient for this game)
+- **Persistent storage**: Data in Spaces is temporary; game saves won't persist between sessions
+- **Build time**: Initial build may take 2-5 minutes due to dependency installation
+- **Browser compatibility**: Test on Chrome, Firefox, and Safari
+- **Rate limits**: Gemini free tier has 60 requests/minute (more than enough for typical gameplay)
+
+### 💡 Pro Tips
+- Use **Git LFS** for large files (.wasm, .pck files) to avoid push issues
+- Test your Gemini API key in [Google AI Studio](https://aistudio.google.com/) before deploying
+- Monitor your Space logs for any errors during build/runtime
+- The AI will work in mock mode without API key (useful for testing deployment)
+
+---
+
+Good luck with your deployment! 🚀
+
+**Total cost: $0.00 forever!**

@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import boto3
+import google.generativeai as genai
 import json
 from flask import Flask, request, jsonify
 import time
@@ -9,31 +9,15 @@ load_dotenv()
 
 MOCK_RESPONSE = False
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_REGION = 'us-east-1'
-# MODEL_ID = "mistral.mistral-7b-instruct-v0:2"
-MODEL_ID = "mistral.mistral-large-2402-v1:0" 
-# prompt = "Provide output strictly as JSON: {name,statement}. You are Delano. Your task is to speak about any one of the given topics in a few words. Choose a topic randomly from the following list: ['List innovative farming methods and how they work', 'How is food security handled for settlements', 'The battle against contaminated soil and methods']. Speak naturally, as if you were explaining it to a friend, and avoid using overly complex words. Introduce yourself by name before discussing the topic."
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+MODEL_ID = "gemini-1.5-flash"
 
-brt = boto3.client("bedrock-runtime", 
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-        region_name=AWS_REGION)
-
-# # Stream the response
-# streaming_response = brt.invoke_model_with_response_stream(modelId=MODEL_ID, body=body.encode())
-# for event in streaming_response['body']:
-#     chunk = json.loads(event['chunk']['bytes'])
-#     if 'outputs' in chunk:
-#         output = chunk['outputs'][0]
-#         print(output['text'], end="")
-    
-#     if 'amazon-bedrock-invocationMetrics' in chunk:
-#         metrics = chunk['amazon-bedrock-invocationMetrics']
-#         print("\nmetrics", metrics)
+# Configure Gemini API
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 app = Flask(__name__)
+
 @app.route('/ai-response', methods=['POST'])
 def post_ai_response():
     try:
@@ -43,30 +27,43 @@ def post_ai_response():
             return jsonify({"error": "Missing 'prompt' in request body"}), 400
 
         input_value = data['prompt']
+        prompt = input_value + ". Strictly respond in plain text, limited to 4 sentences."
 
-        prompt = input_value + ".Strictly respond in plain text, limited to 4 sentences."
-
-        native_request = {
-            "prompt": prompt,
-            "temperature": 0.6,
-            "top_p": 0.9
-        }
-        
         if MOCK_RESPONSE:
             time.sleep(3)
-            return jsonify({"output": "Mocked resposne. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. Praesent quis felis viverra, faucibus nisi nec, ullamcorper magna. Phasellus ut augue ac tortor elementum euismod nec sed felis. Fusce ut arcu pretium massa gravida sodales non at diam. Donec non risus ipsum."}), 200
-        
-        print(f"Calling AWS bedrock: model={MODEL_ID}")
-        start_time = time.time()
-        brt_response = brt.invoke_model(modelId=MODEL_ID, body=json.dumps(native_request).encode())
-        
-        response_body = json.loads(brt_response['body'].read())
-        print(f"Took={time.time() - start_time}, response_body={response_body}")
-        output_value = response_body['outputs'][0]['text']
+            return jsonify({"output": "Mocked response. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. Praesent quis felis viverra, faucibus nisi nec, ullamcorper magna. Phasellus ut augue ac tortor elementum euismod nec sed felis. Fusce ut arcu pretium massa gravida sodales non at diam. Donec non risus ipsum."}), 200
 
-        return jsonify({"output": output_value}), 200
+        if not GEMINI_API_KEY:
+            return jsonify({"error": "GEMINI_API_KEY not configured"}), 500
+
+        print(f"Calling Google Gemini API: model={MODEL_ID}")
+        start_time = time.time()
+
+        # Create the model
+        model = genai.GenerativeModel(MODEL_ID)
+
+        # Configure generation parameters
+        generation_config = {
+            "temperature": 0.6,
+            "top_p": 0.9,
+            "max_output_tokens": 200,
+        }
+
+        # Generate response
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config
+        )
+
+        print(f"Took={time.time() - start_time:.2f}s")
+
+        if response.text:
+            return jsonify({"output": response.text}), 200
+        else:
+            return jsonify({"error": "No response from Gemini API"}), 500
 
     except Exception as e:
+        print(f"Error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 
