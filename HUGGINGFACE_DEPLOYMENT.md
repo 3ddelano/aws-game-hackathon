@@ -1,10 +1,15 @@
 # Hugging Face Gradio Space Deployment Guide
 
+## 🎉 100% Free Deployment - No Docker, No Credit Card!
+
+This guide shows you how to deploy your Godot game to Hugging Face Spaces using Google Gemini for AI dialogues - completely free!
+
 ## 📋 Prerequisites
 
-1. **Hugging Face Account**: Create an account at [huggingface.co](https://huggingface.co/)
-2. **Godot 4.3**: Install from [godotengine.org](https://godotengine.org/)
-3. **Git LFS**: Install Git Large File Storage
+1. **Hugging Face Account**: Create a free account at [huggingface.co](https://huggingface.co/)
+2. **Google Gemini API Key**: Get your free API key at [Google AI Studio](https://makersuite.google.com/app/apikey)
+3. **Godot 4.3**: Install from [godotengine.org](https://godotengine.org/)
+4. **Git LFS**: Install Git Large File Storage
    ```bash
    # Ubuntu/Debian
    sudo apt-get install git-lfs
@@ -15,7 +20,8 @@
    # Windows (via Git for Windows)
    # Included in Git for Windows installer
    ```
-4. **AWS Credentials** (optional): For AI-powered NPC dialogues
+
+**Note**: No Docker or containerization knowledge needed! Hugging Face Spaces handles everything automatically.
 
 ## 🎮 Step 1: Export Godot Game to HTML5
 
@@ -141,28 +147,37 @@ gr.HTML("""
 """)
 ```
 
-## 🔐 Step 4: Configure AWS Credentials (Optional)
+## 🔐 Step 4: Configure Google Gemini API Key
 
-If you want AI-powered NPC dialogues to work:
+To enable AI-powered NPC dialogues:
 
-### 4.1 Add Secrets to Hugging Face Space
+### 4.1 Get Your Free Gemini API Key
+
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click **"Get API Key"** or **"Create API Key"**
+4. Copy your API key
+
+**Important**: Google Gemini is 100% free with generous limits - no credit card required!
+
+### 4.2 Add API Key to Hugging Face Space
 
 1. Go to your Space settings: `https://huggingface.co/spaces/YOUR_USERNAME/shadows-of-tomorrow/settings`
-2. Navigate to **Repository secrets**
-3. Add the following secrets:
-   - **Name**: `AWS_ACCESS_KEY_ID`
-     **Value**: Your AWS access key
-   - **Name**: `AWS_SECRET_ACCESS_KEY`
-     **Value**: Your AWS secret access key
+2. Navigate to **Repository secrets** (or **Settings → Secrets**)
+3. Click **"New secret"**
+4. Add the secret:
+   - **Name**: `GEMINI_API_KEY`
+   - **Value**: Paste your Gemini API key
 
-### 4.2 Update app.py to Use Hugging Face Secrets
+### 4.3 How It Works
 
-Hugging Face Spaces automatically loads secrets as environment variables, so the current `app.py` should work as-is. The code already uses:
+Hugging Face Spaces automatically loads secrets as environment variables. The `app.py` already has:
 
 ```python
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 ```
+
+Without the API key, the game will use mock responses for NPC dialogues (which still works for testing!).
 
 ## 📤 Step 5: Push to Hugging Face
 
@@ -192,9 +207,11 @@ git push origin main
 ## ✅ Step 6: Verify Deployment
 
 1. Wait for the Space to build (usually 2-5 minutes)
+   - Hugging Face automatically installs dependencies from `requirements.txt`
+   - No Docker configuration needed!
 2. Visit your Space: `https://huggingface.co/spaces/YOUR_USERNAME/shadows-of-tomorrow`
 3. Test the game by clicking inside the game iframe
-4. Test the AI Dialogue Tester tab if you configured AWS credentials
+4. Test the AI Dialogue Tester tab if you configured your Gemini API key
 
 ## 🐛 Troubleshooting
 
@@ -207,10 +224,11 @@ git push origin main
 
 ### AI Dialogue Not Working
 
-1. **Check secrets**: Verify AWS credentials are set correctly in Space settings
-2. **Check AWS permissions**: Ensure your AWS account has Bedrock access
-3. **Region availability**: AWS Bedrock may not be available in all regions
+1. **Check API key**: Verify `GEMINI_API_KEY` is set correctly in Space Settings → Secrets
+2. **Verify API key is active**: Test your key at [Google AI Studio](https://aistudio.google.com/)
+3. **Check rate limits**: Free tier has generous limits, but check if you've exceeded them
 4. **Check logs**: Go to Space settings → Logs to see error messages
+5. **Mock mode works**: If you see mock responses, your setup is correct but API key is missing/invalid
 
 ### Game Performance Issues
 
@@ -264,6 +282,8 @@ with gr.Blocks(title="Your Title", theme=gr.themes.Soft()) as demo:
 
 - [Hugging Face Spaces Documentation](https://huggingface.co/docs/hub/spaces)
 - [Gradio Documentation](https://gradio.app/docs/)
+- [Google Gemini API Documentation](https://ai.google.dev/docs)
+- [Google AI Studio](https://aistudio.google.com/) - Test and manage your API keys
 - [Godot HTML5 Export Guide](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html)
 - [Git LFS Documentation](https://git-lfs.github.com/)
 
@@ -275,11 +295,27 @@ with gr.Blocks(title="Your Title", theme=gr.themes.Soft()) as demo:
 
 ## 📝 Notes
 
-- **Free tier limitations**: Hugging Face free Spaces may have CPU/memory limits
+### ✅ What's Free
+- **Hugging Face Spaces**: Free CPU Basic tier (perfect for this game!)
+- **Google Gemini API**: 100% free with generous rate limits (60 requests/minute)
+- **No credit card required**: For either service!
+- **No Docker needed**: Gradio SDK handles everything automatically
+
+### ⚠️ Limitations
+- **Free tier compute**: Hugging Face free Spaces have CPU/memory limits (but sufficient for this game)
 - **Persistent storage**: Data in Spaces is temporary; game saves won't persist between sessions
-- **Build time**: Initial build may take longer due to large game files
+- **Build time**: Initial build may take 2-5 minutes due to dependency installation
 - **Browser compatibility**: Test on Chrome, Firefox, and Safari
+- **Rate limits**: Gemini free tier has 60 requests/minute (more than enough for typical gameplay)
+
+### 💡 Pro Tips
+- Use **Git LFS** for large files (.wasm, .pck files) to avoid push issues
+- Test your Gemini API key in [Google AI Studio](https://aistudio.google.com/) before deploying
+- Monitor your Space logs for any errors during build/runtime
+- The AI will work in mock mode without API key (useful for testing deployment)
 
 ---
 
 Good luck with your deployment! 🚀
+
+**Total cost: $0.00 forever!**

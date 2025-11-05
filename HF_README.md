@@ -16,7 +16,7 @@ license: mit
 
 ## 🌟 Play the Game
 
-An immersive RPG adventure set in post-nuclear 2200, built with Godot 4.3 and powered by AWS Bedrock AI.
+An immersive RPG adventure set in post-nuclear 2200, built with Godot 4.3 and powered by Google Gemini AI (100% FREE!).
 
 ### Game Controls
 - **WASD / Arrow Keys**: Move
@@ -35,7 +35,7 @@ In the year 2200, a catastrophic nuclear disaster ravages the world, wiping out 
 
 ## 🤖 AI-Powered Features
 
-This game features dynamic NPC dialogues powered by **AWS Bedrock** using the Mistral Large model. NPCs engage in meaningful conversations about:
+This game features dynamic NPC dialogues powered by **Google Gemini 1.5 Flash** - completely FREE! NPCs engage in meaningful conversations about:
 
 - Real-world issues: consequences of war, renewable energy, environmental concerns
 - Game world lore: history, Nova Force, and surviving populations
@@ -49,8 +49,8 @@ This game features dynamic NPC dialogues powered by **AWS Bedrock** using the Mi
 - **GDScript** - Game logic
 
 ### AI & Cloud Services
-- **AWS Bedrock** - NPC dialogue generation (Mistral Large 2402 model)
-- **AWS Lambda** - Serverless API hosting
+- **Google Gemini 1.5 Flash** - NPC dialogue generation (100% FREE!)
+- **Hugging Face Spaces** - Free hosting platform
 - **AWS Q Developer** - Code assistance
 
 ### Content Generation
@@ -74,14 +74,17 @@ This Space hosts the Godot game as an HTML5 export and provides an AI dialogue t
 
 ### Configuration
 
-To enable AWS Bedrock features, set the following secrets in your Hugging Face Space settings:
+To enable Google Gemini AI features, set the following secret in your Hugging Face Space settings:
 
-1. Go to Space Settings → Repository secrets
-2. Add these secrets:
-   - `AWS_ACCESS_KEY_ID`: Your AWS access key
-   - `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
+1. Get your free API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Go to Space Settings → Repository secrets
+3. Add this secret:
+   - **Name**: `GEMINI_API_KEY`
+   - **Value**: Your Gemini API key from Google AI Studio
 
-Without these credentials, the game will use mock responses for NPC dialogues.
+Without this API key, the game will use mock responses for NPC dialogues.
+
+**Note**: Google Gemini has a generous free tier - no credit card required!
 
 ## 📂 Repository Structure
 
@@ -115,10 +118,18 @@ Planned features that weren't implemented due to time constraints:
 
 Created for the AWS Game Hackathon by the development team.
 
+## 💡 Why This Stack?
+
+- **100% Free**: Google Gemini API + Hugging Face Spaces = No costs!
+- **No Docker needed**: Gradio SDK handles everything automatically
+- **No credit card required**: Both services offer generous free tiers
+- **Easy setup**: Just add your Gemini API key and deploy!
+
 ## 🔗 Links
 
 - [GitHub Repository](https://github.com/Reubencfernandes/aws-game-hackathon)
-- [AWS Bedrock Documentation](https://aws.amazon.com/bedrock/)
+- [Google AI Studio](https://makersuite.google.com/app/apikey) - Get your free API key
+- [Hugging Face Spaces](https://huggingface.co/spaces) - Free hosting
 
 ## 📄 License
 

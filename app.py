@@ -1,7 +1,6 @@
 import os
 import gradio as gr
-import boto3
-import json
+import google.generativeai as genai
 from dotenv import load_dotenv
 import time
 
@@ -9,60 +8,62 @@ load_dotenv()
 
 # Configuration
 MOCK_RESPONSE = False
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_REGION = 'us-east-1'
-MODEL_ID = "mistral.mistral-large-2402-v1:0"
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
-# Initialize AWS Bedrock client if credentials are available
-brt = None
-if AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
-    try:
-        brt = boto3.client(
-            "bedrock-runtime",
-            aws_access_key_id=AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-            region_name=AWS_REGION
-        )
-    except Exception as e:
-        print(f"Warning: Could not initialize AWS Bedrock client: {e}")
+# Model options:
+# - "gemini-1.5-flash" (fast and free, recommended)
+# - "gemini-1.5-pro" (more capable, also free with limits)
+# - "gemini-1.0-pro" (older but stable)
+MODEL_ID = "gemini-1.5-flash"
+
+# Configure Gemini API
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 def get_ai_response(prompt):
-    """Generate AI response using AWS Bedrock"""
+    """Generate AI response using Google Gemini API"""
     try:
         if not prompt:
             return {"error": "Missing prompt"}
 
         full_prompt = prompt + ". Strictly respond in plain text, limited to 4 sentences."
 
-        native_request = {
-            "prompt": full_prompt,
-            "temperature": 0.6,
-            "top_p": 0.9
-        }
-
-        if MOCK_RESPONSE or not brt:
+        if MOCK_RESPONSE or not GEMINI_API_KEY:
             time.sleep(1)
             return {
                 "output": "Mocked response. Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                         "Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus."
+                         "Mauris lorem ligula, convallis a massa nec, lacinia commodo lectus. "
+                         "(Note: Set GEMINI_API_KEY to enable real AI responses. Get your free API key at https://makersuite.google.com/app/apikey)"
             }
 
-        print(f"Calling AWS Bedrock: model={MODEL_ID}")
+        print(f"Calling Google Gemini API: model={MODEL_ID}")
         start_time = time.time()
-        brt_response = brt.invoke_model(
-            modelId=MODEL_ID,
-            body=json.dumps(native_request).encode()
+
+        # Create the model
+        model = genai.GenerativeModel(MODEL_ID)
+
+        # Configure generation parameters
+        generation_config = {
+            "temperature": 0.6,
+            "top_p": 0.9,
+            "max_output_tokens": 200,
+        }
+
+        # Generate response
+        response = model.generate_content(
+            full_prompt,
+            generation_config=generation_config
         )
 
-        response_body = json.loads(brt_response['body'].read())
-        print(f"Took={time.time() - start_time}s")
-        output_value = response_body['outputs'][0]['text']
+        print(f"Took={time.time() - start_time:.2f}s")
 
-        return {"output": output_value}
+        if response.text:
+            return {"output": response.text}
+        else:
+            return {"error": "No response from AI model"}
 
     except Exception as e:
-        return {"error": str(e)}
+        return {"error": f"Gemini API error: {str(e)}"}
 
 # Create the Gradio interface
 with gr.Blocks(title="Shadows of Tomorrow - AWS Game Hackathon") as demo:
@@ -70,7 +71,7 @@ with gr.Blocks(title="Shadows of Tomorrow - AWS Game Hackathon") as demo:
     # 🎮 Shadows of Tomorrow
     ### An RPG Adventure Set in Post-Nuclear 2200
 
-    Welcome to Magnus Province! This game was created with Godot 4.3 and features AI-powered NPC dialogues using AWS Bedrock.
+    Welcome to Magnus Province! This game was created with Godot 4.3 and features AI-powered NPC dialogues using Google Gemini.
 
     **Game Controls:**
     - WASD / Arrow Keys: Move
@@ -110,8 +111,10 @@ with gr.Blocks(title="Shadows of Tomorrow - AWS Game Hackathon") as demo:
 
     with gr.Tab("🤖 AI Dialogue Tester"):
         gr.Markdown("""
-        ### Test the AWS Bedrock NPC Dialogue System
+        ### Test the Google Gemini NPC Dialogue System
         This is the same AI system used for NPC conversations in the game.
+        Uses Gemini 1.5 Flash - completely FREE with Google AI Studio!
+        Get your API key: https://makersuite.google.com/app/apikey
         """)
 
         with gr.Row():
@@ -147,8 +150,8 @@ with gr.Blocks(title="Shadows of Tomorrow - AWS Game Hackathon") as demo:
 
         This game was created using:
         - **Godot 4.3** - Game Engine
-        - **AWS Bedrock** - AI-powered NPC dialogue (Mistral Large model)
-        - **AWS Lambda** - Serverless API hosting
+        - **Google Gemini 1.5 Flash** - AI-powered NPC dialogue (100% FREE!)
+        - **Hugging Face Spaces** - Free hosting
         - **AWS Q Developer** - GDScript code assistance
         - **FLUX-dev** - Image generation
         - **ElevenLabs** - Audio generation
@@ -166,6 +169,7 @@ with gr.Blocks(title="Shadows of Tomorrow - AWS Game Hackathon") as demo:
           consequences of war, and environmental concerns
         - **Contextual Dialogue**: AI responses are tailored to the game's storyline and world
         - **Emotional Intelligence**: NPCs display emotions and empathy in their interactions
+        - **100% Free**: Uses Google Gemini's free tier - no API costs!
 
         ## Credits
         Created for the AWS Game Hackathon
